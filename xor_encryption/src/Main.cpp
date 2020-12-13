@@ -3,8 +3,8 @@
 
 std::string encrypt_char(char character, int base, int key = 0)
 {
-    char digits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-                     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    char digit_chars[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                          'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
     int char_code = static_cast<int>(character) ^ key;
 
@@ -12,7 +12,7 @@ std::string encrypt_char(char character, int base, int key = 0)
     std::string result_digits;
     while (char_code != 0)
     {
-        char this_digit = digits[char_code % base];
+        char this_digit = digit_chars[char_code % base];
         result_digits.push_back(this_digit);
 
         char_code = char_code / base;
