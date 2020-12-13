@@ -1,12 +1,16 @@
 #include <iostream>
 
-int char_to_int(char character, int check_base = 36)
+int character_to_int(char character, int check_base = 36)
 {
+    // convert digit in base <chack_base> to int
     int digit = check_base;
     if (character >= '0' && character <= '9')
         digit = character - '0';
     else if (character >= 'a' && character <= 'z')
-        digit = character - 'a';
+        digit = character - 'a' + 10;
+    else if (character >= 'A' && character <= 'Z')
+        digit = character - 'A' + 10;
+    // check if character is valid in check_base
     if (digit >= check_base)
     {
         std::string error;
@@ -18,37 +22,40 @@ int char_to_int(char character, int check_base = 36)
     return digit;
 }
 
-char decrypt_digit(std::string digit_str, int base, int key = 0)
+int decrypt_number(std::string digit_str, int base, int key = 0)
 {
+    // convert multiple digits in base <base> to int
     int result_char_code = 0;
-
     for (char character : digit_str)
-    {
-        result_char_code = base * result_char_code + char_to_int(character, base);
-    }
+        result_char_code = base * result_char_code + character_to_int(character, base);
 
+    // xor decryption and convert to ASCII char
     return static_cast<char>(result_char_code ^ key);
 }
 
-std::string decrypt_text(std::string str, int base, char delimiter = ' ', int key = 0)
+std::string decrypt_text(std::string str, int base, int key = 0, char delimiter = ' ', int digit_length = 0)
 {
+    // extract numbers from string (by delimiter or digit_length) and convert to ints and then to ASCII chars
     std::string result_str = "";
-    std::string last_digit_str = "";
-    for (int idx = 0; idx < str.size(); ++idx)
+    if (delimiter == 0)
     {
-        if (str[idx] == delimiter)
-        {
-            result_str.push_back(decrypt_digit(last_digit_str, base, key));
-            last_digit_str = "";
-        }
-        else
-        {
-            last_digit_str.push_back(str[idx]);
-        }
+        for (int idx = 0; idx < str.size(); idx += digit_length)
+            result_str.push_back(decrypt_number(str.substr(idx, digit_length), base, key));
     }
-    result_str.push_back(decrypt_digit(last_digit_str, base, key));
+    else
+    {
+        // cut at delimiter
+        size_t previous = 0;
+        size_t current = str.find(delimiter);
+        while (current != std::string::npos)
+        {
+            result_str.push_back(decrypt_number(str.substr(previous, current - previous), base, key));
 
-    decrypt_digit("d", 10, key = 20);
+            previous = current + 1;
+            current = str.find(delimiter, previous);
+        }
+        result_str.push_back(decrypt_number(str.substr(previous, current - previous), base, key));
+    }
     return result_str;
 }
 
@@ -68,7 +75,7 @@ int main()
 
     // std::cout << base << ": " << convert_str(input, base, ' ', key = key) << std::endl;
     std::cout
-        << decrypt_text(input, base, ' ', key) << std::endl;
+        << decrypt_text(input, base, key, ' ', 0) << std::endl;
 }
 
 // todo: make lowercase
