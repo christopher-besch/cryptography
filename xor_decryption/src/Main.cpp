@@ -57,9 +57,9 @@ std::vector<std::string> get_numbers(std::string &str, char delimiter = ' ', int
 {
     std::vector<std::string> numbers;
 
-    // extract numbers from string (by delimiter or digit_length)
     if (delimiter == 0)
     {
+        // cut with digit_length
         for (int idx = 0; idx < str.size(); idx += digit_length)
             numbers.push_back(str.substr(idx, digit_length));
     }
