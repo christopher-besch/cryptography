@@ -3,14 +3,13 @@
 class Decrypted
 {
 private:
-    std::string text;
+    std::string decrypted_text;
 
 public:
-    Decrypted(std::string text)
-        : text(text) {}
+    Decrypted(std::string decrypted_text)
+        : decrypted_text(decrypted_text) {}
 
-    std::string get_text() { return text; }
-
+    std::string get_text() { return decrypted_text; }
     virtual std::string get_type() = 0;
 };
 
@@ -21,8 +20,10 @@ private:
     int base;
 
 public:
-    XORDecrypted(std::string text, int key, int base)
-        : Decrypted(text), key(key), base(base) {}
+    XORDecrypted(std::string decrypted_text, int key, int base)
+        : Decrypted(decrypted_text), key(key), base(base) {}
 
     virtual std::string get_type() override { return "XOR Cipher"; }
+    int get_key() { return key; }
+    int get_base() { return base; }
 };
