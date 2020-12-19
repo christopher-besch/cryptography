@@ -75,30 +75,6 @@ long long decrypt_number(std::string &digit_str, int base, int key = 0)
     return result_char_code ^ key;
 }
 
-std::vector<int> get_possible_bases(std::vector<std::string> &encrypted_numbers, char highest_character)
-{
-    std::vector<int> possible_bases;
-
-    // e.g. when the character representing the highest number is '9', base 10 is the "smallest" possible base
-    for (int test_base = highest_character + 1; test_base < 37; test_base++)
-    {
-        bool possible = true;
-        for (std::string encrypted_number : encrypted_numbers)
-        {
-            // todo: test other keys
-            long long x = decrypt_number(encrypted_number, test_base, 0) > 255;
-            if (decrypt_number(encrypted_number, test_base, 0) > 255)
-            {
-                possible = false;
-                break;
-            }
-        }
-        if (possible)
-            possible_bases.push_back(test_base);
-    }
-    return possible_bases;
-}
-
 // todo: amount of requested matches
 std::vector<XORDecrypted> get_decryptions(std::string &cipher)
 {
@@ -117,21 +93,54 @@ std::vector<XORDecrypted> get_decryptions(std::string &cipher)
             highest_character = decrypted_character;
     }
 
-    for (char delimiter : possible_delimiters)
+    // test different ways of sepperating numbers
+    std::vector<XORDecrypted> results;
+    for (char test_delimiter : possible_delimiters)
     {
         // todo: find length
-        // cut into encrypted numbers
-        std::vector<std::string> encrypted_numbers = get_encrypted_numbers(cipher, ' ', 0);
+        // todo: remove other characters
+        std::vector<std::string> encrypted_numbers = get_encrypted_numbers(cipher, test_delimiter, 0);
 
-        std::vector<int> possible_bases = get_possible_bases(encrypted_numbers, highest_character);
-        std::cout << "";
+        // test possible bases
+        // e.g. when the character representing the highest number is '9', base 10 is the "smallest" possible base
+        for (int test_base = highest_character + 1; test_base < 37; test_base++)
+        {
+            // todo: test more keys
+            // test possible keys
+            for (int test_key = 0; test_key < 256; test_key++)
+            {
+                bool possible = true;
+                std::string decrypted_str = "";
+                for (std::string encrypted_number : encrypted_numbers)
+                {
+                    // is decodable with extended ASCII?
+                    long long decrypted_number = decrypt_number(encrypted_number, test_base, test_key);
+                    if (decrypted_number > 255)
+                    {
+                        possible = false;
+                        break;
+                    }
+                    decrypted_str.push_back(static_cast<char>(decrypted_number));
+                }
+                if (possible)
+                {
+                    XORDecrypted decrypt = XORDecrypted(decrypted_str, test_delimiter, test_key, test_base);
+                    results.push_back(decrypt);
+                }
+            }
+        }
     }
-
-    // go through possible bases
+    std::sort(results.begin(), results.end());
+    return results;
 }
 
 int main()
 {
-    std::string str = "1110100 1100101 1110011 1110100";
-    get_decryptions(str);
+    std::string str = "202 253 278 204 272 286 272 301 313 204 281 276 277 204 285 302 204 270 285 286 272 277 204 288 284 272 204 283 272 313 204 288 278 204 288 284 272 204 270 276 288 272 302 204 278 268 204 284 272 276 286 272 277 206 204 253 284 272 204 302 276 281 272 204 283 272 313 204 278 303 272 277 302 204 288 284 272 204 270 276 288 272 302 204 278 268 204 284 272 280 280 206 204 241 277 271 204 302 278 204 285 288 204 285 302 204 287 285 288 284 204 302 274 285 272 277 274 272 206 202 210 255 285 274 284 276 301 271 204 233 272 313 277 281 276 277";
+    std::vector<XORDecrypted> options = get_decryptions(str);
+
+    for (int idx = 0; idx < options.size(); idx++)
+    {
+        std::cout << options[idx].get_score() << " " << options[idx].get_base() << " " << options[idx].get_key() << " " << options[idx].get_text() << std::endl;
+    }
 }
