@@ -79,7 +79,7 @@ std::vector<std::string> get_encrypted_numbers(std::string &str, char delimiter,
     return numbers;
 }
 
-long long decrypt_number(std::string &digit_str, int base, int key = 0)
+long long decrypt_number(std::string digit_str, int base, int key = 0)
 {
     // convert multiple digits in base <base> to int
     long long result_char_code = 0;
@@ -153,9 +153,6 @@ std::vector<XORDecrypted> get_decryptions(std::string cipher)
         if (cipher.size() % char_length != 0)
             continue;
         std::vector<std::string> encrypted_numbers = get_encrypted_numbers(cipher, '\0', char_length);
-        std::cout << char_length << std::endl;
-        std::cout << encrypted_numbers[0] << std::endl;
-        std::cout << std::endl;
         try_decrypt(results, encrypted_numbers, '\0', char_length, highest_character);
     }
 
@@ -168,7 +165,7 @@ int main()
     std::string str = "202 253 278 204 272 286 272  301 313 204 281 276 277 204 285 302 204 270 285 286 272 277 204 288 284 272 204 283 272 313 204 288 278 204 288 284 272 204 270 276 288 272 302 204 278 268 204 284 272 276 286 272 277 206 204 253 284 272 204 302 276 281 272 204 283 272 313 204 278 303 272 277 302 204 288 284 272 204 270 276 288 272 302 204 278 268 204 284 272 280 280 206 204 241 277 271 204 302 278 204 285 288 204 285 302 204 287 285 288 284 204 302 274 285 272 277 274 272 206 202 210 255 285 274 284 276 301 271 204 233 272 313 277 281 276 277";
     std::vector<XORDecrypted> options = get_decryptions(str);
 
-    for (int idx = 0; idx < options.size(); idx++)
+    for (int idx = std::max(static_cast<int>(options.size() - 6), 0); idx < options.size(); idx++)
     {
         std::cout << options[idx].get_score() << " '" << options[idx].get_delimiter() << "' " << options[idx].get_char_length() << " " << options[idx].get_base() << " " << options[idx].get_key() << " " << options[idx].get_text() << std::endl;
     }

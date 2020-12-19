@@ -2,6 +2,7 @@
 
 void Decrypted::calculate_score()
 {
+    // score used to compare different decryptions
     m_score = 0;
     for (char character : m_decrypted_text)
     {
@@ -19,7 +20,7 @@ void Decrypted::calculate_score()
         else if (character == ' ')
             m_score += 1;
     }
-    m_score /= static_cast<float>(m_decrypted_text.size());
+    m_score *= m_char_length ? m_char_length : 8;
 }
 
 Decrypted::Decrypted(std::string decrypted_text, char delimiter, int char_length)
