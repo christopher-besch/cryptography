@@ -20,7 +20,7 @@ void Decrypted::calculate_score()
         else if (character == ' ')
             m_score += 1;
     }
-    m_score *= m_char_length ? m_char_length : 8;
+    m_score *= m_char_length;
 }
 
 Decrypted::Decrypted(std::string decrypted_text, char delimiter, int char_length)

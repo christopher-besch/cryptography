@@ -113,7 +113,8 @@ void try_decrypt(std::vector<XORDecrypted> &results, std::vector<std::string> &e
                 }
                 decrypted_str.push_back(static_cast<char>(decrypted_number));
             }
-            if (possible)
+            // only add new options
+            if (possible && std::find_if(results.begin(), results.end(), [&](XORDecrypted item) { return item.get_text() == decrypted_str; }) == results.end())
             {
                 XORDecrypted decrypt = XORDecrypted(decrypted_str, test_delimiter, test_char_length, test_key, test_base);
                 results.push_back(decrypt);
@@ -144,7 +145,7 @@ std::vector<XORDecrypted> get_decryptions(std::string cipher)
     for (char test_delimiter : possible_delimiters)
     {
         std::vector<std::string> encrypted_numbers = get_encrypted_numbers(cipher, test_delimiter, 0);
-        try_decrypt(results, encrypted_numbers, test_delimiter, 0, highest_character);
+        try_decrypt(results, encrypted_numbers, test_delimiter, encrypted_numbers[0].size(), highest_character);
     }
 
     remove_unsupported_characters(cipher);
@@ -162,10 +163,10 @@ std::vector<XORDecrypted> get_decryptions(std::string cipher)
 
 int main()
 {
-    std::string str = "202 253 278 204 272 286 272  301 313 204 281 276 277 204 285 302 204 270 285 286 272 277 204 288 284 272 204 283 272 313 204 288 278 204 288 284 272 204 270 276 288 272 302 204 278 268 204 284 272 276 286 272 277 206 204 253 284 272 204 302 276 281 272 204 283 272 313 204 278 303 272 277 302 204 288 284 272 204 270 276 288 272 302 204 278 268 204 284 272 280 280 206 204 241 277 271 204 302 278 204 285 288 204 285 302 204 287 285 288 284 204 302 274 285 272 277 274 272 206 202 210 255 285 274 284 276 301 271 204 233 272 313 277 281 276 277";
+    std::string str = "54727574682077617320746865206f6e6c79206461756768746572206f662054696d652e";
     std::vector<XORDecrypted> options = get_decryptions(str);
 
-    for (int idx = std::max(static_cast<int>(options.size() - 6), 0); idx < options.size(); idx++)
+    for (int idx = std::max(static_cast<int>(options.size() - 10000000), 0); idx < options.size(); idx++)
     {
         std::cout << options[idx].get_score() << " '" << options[idx].get_delimiter() << "' " << options[idx].get_char_length() << " " << options[idx].get_base() << " " << options[idx].get_key() << " " << options[idx].get_text() << std::endl;
     }
