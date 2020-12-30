@@ -2,8 +2,35 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
+#include <sstream>
 
 #include "Decrypted.h"
+
+#ifdef DEBUG
+#define raise_error(msg)                                                                                                  \
+    {                                                                                                                     \
+        std::cerr << msg << " (in: " << __FILE__ << ":" << __LINE__ << "; in function: " << __func__ << ")" << std::endl; \
+        std::exit(EXIT_FAILURE);                                                                                          \
+    }
+#else
+#define raise_error(msg)               \
+    {                                  \
+        std::cerr << msg << std::endl; \
+        std::exit(EXIT_FAILURE);       \
+    }
+#endif
+
+int checked_stoi(std::string str)
+{
+    try
+    {
+        return std::stoi(str);
+    }
+    catch (std::invalid_argument ex)
+    {
+        raise_error("Can't convert \"" << str << "\" to int!");
+    }
+}
 
 int character_to_int(char character, int check_base = 36, bool error = true)
 {
@@ -21,12 +48,9 @@ int character_to_int(char character, int check_base = 36, bool error = true)
     {
         if (error)
         {
-            std::string error;
-            error.append("'");
-            error.push_back(character);
-            error.append("' not supported with base ");
-            error.append(std::to_string(static_cast<int>(check_base)));
-            throw std::runtime_error(error);
+            std::stringstream error;
+            error << "'" << character << "' not supported with base " << std::to_string(static_cast<int>(check_base));
+            throw std::runtime_error(error.str());
         }
         else
             return -1;
@@ -37,12 +61,8 @@ int character_to_int(char character, int check_base = 36, bool error = true)
 void remove_unsupported_characters(std::string &str)
 {
     for (int idx = str.size() - 1; idx >= 0; idx--)
-    {
         if (character_to_int(str[idx], 36, false) == -1)
-        {
             str.erase(idx, 1);
-        }
-    }
 }
 
 std::vector<std::string> get_encrypted_numbers(std::string &str, char delimiter, int digit_length)
@@ -50,11 +70,9 @@ std::vector<std::string> get_encrypted_numbers(std::string &str, char delimiter,
     std::vector<std::string> numbers;
 
     if (delimiter == '\0')
-    {
         // cut with digit_length
         for (int idx = 0; idx < str.size(); idx += digit_length)
             numbers.push_back(str.substr(idx, digit_length));
-    }
     else
     {
         // cut at delimiter
@@ -75,7 +93,6 @@ std::vector<std::string> get_encrypted_numbers(std::string &str, char delimiter,
         if (substring.size() != 0)
             numbers.push_back(substring);
     }
-
     return numbers;
 }
 
@@ -140,14 +157,16 @@ std::vector<XORDecrypted> get_decryptions(std::string cipher)
             highest_character = decrypted_character;
     }
 
-    // test different ways of separating numbers
+    // test separating numbers with all possible delimiters
     std::vector<XORDecrypted> results;
     for (char test_delimiter : possible_delimiters)
     {
         std::vector<std::string> encrypted_numbers = get_encrypted_numbers(cipher, test_delimiter, 0);
+        // todo: not only the first one please
         try_decrypt(results, encrypted_numbers, test_delimiter, encrypted_numbers[0].size(), highest_character);
     }
 
+    // test separating numbers with different number lengths
     remove_unsupported_characters(cipher);
     for (int char_length = 1; char_length <= 8; char_length++)
     {
@@ -161,13 +180,44 @@ std::vector<XORDecrypted> get_decryptions(std::string cipher)
     return results;
 }
 
-int main()
+int main(int argc, char *argv[])
 {
-    std::string str = "54727574682077617320746865206f6e6c79206461756768746572206f662054696d652e";
-    std::vector<XORDecrypted> options = get_decryptions(str);
+    // todo: read from file
+    // todo: list of preferred base, key, delimiter, char length
+    int base = -1;
+    char delimiter = '\0';
+    int char_length = 0;
 
-    for (int idx = std::max(static_cast<int>(options.size() - 10000000), 0); idx < options.size(); idx++)
+    int last_used_idx = -1;
+    for (int idx = 1; idx < argc - 1; idx++)
     {
-        std::cout << options[idx].get_score() << " '" << options[idx].get_delimiter() << "' " << options[idx].get_char_length() << " " << options[idx].get_base() << " " << options[idx].get_key() << " " << options[idx].get_text() << std::endl;
+        if (argv[idx] == "--base" || argv[idx] == "-b")
+        {
+            base = checked_stoi(argv[idx + 1]);
+            last_used_idx = idx + 1;
+        }
+        if (argv[idx] == "--delim" || argv[idx] == "-d")
+        {
+            delimiter = *argv[idx + 1];
+            last_used_idx = idx + 1;
+        }
+        if (argv[idx] == "--length" || argv[idx] == "-l")
+        {
+            char_length = checked_stoi(argv[idx + 1]);
+            last_used_idx = idx + 1;
+        }
     }
+
+    std::string input;
+    if (last_used_idx == argc - 1)
+    {
+        std::cout << "Input Cipher: ";
+        std::getline(std::cin, input);
+    }
+    else
+        input = argv[argc - 1];
+    std::vector<XORDecrypted> options = get_decryptions(input);
+
+    for (int idx = std::max(static_cast<int>(options.size() - 5), 0); idx < options.size(); idx++)
+        std::cout << options[idx].get_score() << " '" << options[idx].get_delimiter() << "' " << options[idx].get_char_length() << " " << options[idx].get_base() << " " << options[idx].get_key() << " " << options[idx].get_text() << std::endl;
 }

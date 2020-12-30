@@ -2,34 +2,38 @@
 
 #include <string>
 
+// for all types of decryptions of the cipher
 class Decrypted
 {
-private:
+protected:
     std::string m_decrypted_text;
 
     char m_delimiter;
     int m_char_length;
+    // the higher the better the decryption
     float m_score;
+    bool m_score_calculated;
 
-private:
-    void calculate_score();
+protected:
+    virtual void calculate_score() = 0;
 
 public:
-    Decrypted(std::string decrypted_text, char delimiter, int char_length);
+    Decrypted(std::string decrypted_text, char delimiter, int char_length)
+        : m_decrypted_text(decrypted_text), m_delimiter(delimiter), m_char_length(char_length) {}
 
-    std::string get_text() { return m_decrypted_text; }
-    char get_delimiter() const { return m_delimiter; }
-    int get_char_length() const { return m_char_length; }
-    int get_score() const { return m_score; }
+    const std::string get_text() const { return m_decrypted_text; }
+    const char get_delimiter() const { return m_delimiter; }
+    const int get_char_length() const { return m_char_length; }
+    const int get_score();
 
     virtual std::string get_type() const = 0;
 
-    virtual bool operator<(Decrypted &other) const { return m_score < other.m_score; }
-    virtual bool operator<=(Decrypted &other) const { return m_score <= other.m_score; }
-    virtual bool operator>(Decrypted &other) const { return m_score > other.m_score; }
-    virtual bool operator>=(Decrypted &other) const { return m_score >= other.m_score; }
-    virtual bool operator==(Decrypted &other) const { return m_score == other.m_score; }
-    virtual bool operator!=(Decrypted &other) const { return m_score != other.m_score; }
+    virtual bool operator<(Decrypted &other) { return get_score() < other.get_score(); }
+    virtual bool operator<=(Decrypted &other) { return get_score() <= other.get_score(); }
+    virtual bool operator>(Decrypted &other) { return get_score() > other.get_score(); }
+    virtual bool operator>=(Decrypted &other) { return get_score() >= other.get_score(); }
+    virtual bool operator==(Decrypted &other) { return get_score() == other.get_score(); }
+    virtual bool operator!=(Decrypted &other) { return get_score() != other.get_score(); }
 };
 
 class XORDecrypted : public Decrypted
@@ -37,6 +41,9 @@ class XORDecrypted : public Decrypted
 private:
     int m_key;
     int m_base;
+
+private:
+    virtual void calculate_score() override;
 
 public:
     XORDecrypted(std::string decrypted_text, char delimiter, int char_length, int key, int base)

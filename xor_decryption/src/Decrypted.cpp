@@ -1,6 +1,14 @@
 #include "Decrypted.h"
+#include <math.h>
 
-void Decrypted::calculate_score()
+const int Decrypted::get_score()
+{
+    if (!m_score_calculated)
+        calculate_score();
+    return m_score;
+}
+
+void XORDecrypted::calculate_score()
 {
     // score used to compare different decryptions
     m_score = 0;
@@ -18,13 +26,14 @@ void Decrypted::calculate_score()
         else if (character >= 'a' && character <= 'z')
             m_score += 2;
         else if (character == ' ')
-            m_score += 1;
+            m_score += 3;
     }
-    m_score *= m_char_length;
-}
+    m_score += std::abs(m_score * m_char_length);
 
-Decrypted::Decrypted(std::string decrypted_text, char delimiter, int char_length)
-    : m_decrypted_text(decrypted_text), m_delimiter(delimiter), m_char_length(char_length)
-{
-    calculate_score();
+    if (m_key == 0)
+        m_score += std::abs(m_score * 0.5);
+    if (m_base == 2 || m_base == 8 || m_base == 10 || m_base == 16)
+        m_score += std::abs(m_score * 0.5);
+
+    m_score_calculated = true;
 }
