@@ -3,12 +3,12 @@
 #include <iostream>
 #include <algorithm>
 #include <sstream>
-#include <unordered_map>
 #include <cstring>
 
 #include "Console.h"
 #include "Core.h"
 #include "Decrypted.h"
+#include "Utils.h"
 
 int character_to_int(char character, int check_base = 36, bool error = true)
 {

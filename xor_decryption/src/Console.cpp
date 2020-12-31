@@ -1,7 +1,10 @@
 #include "Console.h"
 
-#include "Core.h"
 #include <cstring>
+#include <algorithm>
+
+#include "Core.h"
+#include "Utils.h"
 
 // VectorArgument
 VectorArgument::VectorArgument(std::vector<const char *> init_arguments, int max_amount_arguments, bool optional)

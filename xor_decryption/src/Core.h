@@ -1,7 +1,5 @@
 #pragma once
 
-#include <string>
-#include <algorithm>
 #include <iostream>
 
 #ifdef DEBUG
@@ -17,15 +15,3 @@
         std::exit(EXIT_FAILURE);       \
     }
 #endif
-
-int checked_stoi(std::string str)
-{
-    try
-    {
-        return std::stoi(str);
-    }
-    catch (std::invalid_argument ex)
-    {
-        raise_error("Can't convert \"" << str << "\" to int!");
-    }
-}
