@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <cstring>
 
+#include
 #include "Decrypted.h"
 
 #ifdef DEBUG
@@ -182,105 +183,12 @@ std::vector<XORDecrypted> get_decryptions(std::string cipher)
     return results;
 }
 
-// let's make hkarrson happy
-class VectorArgument
-{
-private:
-    std::vector<const char *> m_init_arguments;
-    std::vector<const char *> m_arguments;
-    bool m_optional;
-
-public:
-    VectorArgument(std::vector<const char *> init_arguments, bool optional = true)
-        : m_init_arguments(init_arguments), m_optional(optional) {}
-
-    void add_argument(const char *argument)
-    {
-        m_arguments.push_back(argument);
-    }
-
-    std::vector<const char *> get_init_arguments() { return m_init_arguments; }
-    const std::vector<const char *> &get_arguments() const { return m_arguments; }
-    bool is_required() const { return !m_optional; }
-
-    bool contains_init_argument(const char *init_argument)
-    {
-        // look mum I managed to cram three good lines of code into one bad one
-        return std::find_if(m_init_arguments.begin(), m_init_arguments.end(), [&](const char *this_init_argument) { return std::strcmp(this_init_argument, init_argument) == 0; }) != m_init_arguments.end();
-    }
-};
-
-class ConsoleArguments
-{
-private:
-    std::vector<VectorArgument> m_vector_arguments;
-
-private:
-    void check_required()
-    {
-        for (VectorArgument &vector_argument : m_vector_arguments)
-            if (vector_argument.is_required() && vector_argument.get_arguments().empty())
-                // todo: add check if out of bounds
-                raise_error("Console Parameter " << vector_argument.get_init_arguments()[0]);
-    }
-
-public:
-    void add_optional(std::vector<const char *> init_arguments)
-    {
-        m_vector_arguments.push_back({init_arguments, true});
-    }
-    void add_required(std::vector<const char *> init_arguments)
-    {
-        m_vector_arguments.push_back({init_arguments, false});
-    }
-
-    void load_arguments(int argc, char *argv[])
-    {
-        VectorArgument *current_vector_argument = nullptr;
-        for (int idx = 1; idx < argc; idx++)
-        {
-            std::cout << argv[idx][0] << std::endl;
-
-            // is init argument?
-            if (argv[idx][0] == '-')
-            {
-                bool found = false;
-                // find used vector argument
-                for (VectorArgument &vector_argument : m_vector_arguments)
-                {
-                    // update pointer if found
-                    if (vector_argument.contains_init_argument(argv[idx]))
-                    {
-                        current_vector_argument = &vector_argument;
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found)
-                    raise_error("Unknown Parameter: " << argv[idx]);
-            }
-            else
-            {
-                if (!current_vector_argument)
-                    raise_error("Unknown Parameter: " << argv[idx]);
-                current_vector_argument->add_argument(argv[idx]);
-            }
-        }
-    }
-};
-
 int main(int argc, char *argv[])
 {
-
-    for (int idx = 0; idx < argc; idx++)
-        std::cout << argv[idx] << " ";
-    std::cout << std::endl;
-
-    std::vector<VectorArgument> vector_arguments = {
-        {{"-b", "--base"}},
-        {{"-k", "--key"}}};
-
-    read_command_parameters(argc, argv, vector_arguments);
+    ConsoleArguments console_arguments;
+    console_arguments.add_optional({"-b", "--base"});
+    console_arguments.add_bool({"-c"});
+    console_arguments.load_arguments(argc, argv);
 
     std::string input;
     if (argc > 1)

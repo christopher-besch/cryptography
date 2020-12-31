@@ -63,8 +63,10 @@ endif
 GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/Console.o
 GENERATED += $(OBJDIR)/DecryptXOR.o
 GENERATED += $(OBJDIR)/Decrypted.o
+OBJECTS += $(OBJDIR)/Console.o
 OBJECTS += $(OBJDIR)/DecryptXOR.o
 OBJECTS += $(OBJDIR)/Decrypted.o
 
@@ -130,6 +132,9 @@ endif
 # File Rules
 # #############################################
 
+$(OBJDIR)/Console.o: src/Console.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/DecryptXOR.o: src/DecryptXOR.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"

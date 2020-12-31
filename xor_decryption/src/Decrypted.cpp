@@ -10,6 +10,7 @@ const int Decrypted::get_score()
 
 void XORDecrypted::calculate_score()
 {
+    // todo: maybe Trie good?
     // score used to compare different decryptions
     m_score = 0;
     for (char character : m_decrypted_text)
@@ -19,7 +20,6 @@ void XORDecrypted::calculate_score()
             m_score += 1;
         else
             m_score -= 1;
-
         // extra points for "good" characters
         if (character >= 'A' && character <= 'Z')
             m_score += 2;
