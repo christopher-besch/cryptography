@@ -64,9 +64,7 @@ GENERATED :=
 OBJECTS :=
 
 GENERATED += $(OBJDIR)/Console.o
-GENERATED += $(OBJDIR)/Decrypted.o
 OBJECTS += $(OBJDIR)/Console.o
-OBJECTS += $(OBJDIR)/Decrypted.o
 
 # Rules
 # #############################################
@@ -131,9 +129,6 @@ endif
 # #############################################
 
 $(OBJDIR)/Console.o: src/Console.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Decrypted.o: src/Decrypted.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
