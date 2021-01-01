@@ -19,10 +19,12 @@ endif
 # #############################################
 
 RESCOMP = windres
-INCLUDES += -I../utils/src
+INCLUDES +=
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
+LIBS +=
+LDDEPS +=
 LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
 define PREBUILDCMDS
 endef
@@ -32,25 +34,21 @@ define POSTBUILDCMDS
 endef
 
 ifeq ($(config),debug)
-TARGETDIR = ../bin/Debug-linux-x86_64/xor_decryption
-TARGET = $(TARGETDIR)/libxor_decryption.a
-OBJDIR = ../bin-int/Debug-linux-x86_64/xor_decryption
+TARGETDIR = ../bin/Debug-linux-x86_64/utils
+TARGET = $(TARGETDIR)/libutils.a
+OBJDIR = ../bin-int/Debug-linux-x86_64/utils
 DEFINES += -DDEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -g
-LIBS += ../bin/Debug-linux-x86_64/utils/libutils.a
-LDDEPS += ../bin/Debug-linux-x86_64/utils/libutils.a
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
 
 else ifeq ($(config),release)
-TARGETDIR = ../bin/Release-linux-x86_64/xor_decryption
-TARGET = $(TARGETDIR)/libxor_decryption.a
-OBJDIR = ../bin-int/Release-linux-x86_64/xor_decryption
+TARGETDIR = ../bin/Release-linux-x86_64/utils
+TARGET = $(TARGETDIR)/libutils.a
+OBJDIR = ../bin-int/Release-linux-x86_64/utils
 DEFINES += -DRELEASE
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2
-LIBS += ../bin/Release-linux-x86_64/utils/libutils.a
-LDDEPS += ../bin/Release-linux-x86_64/utils/libutils.a
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s
 
 endif
@@ -65,10 +63,8 @@ endif
 GENERATED :=
 OBJECTS :=
 
-GENERATED += $(OBJDIR)/DecryptXOR.o
-GENERATED += $(OBJDIR)/Decrypted.o
-OBJECTS += $(OBJDIR)/DecryptXOR.o
-OBJECTS += $(OBJDIR)/Decrypted.o
+GENERATED += $(OBJDIR)/Console.o
+OBJECTS += $(OBJDIR)/Console.o
 
 # Rules
 # #############################################
@@ -78,7 +74,7 @@ all: $(TARGET)
 
 $(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
-	@echo Linking xor_decryption
+	@echo Linking utils
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -99,7 +95,7 @@ else
 endif
 
 clean:
-	@echo Cleaning xor_decryption
+	@echo Cleaning utils
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(GENERATED)
@@ -132,10 +128,7 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/DecryptXOR.o: src/DecryptXOR.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Decrypted.o: src/Decrypted.cpp
+$(OBJDIR)/Console.o: src/Console.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

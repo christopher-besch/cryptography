@@ -9,22 +9,32 @@ ifndef verbose
 endif
 
 ifeq ($(config),debug)
+  decryption_config = debug
   xor_encryption_config = debug
   xor_decryption_config = debug
+  utils_config = debug
 
 else ifeq ($(config),release)
+  decryption_config = release
   xor_encryption_config = release
   xor_decryption_config = release
+  utils_config = release
 
 else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := xor_encryption xor_decryption
+PROJECTS := decryption xor_encryption xor_decryption utils
 
 .PHONY: all clean help $(PROJECTS) 
 
 all: $(PROJECTS)
+
+decryption: xor_decryption utils
+ifneq (,$(decryption_config))
+	@echo "==== Building decryption ($(decryption_config)) ===="
+	@${MAKE} --no-print-directory -C decryption -f Makefile config=$(decryption_config)
+endif
 
 xor_encryption:
 ifneq (,$(xor_encryption_config))
@@ -32,15 +42,23 @@ ifneq (,$(xor_encryption_config))
 	@${MAKE} --no-print-directory -C xor_encryption -f Makefile config=$(xor_encryption_config)
 endif
 
-xor_decryption:
+xor_decryption: utils
 ifneq (,$(xor_decryption_config))
 	@echo "==== Building xor_decryption ($(xor_decryption_config)) ===="
 	@${MAKE} --no-print-directory -C xor_decryption -f Makefile config=$(xor_decryption_config)
 endif
 
+utils:
+ifneq (,$(utils_config))
+	@echo "==== Building utils ($(utils_config)) ===="
+	@${MAKE} --no-print-directory -C utils -f Makefile config=$(utils_config)
+endif
+
 clean:
+	@${MAKE} --no-print-directory -C decryption -f Makefile clean
 	@${MAKE} --no-print-directory -C xor_encryption -f Makefile clean
 	@${MAKE} --no-print-directory -C xor_decryption -f Makefile clean
+	@${MAKE} --no-print-directory -C utils -f Makefile clean
 
 help:
 	@echo "Usage: make [config=name] [target]"
@@ -52,7 +70,9 @@ help:
 	@echo "TARGETS:"
 	@echo "   all (default)"
 	@echo "   clean"
+	@echo "   decryption"
 	@echo "   xor_encryption"
 	@echo "   xor_decryption"
+	@echo "   utils"
 	@echo ""
 	@echo "For more information, see https://github.com/premake/premake-core/wiki"

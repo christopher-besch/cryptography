@@ -3,7 +3,6 @@
 #include <cstring>
 #include <algorithm>
 
-#include "Core.h"
 #include "Utils.h"
 
 // VectorArgument

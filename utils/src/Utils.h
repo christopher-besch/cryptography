@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iostream>
+#include <string>
+#include <stdexcept>
 
 #ifdef DEBUG
 #define raise_error(msg)                                                                                                  \
@@ -15,3 +17,15 @@
         std::exit(EXIT_FAILURE);       \
     }
 #endif
+
+inline int checked_stoi(std::string str)
+{
+    try
+    {
+        return std::stoi(str);
+    }
+    catch (std::invalid_argument ex)
+    {
+        raise_error("Can't convert \"" << str << "\" to int!");
+    }
+}

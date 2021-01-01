@@ -1,18 +1,18 @@
+#include "DecryptXOR.h"
+
 #include <vector>
 #include <string>
 #include <iostream>
 #include <algorithm>
 #include <sstream>
-#include <cstring>
 
-#include "Console.h"
-#include "Core.h"
+#include <Utils.h>
+
 #include "Decrypted.h"
-#include "Utils.h"
 
-int character_to_int(char character, int check_base = 36, bool error = true)
+// convert digit in base <check_base> to int
+int character_to_int(char character, int check_base, bool error)
 {
-    // convert digit in base <check_base> to int
     int digit = check_base;
     if (character >= '0' && character <= '9')
         digit = character - '0';
@@ -74,9 +74,9 @@ std::vector<std::string> get_encrypted_numbers(std::string &str, char delimiter,
     return numbers;
 }
 
-long long decrypt_number(std::string digit_str, int base, int key = 0)
+// convert multiple digits in base <base> to int
+long long decrypt_number(std::string digit_str, int base, int key)
 {
-    // convert multiple digits in base <base> to int
     long long result_char_code = 0;
     for (char character : digit_str)
         result_char_code = base * result_char_code + character_to_int(character, base, true);
@@ -156,26 +156,4 @@ std::vector<XORDecrypted> get_decryptions(std::string cipher)
 
     std::sort(results.begin(), results.end());
     return results;
-}
-
-int main(int argc, char *argv[])
-{
-    ConsoleArguments console_arguments;
-    console_arguments.add_optional({"-b", "--base"});
-    console_arguments.add_bool({"-c"});
-    console_arguments.load_arguments(argc, argv);
-
-    std::string input;
-    if (argc > 1)
-        input = argv[argc - 1];
-    else
-    {
-        std::cout << "Input Cipher: ";
-        std::getline(std::cin, input);
-    }
-
-    std::vector<XORDecrypted> options = get_decryptions(input);
-
-    for (int idx = std::max(static_cast<int>(options.size() - 5), 0); idx < options.size(); idx++)
-        std::cout << options[idx].get_score() << " '" << options[idx].get_delimiter() << "' " << options[idx].get_char_length() << " " << options[idx].get_base() << " " << options[idx].get_key() << " " << options[idx].get_text() << std::endl;
 }

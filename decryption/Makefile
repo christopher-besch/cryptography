@@ -19,11 +19,11 @@ endif
 # #############################################
 
 RESCOMP = windres
-INCLUDES += -I../utils/src
+INCLUDES += -I../xor_decryption/src -I../utils/src
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
+LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
 define PREBUILDCMDS
 endef
 define PRELINKCMDS
@@ -32,25 +32,25 @@ define POSTBUILDCMDS
 endef
 
 ifeq ($(config),debug)
-TARGETDIR = ../bin/Debug-linux-x86_64/xor_decryption
-TARGET = $(TARGETDIR)/libxor_decryption.a
-OBJDIR = ../bin-int/Debug-linux-x86_64/xor_decryption
+TARGETDIR = ../bin/Debug-linux-x86_64/decryption
+TARGET = $(TARGETDIR)/decryption
+OBJDIR = ../bin-int/Debug-linux-x86_64/decryption
 DEFINES += -DDEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -g
-LIBS += ../bin/Debug-linux-x86_64/utils/libutils.a
-LDDEPS += ../bin/Debug-linux-x86_64/utils/libutils.a
+LIBS += ../bin/Debug-linux-x86_64/xor_decryption/libxor_decryption.a ../bin/Debug-linux-x86_64/utils/libutils.a
+LDDEPS += ../bin/Debug-linux-x86_64/xor_decryption/libxor_decryption.a ../bin/Debug-linux-x86_64/utils/libutils.a
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
 
 else ifeq ($(config),release)
-TARGETDIR = ../bin/Release-linux-x86_64/xor_decryption
-TARGET = $(TARGETDIR)/libxor_decryption.a
-OBJDIR = ../bin-int/Release-linux-x86_64/xor_decryption
+TARGETDIR = ../bin/Release-linux-x86_64/decryption
+TARGET = $(TARGETDIR)/decryption
+OBJDIR = ../bin-int/Release-linux-x86_64/decryption
 DEFINES += -DRELEASE
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2
-LIBS += ../bin/Release-linux-x86_64/utils/libutils.a
-LDDEPS += ../bin/Release-linux-x86_64/utils/libutils.a
+LIBS += ../bin/Release-linux-x86_64/xor_decryption/libxor_decryption.a ../bin/Release-linux-x86_64/utils/libutils.a
+LDDEPS += ../bin/Release-linux-x86_64/xor_decryption/libxor_decryption.a ../bin/Release-linux-x86_64/utils/libutils.a
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s
 
 endif
@@ -65,10 +65,8 @@ endif
 GENERATED :=
 OBJECTS :=
 
-GENERATED += $(OBJDIR)/DecryptXOR.o
-GENERATED += $(OBJDIR)/Decrypted.o
-OBJECTS += $(OBJDIR)/DecryptXOR.o
-OBJECTS += $(OBJDIR)/Decrypted.o
+GENERATED += $(OBJDIR)/Main.o
+OBJECTS += $(OBJDIR)/Main.o
 
 # Rules
 # #############################################
@@ -78,7 +76,7 @@ all: $(TARGET)
 
 $(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
-	@echo Linking xor_decryption
+	@echo Linking decryption
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -99,7 +97,7 @@ else
 endif
 
 clean:
-	@echo Cleaning xor_decryption
+	@echo Cleaning decryption
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(GENERATED)
@@ -132,10 +130,7 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/DecryptXOR.o: src/DecryptXOR.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Decrypted.o: src/Decrypted.cpp
+$(OBJDIR)/Main.o: src/Main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
