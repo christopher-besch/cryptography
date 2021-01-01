@@ -51,11 +51,11 @@ private:
     void all_required_found();
 
 public:
-    void add_optional(std::vector<const char *> init_arguments, int max_arguments = -1)
+    void add_optional(std::vector<const char *> init_arguments, int max_arguments = 1)
     {
         m_vector_arguments.push_back({init_arguments, max_arguments, true});
     }
-    void add_required(std::vector<const char *> init_arguments, int max_arguments = -1)
+    void add_required(std::vector<const char *> init_arguments, int max_arguments = 1)
     {
         m_vector_arguments.push_back({init_arguments, max_arguments, false});
     }
@@ -68,6 +68,8 @@ public:
     const VectorArgument &operator[](const char *init_argument) const;
 
     const char *operator[](int idx) const;
+
+    int other_size() { return m_other_arguments.size(); }
 
     void load_arguments(int argc, char *argv[]);
 };

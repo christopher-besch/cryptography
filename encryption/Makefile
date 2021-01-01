@@ -19,10 +19,12 @@ endif
 # #############################################
 
 RESCOMP = windres
-INCLUDES += -I../xor/src -I../utils/src
+INCLUDES +=
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
+LIBS +=
+LDDEPS +=
 LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
 define PREBUILDCMDS
 endef
@@ -32,25 +34,21 @@ define POSTBUILDCMDS
 endef
 
 ifeq ($(config),debug)
-TARGETDIR = ../bin/Debug-linux-x86_64/decryption
-TARGET = $(TARGETDIR)/decryption
-OBJDIR = ../bin-int/Debug-linux-x86_64/decryption
+TARGETDIR = ../bin/Debug-linux-x86_64/encryption
+TARGET = $(TARGETDIR)/encryption
+OBJDIR = ../bin-int/Debug-linux-x86_64/encryption
 DEFINES += -DDEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -g
-LIBS += ../bin/Debug-linux-x86_64/xor/libxor.a ../bin/Debug-linux-x86_64/utils/libutils.a
-LDDEPS += ../bin/Debug-linux-x86_64/xor/libxor.a ../bin/Debug-linux-x86_64/utils/libutils.a
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
 
 else ifeq ($(config),release)
-TARGETDIR = ../bin/Release-linux-x86_64/decryption
-TARGET = $(TARGETDIR)/decryption
-OBJDIR = ../bin-int/Release-linux-x86_64/decryption
+TARGETDIR = ../bin/Release-linux-x86_64/encryption
+TARGET = $(TARGETDIR)/encryption
+OBJDIR = ../bin-int/Release-linux-x86_64/encryption
 DEFINES += -DRELEASE
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2
-LIBS += ../bin/Release-linux-x86_64/xor/libxor.a ../bin/Release-linux-x86_64/utils/libutils.a
-LDDEPS += ../bin/Release-linux-x86_64/xor/libxor.a ../bin/Release-linux-x86_64/utils/libutils.a
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s
 
 endif
@@ -76,7 +74,7 @@ all: $(TARGET)
 
 $(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
-	@echo Linking decryption
+	@echo Linking encryption
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -97,7 +95,7 @@ else
 endif
 
 clean:
-	@echo Cleaning decryption
+	@echo Cleaning encryption
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(GENERATED)

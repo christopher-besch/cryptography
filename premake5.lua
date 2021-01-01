@@ -27,21 +27,16 @@ project "decryption"
     }
 
     includedirs {
-        "xor_decryption/src",
+        "xor/src",
         "utils/src"
     }
 
     links {
-        "xor_decryption",
+        "xor",
         "utils"
     }
 
-    -- -- todo: good?
-    -- sysincludedirs {
-    --     "xor_decryption/src"
-    -- }
-
-project "xor_encryption"
+project "encryption"
     language "C++"
     architecture "x86_64"
     cppdialect "C++latest"
@@ -55,7 +50,7 @@ project "xor_encryption"
         "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp"
     }
 
-project "xor_decryption"
+project "xor"
     language "C++"
     architecture "x86_64"
     cppdialect "C++latest"
@@ -76,11 +71,6 @@ project "xor_decryption"
     links {
         "utils"
     }
-
-    -- -- todo: good
-    -- includedirs {
-    --     "src/"
-    -- }
 
 project "utils"
     language "C++"
