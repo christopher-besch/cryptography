@@ -34,6 +34,6 @@ inline int checked_stoi(std::string str)
 inline void remove_chars(std::string &str, std::vector<char> chars)
 {
     for (int idx = str.size() - 1; idx >= 0; idx--)
-        if (std::find(str.begin(), str.end(), str[idx]) != str.end())
+        if (std::find(chars.begin(), chars.end(), str[idx]) != chars.end())
             str.erase(idx, 1);
 }

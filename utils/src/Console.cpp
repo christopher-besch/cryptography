@@ -9,19 +9,22 @@
 VectorArgument::VectorArgument(std::vector<const char *> init_arguments, int max_amount_arguments, bool optional)
     : m_init_arguments(init_arguments), m_max_amount_arguments(max_amount_arguments), m_optional(optional), m_found(false)
 {
-    // todo: requested amount of arguments
+#ifdef DEBUG
     // checks
     if (m_init_arguments.empty())
         raise_error("Trying to create VectorArgument with no init arguments!");
     for (const char *init_argument : init_arguments)
         if (init_argument[0] != '-')
             raise_error("Init arguments have to start with '-'! '" << init_argument << "' is invalid!")
+#endif
 }
 
 void VectorArgument::add_argument(const char *argument)
 {
+#ifdef DEBUG
     if (m_arguments.size() == m_max_amount_arguments)
         raise_error("Trying to add more arguments than allowed!");
+#endif
     m_arguments.push_back(argument);
 }
 
@@ -49,8 +52,10 @@ const VectorArgument &ConsoleArguments::operator[](const char *init_argument) co
 
 const char *ConsoleArguments::operator[](int idx) const
 {
+#ifdef DEBUG
     if (idx < 0 || idx >= m_other_arguments.size())
         raise_error("Trying to access other arguments with invalid index!");
+#endif
     return m_other_arguments[idx];
 }
 

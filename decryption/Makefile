@@ -66,7 +66,9 @@ GENERATED :=
 OBJECTS :=
 
 GENERATED += $(OBJDIR)/Main.o
+GENERATED += $(OBJDIR)/XORDecrpyt.o
 OBJECTS += $(OBJDIR)/Main.o
+OBJECTS += $(OBJDIR)/XORDecrpyt.o
 
 # Rules
 # #############################################
@@ -131,6 +133,9 @@ endif
 # #############################################
 
 $(OBJDIR)/Main.o: src/Main.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XORDecrpyt.o: src/xor/XORDecrpyt.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

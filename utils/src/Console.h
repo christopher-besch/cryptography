@@ -5,6 +5,7 @@
 // #include "Core.h"
 
 // let's make hkarrson happy
+// abstraction for arguments belonging to same parameter
 class VectorArgument
 {
 private:
@@ -23,14 +24,13 @@ public:
     VectorArgument(std::vector<const char *> init_arguments, int max_amount_arguments, bool optional = true);
 
     void got_found() { m_found = true; }
-
     void add_argument(const char *argument);
 
     const std::vector<const char *> &get_init_arguments() const { return m_init_arguments; }
     const std::vector<const char *> &get_arguments() const { return m_arguments; }
     int get_max_amount_arguments() const { return m_max_amount_arguments; }
     bool is_required() const { return !m_optional; }
-    const bool is_found() const { return m_found; }
+    bool is_found() const { return m_found; }
 
     bool contains_init_argument(const char *init_argument) const;
 
@@ -40,6 +40,7 @@ public:
     }
 };
 
+// for all console arguments
 class ConsoleArguments
 {
 private:
@@ -55,6 +56,7 @@ public:
     {
         m_vector_arguments.push_back({init_arguments, max_arguments, true});
     }
+    // will raise error when not found
     void add_required(std::vector<const char *> init_arguments, int max_arguments = 1)
     {
         m_vector_arguments.push_back({init_arguments, max_arguments, false});
@@ -65,8 +67,10 @@ public:
         m_vector_arguments.push_back({init_arguments, 0, true});
     }
 
+    // returns vector argument with supplied init_argument
     const VectorArgument &operator[](const char *init_argument) const;
 
+    // return other argument at that position
     const char *operator[](int idx) const;
 
     int other_size() { return m_other_arguments.size(); }

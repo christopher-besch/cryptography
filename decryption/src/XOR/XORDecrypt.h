@@ -5,6 +5,7 @@
 
 #include <Utils.h>
 
+// for one valid decryption option
 struct XORDecrypted
 {
     std::string decrypted_str;
@@ -12,8 +13,34 @@ struct XORDecrypted
     int char_length;
     int key;
     int base;
+    // used to compare different decryption options
+    int score;
+
+    bool operator<(XORDecrypted &other) { return score < other.score; }
+    bool operator<=(XORDecrypted &other) { return score <= other.score; }
+    bool operator>(XORDecrypted &other) { return score > other.score; }
+    bool operator>=(XORDecrypted &other) { return score >= other.score; }
+    bool operator==(XORDecrypted &other) { return score == other.score; }
+    bool operator!=(XORDecrypted &other) { return score != other.score; }
+
+    std::string get_header()
+    {
+        return "delimiter/char length\tkey\tbase";
+    }
+
+    operator std::string()
+    {
+        std::stringstream stats;
+        if (delimiter)
+            stats << delimiter << "\t";
+        else
+            stats << char_length << "\t";
+        stats << key << "\t" << base << "\t" << decrypted_str;
+        return stats.str();
+    }
 };
 
+// for one cipher and all valid decryption options
 class XORDecrypt
 {
 private:
@@ -38,10 +65,12 @@ private:
     // todo: there might be an off-by-one error here
     int character_to_int(char character, int check_base = 36, bool error = true);
     void preprocess();
-    std::vector<std::string> XORDecrypt::cut_cipher_with_char_length(int char_length);
-    std::vector<std::string> XORDecrypt::cut_cipher_with_delimiter(char delimiter);
+    std::vector<std::string> cut_cipher_with_char_length(int char_length);
+    std::vector<std::string> cut_cipher_with_delimiter(char delimiter);
     long long decrypt_number(std::string digit_str, int base, int key);
     void try_decrypt(std::vector<std::string> &encrypted_numbers, char test_delimiter, int test_char_length);
+    void create_decryptions();
+    void calculate_score();
 
 public:
     XORDecrypt(std::string &cipher)
@@ -56,5 +85,12 @@ public:
     void set_requested_keys(std::vector<int> &keys) { m_requested_keys = keys; }
     void set_requested_bases(std::vector<int> &bases) { m_requested_bases = bases; }
 
-    void create_decryptions();
+    void add_requested_delimiter(char delimiters) { m_requested_delimiters.push_back(delimiters); }
+    void add_requested_char_length(int char_length) { m_requested_char_lengths.push_back(char_length); }
+    void add_requested_key(int keys) { m_requested_keys.push_back(keys); }
+    void add_requested_base(int bases) { m_requested_bases.push_back(bases); }
+
+    std::vector<XORDecrypted> get_best_decryptions()
+    {
+    }
 };

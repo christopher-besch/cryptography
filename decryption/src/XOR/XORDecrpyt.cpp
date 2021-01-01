@@ -8,7 +8,7 @@
 
 #include <Utils.h>
 
-// convert digit in base <check_base> to int
+// convert char-digit in base <check_base> to int
 int XORDecrypt::character_to_int(char character, int check_base, bool error)
 {
     int digit = check_base;
@@ -44,39 +44,39 @@ void XORDecrypt::preprocess()
 
         // todo: off-by-one error?
         // e.g. when the character representing the highest number is '9', base 10 is the "smallest" possible base
-        else if (character_to_int(decrypted_character) + 1 > m_smallest_base)
-            m_smallest_base = character_to_int(decrypted_character) + 1;
+        else if (decrypted_character + 1 > m_smallest_base)
+            m_smallest_base = decrypted_character + 1;
     }
-
-    // remove everything but the characters itself
+    // remove everything but the char-digits itself
     remove_chars(m_cipher_chars_only, m_possible_delimiters);
 }
 
-// cut cipher into individual characters by length of each
+// cut cipher into individual encrypted numbers by length of each
 std::vector<std::string> XORDecrypt::cut_cipher_with_char_length(int char_length)
 {
-    std::vector<std::string> characters;
+    std::vector<std::string> encrypted_numbers;
     for (int idx = 0; idx < m_cipher_chars_only.size(); idx += char_length)
-        characters.push_back(m_cipher_chars_only.substr(idx, char_length));
-    return characters;
+        encrypted_numbers.push_back(m_cipher_chars_only.substr(idx, char_length));
+    return encrypted_numbers;
 }
 
-// cut cipher into individual characters by delimiter
+// cut cipher into individual encrypted numbers by delimiter
 std::vector<std::string> XORDecrypt::cut_cipher_with_delimiter(char delimiter)
 {
-    std::vector<std::string> characters;
+    std::vector<std::string> encrypted_numbers;
     std::stringstream ss_cipher(m_cipher);
+
     for (std::string buffer; std::getline(ss_cipher, buffer, delimiter);)
     {
         // remove everything but the characters itself
         remove_chars(buffer, m_possible_delimiters);
         if (!buffer.empty())
-            characters.push_back(buffer);
+            encrypted_numbers.push_back(buffer);
     }
-    return characters;
+    return encrypted_numbers;
 }
 
-// convert multiple digits in base <base> to int
+// convert encrypted number in base <base> to int
 long long XORDecrypt::decrypt_number(std::string digit_str, int base, int key)
 {
     long long result_char_code = 0;
@@ -87,6 +87,7 @@ long long XORDecrypt::decrypt_number(std::string digit_str, int base, int key)
     return result_char_code ^ key;
 }
 
+// decrypt encrypted numbers, trying every base and key possible
 void XORDecrypt::try_decrypt(std::vector<std::string> &encrypted_numbers, char test_delimiter, int test_char_length)
 {
     // test possible bases
@@ -110,8 +111,9 @@ void XORDecrypt::try_decrypt(std::vector<std::string> &encrypted_numbers, char t
                 }
                 decrypted_str.push_back(static_cast<char>(decrypted_number));
             }
-            // only add possible and new options
-            if (possible && std::find_if(m_decryptions.begin(), m_decryptions.end(), [&](XORDecrypted item) { return item.decrypted_str == decrypted_str; }) == m_decryptions.end())
+            // only add possible options
+            // todo: memory saving pls
+            if (possible)
                 m_decryptions.push_back({decrypted_str, test_delimiter, test_char_length, test_key, test_base});
         }
     }
@@ -119,7 +121,7 @@ void XORDecrypt::try_decrypt(std::vector<std::string> &encrypted_numbers, char t
 
 void XORDecrypt::create_decryptions()
 {
-    // test separating numbers with all possible delimiters
+    // test separating encrypted numbers with all possible delimiters
     for (char test_delimiter : m_possible_delimiters)
     {
         std::vector<std::string> encrypted_numbers = cut_cipher_with_delimiter(test_delimiter);
@@ -127,13 +129,43 @@ void XORDecrypt::create_decryptions()
         try_decrypt(encrypted_numbers, test_delimiter, encrypted_numbers[0].size());
     }
 
-    // test separating numbers with different number lengths
+    // test separating encrypted numbers with different number lengths
     for (int test_char_length = 1; test_char_length <= 8; test_char_length++)
     {
         if (m_cipher.size() % test_char_length != 0)
             continue;
         std::vector<std::string> encrypted_numbers = cut_cipher_with_char_length(test_char_length);
         try_decrypt(encrypted_numbers, '\0', test_char_length);
+    }
+}
+
+void XORDecrypt::calculate_score()
+{
+    // todo: maybe Trie good?
+    for (XORDecrypted &decrypt : m_decryptions)
+    {
+        decrypt.score = 0;
+        for (char character : decrypt.decrypted_str)
+        {
+            // for each printable character
+            if (character >= ' ' && character <= '~')
+                decrypt.score += 1;
+            else
+                decrypt.score -= 1;
+            // extra points for "good" characters
+            if (character >= 'A' && character <= 'Z')
+                decrypt.score += 2;
+            else if (character >= 'a' && character <= 'z')
+                decrypt.score += 2;
+            else if (character == ' ')
+                decrypt.score += 3;
+        }
+        decrypt.score += std::abs(decrypt.score * decrypt.char_length);
+
+        if (decrypt.key == 0)
+            decrypt.score += std::abs(decrypt.score * 0.5);
+        if (decrypt.base == 2 || decrypt.base == 8 || decrypt.base == 10 || decrypt.base == 16)
+            decrypt.score += std::abs(decrypt.score * 0.5);
     }
 }
 
