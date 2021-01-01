@@ -27,12 +27,10 @@ project "decryption"
     }
 
     includedirs {
-        "xor/src",
         "utils/src"
     }
 
     links {
-        "xor",
         "utils"
     }
 
@@ -48,28 +46,6 @@ project "encryption"
 
     files {
         "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp"
-    }
-
-project "xor"
-    language "C++"
-    architecture "x86_64"
-    cppdialect "C++latest"
-    kind "StaticLib"
-
-    location "%{prj.name}"
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-
-    files {
-        "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp"
-    }
-
-    includedirs {
-        "utils/src"
-    }
-
-    links {
-        "utils"
     }
 
 project "utils"

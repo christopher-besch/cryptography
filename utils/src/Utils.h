@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include <algorithm>
 
 #ifdef DEBUG
 #define raise_error(msg)                                                                                                  \
@@ -28,4 +29,11 @@ inline int checked_stoi(std::string str)
     {
         raise_error("Can't convert \"" << str << "\" to int!");
     }
+}
+
+inline void remove_chars(std::string &str, std::vector<char> chars)
+{
+    for (int idx = str.size() - 1; idx >= 0; idx--)
+        if (std::find(str.begin(), str.end(), str[idx]) != str.end())
+            str.erase(idx, 1);
 }
