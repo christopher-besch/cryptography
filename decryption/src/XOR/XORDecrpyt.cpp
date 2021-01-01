@@ -114,9 +114,50 @@ void XORDecrypt::try_decrypt(std::vector<std::string> &encrypted_numbers, char t
             // only add possible options
             // todo: memory saving pls
             if (possible)
-                m_decryptions.push_back({decrypted_str, test_delimiter, test_char_length, test_key, test_base});
+            {
+                XORDecrypted this_decrypt = {decrypted_str, test_delimiter, test_char_length, test_key, test_base};
+                calculate_score(this_decrypt);
+                // when not filled yet
+                if (m_amount == -1 || m_decryptions.size() < m_amount)
+                    m_decryptions.push_back(this_decrypt);
+                else
+                    // when space is rare, overwrite if good enough
+                    for (std::vector<XORDecrypted>::iterator ptr = m_decryptions.begin(); ptr < m_decryptions.end(); ptr++)
+                        if (*ptr < this_decrypt)
+                        {
+                            *ptr = this_decrypt;
+                            break;
+                        }
+            }
         }
     }
+}
+
+void XORDecrypt::calculate_score(XORDecrypted &decrypt)
+{
+    // todo: maybe Trie good?
+    decrypt.score = 0;
+    for (char character : decrypt.decrypted_str)
+    {
+        // for each printable character
+        if (character >= ' ' && character <= '~')
+            decrypt.score += 1;
+        else
+            decrypt.score -= 1;
+        // extra points for "good" characters
+        if (character >= 'A' && character <= 'Z')
+            decrypt.score += 2;
+        else if (character >= 'a' && character <= 'z')
+            decrypt.score += 2;
+        else if (character == ' ')
+            decrypt.score += 1;
+    }
+    decrypt.score += std::abs(decrypt.score * decrypt.char_length);
+
+    if (decrypt.key == 0)
+        decrypt.score += std::abs(decrypt.score * 0.5);
+    if (decrypt.base == 2 || decrypt.base == 8 || decrypt.base == 10 || decrypt.base == 16)
+        decrypt.score += std::abs(decrypt.score * 0.5);
 }
 
 void XORDecrypt::create_decryptions()
@@ -137,36 +178,7 @@ void XORDecrypt::create_decryptions()
         std::vector<std::string> encrypted_numbers = cut_cipher_with_char_length(test_char_length);
         try_decrypt(encrypted_numbers, '\0', test_char_length);
     }
-}
-
-void XORDecrypt::calculate_score()
-{
-    // todo: maybe Trie good?
-    for (XORDecrypted &decrypt : m_decryptions)
-    {
-        decrypt.score = 0;
-        for (char character : decrypt.decrypted_str)
-        {
-            // for each printable character
-            if (character >= ' ' && character <= '~')
-                decrypt.score += 1;
-            else
-                decrypt.score -= 1;
-            // extra points for "good" characters
-            if (character >= 'A' && character <= 'Z')
-                decrypt.score += 2;
-            else if (character >= 'a' && character <= 'z')
-                decrypt.score += 2;
-            else if (character == ' ')
-                decrypt.score += 3;
-        }
-        decrypt.score += std::abs(decrypt.score * decrypt.char_length);
-
-        if (decrypt.key == 0)
-            decrypt.score += std::abs(decrypt.score * 0.5);
-        if (decrypt.base == 2 || decrypt.base == 8 || decrypt.base == 10 || decrypt.base == 16)
-            decrypt.score += std::abs(decrypt.score * 0.5);
-    }
+    std::sort(m_decryptions.begin(), m_decryptions.end());
 }
 
 // todo: better names for everything

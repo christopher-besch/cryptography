@@ -6,8 +6,8 @@
 #include "Utils.h"
 
 // VectorArgument
-VectorArgument::VectorArgument(std::vector<const char *> init_arguments, int max_amount_arguments, bool optional)
-    : m_init_arguments(init_arguments), m_max_amount_arguments(max_amount_arguments), m_optional(optional), m_found(false)
+VectorArgument::VectorArgument(std::vector<const char *> init_arguments, int min_arguments, int max_arguments, bool optional)
+    : m_init_arguments(init_arguments), m_min_arguments(min_arguments), m_max_arguments(max_arguments), m_optional(optional), m_found(false)
 {
 #ifdef DEBUG
     // checks
@@ -22,7 +22,7 @@ VectorArgument::VectorArgument(std::vector<const char *> init_arguments, int max
 void VectorArgument::add_argument(const char *argument)
 {
 #ifdef DEBUG
-    if (m_arguments.size() == m_max_amount_arguments)
+    if (m_arguments.size() == m_max_arguments)
         raise_error("Trying to add more arguments than allowed!");
 #endif
     m_arguments.push_back(argument);
@@ -34,12 +34,20 @@ bool VectorArgument::contains_init_argument(const char *init_argument) const
     return std::find_if(m_init_arguments.begin(), m_init_arguments.end(), [&](const char *this_init_argument) { return std::strcmp(this_init_argument, init_argument) == 0; }) != m_init_arguments.end();
 }
 
-// ConsoleArguments
-void ConsoleArguments::all_required_found()
+void VectorArgument::test_requirements() const
 {
-    for (VectorArgument &vector_argument : m_vector_arguments)
-        if (vector_argument.is_required() && !vector_argument.is_found())
-            raise_error("Console Parameter " << vector_argument.get_init_arguments()[0] << " is missing!");
+    if (!m_optional && !m_found)
+        raise_error("Console Parameter " << m_init_arguments[0] << " is missing!");
+    if (m_found && m_arguments.size() < m_min_arguments)
+        raise_error("Console Parameter " << m_init_arguments[0] << " needs more arguments!");
+}
+
+// ConsoleArguments
+// test if all VectorArguments fullfill their requirements
+void ConsoleArguments::test_requirements() const
+{
+    for (const VectorArgument &vector_argument : m_vector_arguments)
+        vector_argument.test_requirements();
 }
 
 const VectorArgument &ConsoleArguments::operator[](const char *init_argument) const
@@ -98,5 +106,5 @@ void ConsoleArguments::load_arguments(int argc, char *argv[])
             }
         }
     }
-    all_required_found();
+    test_requirements();
 }

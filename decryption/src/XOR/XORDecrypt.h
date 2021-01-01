@@ -23,20 +23,27 @@ struct XORDecrypted
     bool operator==(XORDecrypted &other) { return score == other.score; }
     bool operator!=(XORDecrypted &other) { return score != other.score; }
 
-    std::string get_header()
+    static std::string get_header()
     {
-        return "delimiter/char length\tkey\tbase";
+#ifdef DEBUG
+        return "score\tdelimiter/char_length\tkey\tbase\tresult";
+#else
+        return "delimiter/char_length\tkey\tbase\tresult";
+#endif
     }
 
-    operator std::string()
+    friend std::ostream &operator<<(std::ostream &lhs, const XORDecrypted &rhs)
     {
-        std::stringstream stats;
-        if (delimiter)
-            stats << delimiter << "\t";
+#ifdef DEBUG
+        lhs << rhs.score << "\t";
+#endif
+        if (rhs.delimiter)
+            lhs << "'" << rhs.delimiter << "'";
         else
-            stats << char_length << "\t";
-        stats << key << "\t" << base << "\t" << decrypted_str;
-        return stats.str();
+            lhs << rhs.char_length;
+        lhs << "\t\t\t";
+        lhs << rhs.key << "\t" << rhs.base << "\t" << rhs.decrypted_str;
+        return lhs;
     }
 };
 
@@ -47,6 +54,9 @@ private:
     std::string m_cipher;
     // cipher with all possible delimiters removed
     std::string m_cipher_chars_only;
+
+    // how many decryptions should be stored, -1 for as many as possible
+    int m_amount;
     std::vector<XORDecrypted> m_decryptions;
 
     // decryptions with these parameters are preferred
@@ -69,15 +79,15 @@ private:
     std::vector<std::string> cut_cipher_with_delimiter(char delimiter);
     long long decrypt_number(std::string digit_str, int base, int key);
     void try_decrypt(std::vector<std::string> &encrypted_numbers, char test_delimiter, int test_char_length);
-    void create_decryptions();
-    void calculate_score();
+    void calculate_score(XORDecrypted &decrypt);
 
 public:
-    XORDecrypt(std::string &cipher)
-        : m_cipher(cipher), m_cipher_chars_only(cipher)
+    XORDecrypt(std::string &cipher, int amount = -1)
+        : m_cipher(cipher), m_cipher_chars_only(cipher), m_amount(amount)
     {
+        if (m_amount != -1)
+            m_decryptions.reserve(m_amount);
         preprocess();
-        create_decryptions();
     }
 
     void set_requested_delimiters(std::vector<char> &delimiters) { m_requested_delimiters = delimiters; }
@@ -90,7 +100,7 @@ public:
     void add_requested_key(int keys) { m_requested_keys.push_back(keys); }
     void add_requested_base(int bases) { m_requested_bases.push_back(bases); }
 
-    std::vector<XORDecrypted> get_best_decryptions()
-    {
-    }
+    void create_decryptions();
+
+    const std::vector<XORDecrypted> &get_decryptions() const { return m_decryptions; }
 };
