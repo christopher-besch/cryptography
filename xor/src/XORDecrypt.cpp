@@ -9,3 +9,7 @@
 #include <Utils.h>
 
 #include "XORDecrypted.h"
+
+void XORDecrypt::create_decryptions()
+{
+}
