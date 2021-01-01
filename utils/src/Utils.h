@@ -4,6 +4,7 @@
 #include <string>
 #include <stdexcept>
 #include <algorithm>
+#include <vector>
 
 #ifdef DEBUG
 #define raise_error(msg)                                                                                                  \

@@ -64,7 +64,9 @@ GENERATED :=
 OBJECTS :=
 
 GENERATED += $(OBJDIR)/Console.o
+GENERATED += $(OBJDIR)/Trie.o
 OBJECTS += $(OBJDIR)/Console.o
+OBJECTS += $(OBJDIR)/Trie.o
 
 # Rules
 # #############################################
@@ -129,6 +131,9 @@ endif
 # #############################################
 
 $(OBJDIR)/Console.o: src/Console.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Trie.o: src/Trie.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

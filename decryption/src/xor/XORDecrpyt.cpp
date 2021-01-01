@@ -152,12 +152,10 @@ void XORDecrypt::calculate_score(XORDecrypted &decrypt)
         else if (character == ' ')
             decrypt.score += 1;
     }
-    decrypt.score += std::abs(decrypt.score * decrypt.char_length);
+    decrypt.score /= decrypt.base;
 
     if (decrypt.key == 0)
-        decrypt.score += std::abs(decrypt.score * 0.5);
-    if (decrypt.base == 2 || decrypt.base == 8 || decrypt.base == 10 || decrypt.base == 16)
-        decrypt.score += std::abs(decrypt.score * 0.5);
+        decrypt.score *= 2;
 }
 
 void XORDecrypt::create_decryptions()

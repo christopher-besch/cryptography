@@ -3,9 +3,29 @@
 #include <fstream>
 
 #include <Console.h>
+#include <Trie.h>
 #include "xor/XORDecrypt.h"
 
-int main(int argc, char *argv[])
+int main()
+{
+    Trie my_trie;
+    my_trie.insert("test");
+    my_trie.insert("apple");
+    my_trie.insert("me");
+
+    std::cout << my_trie.search("test") << std::endl;
+    std::cout << my_trie.search("apple") << std::endl;
+    std::cout << my_trie.search("you") << std::endl;
+    std::cout << my_trie.search("test") << std::endl;
+
+    // todo: memory leak!!!
+    while (true)
+    {
+        Trie *x = new Trie;
+    }
+}
+
+int main_d(int argc, char *argv[])
 {
     // todo: read config from json
     // todo: add force mode only searching for requested
@@ -18,7 +38,6 @@ int main(int argc, char *argv[])
     console_arguments.load_arguments(argc, argv);
 
     // todo: read from file
-    // todo: print to file
     std::string input;
     if (console_arguments.other_size() >= 2)
         input = console_arguments[1];
