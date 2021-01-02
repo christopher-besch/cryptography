@@ -11,6 +11,10 @@ workspace "cryptography"
     filter "configurations:Release"
         defines { "RELEASE" }
         optimize "On"
+    -- w
+    debugdir {
+        ""
+    }
 
 project "decryption"
     language "C++"
@@ -27,8 +31,8 @@ project "decryption"
     }
 
     includedirs {
-        "utils/src",
-        "%{prj.name}/src"
+        "%{prj.name}/src",
+        "utils/src"
     }
 
     links {
@@ -47,6 +51,15 @@ project "encryption"
 
     files {
         "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp"
+    }
+
+    includedirs {
+        "%{prj.name}/src",
+        "utils/src"
+    }
+
+    links {
+        "utils"
     }
 
 project "utils"

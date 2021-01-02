@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <algorithm>
 
 std::string encrypt_char(char character, int base, int key = 0)
@@ -39,11 +40,11 @@ int main()
     // get input
     std::string input, key_str;
     std::cout << "input to encrypt: ";
-    getline(std::cin, input);
+    std::getline(std::cin, input);
     std::cout << "input xor key: ";
-    getline(std::cin, key_str);
+    std::getline(std::cin, key_str);
 
-    int key = stoi(key_str);
+    int key = std::stoi(key_str);
 
     // from base 36 to base 2
     for (int base = 36; base > 1; --base)
@@ -51,3 +52,5 @@ int main()
         std::cout << base << ": " << encrypt_test(input, base, ' ', key) << std::endl;
     }
 }
+
+// todo: why tf getline(); working?
