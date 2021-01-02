@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
         std::getline(std::cin, input);
     }
 
-    XORDecrypt decrypts(input, -1);
+    XORDecrypt decrypts(input, 10);
     // load dictionaries and requests
     decrypts.load_dictionary("english.txt");
     for (const char *delimiter : console_arguments["-d"].get_arguments())

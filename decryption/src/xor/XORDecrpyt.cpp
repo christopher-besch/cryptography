@@ -133,32 +133,6 @@ void XORDecrypt::try_decrypt(std::vector<std::string> &encrypted_numbers, char t
     }
 }
 
-// todo: remove
-// void XORDecrypt::calculate_score(XORDecrypted &decrypt)
-// {
-//     // todo: maybe Trie good?
-//     decrypt.score = 0;
-//     for (char character : decrypt.decrypted_str)
-//     {
-//         // for each printable character
-//         if (character >= ' ' && character <= '~')
-//             decrypt.score += 1;
-//         else
-//             decrypt.score -= 3;
-//     }
-//     // the smaller the base, the better
-//     decrypt.score /= decrypt.base;
-//
-//     decrypt.score += m_dictionary.get_score(decrypt.decrypted_str) * 100;
-//
-//     // no key needed? great!
-//     if (decrypt.key == 0)
-//         decrypt.score *= 2;
-//     // using a delimiter? great!
-//     // if (decrypt.delimiter)
-//     //     decrypt.score *= 2;
-// }
-
 void XORDecrypt::create_decryptions()
 {
     // test separating encrypted numbers with all possible delimiters
@@ -172,7 +146,7 @@ void XORDecrypt::create_decryptions()
     // test separating encrypted numbers with different number lengths
     for (int test_char_length = 1; test_char_length <= 8; test_char_length++)
     {
-        if (m_cipher.size() % test_char_length != 0)
+        if (m_cipher_chars_only.size() % test_char_length != 0)
             continue;
         std::vector<std::string> encrypted_numbers = cut_cipher_with_char_length(test_char_length);
         try_decrypt(encrypted_numbers, '\0', test_char_length);

@@ -40,8 +40,11 @@ int LibrarySearch::get_word_score(std::string word) const
     for (int idx = word.size() - 1; idx >= 0; idx--)
         if (!(word[idx] >= 'a' && word[idx] <= 'z' || word[idx] >= 'A' && word[idx] <= 'Z'))
         {
+            // unsupported characters at the end are allowed
+            // todo: only not punish commas and such
+            if (idx != word.size() - 1)
+                score -= 2;
             word.erase(idx, 1);
-            score--;
         }
 
     // make lower-case
