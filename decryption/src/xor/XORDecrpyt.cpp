@@ -70,6 +70,7 @@ std::vector<std::string> XORDecrypt::cut_cipher_with_delimiter(char delimiter)
     {
         // remove everything but the characters itself
         remove_chars(buffer, m_possible_delimiters);
+        // doupled delimiters aren't a problem
         if (!buffer.empty())
             encrypted_numbers.push_back(buffer);
     }
@@ -111,10 +112,9 @@ void XORDecrypt::try_decrypt(std::vector<std::string> &encrypted_numbers, char t
                 }
                 decrypted_str.push_back(static_cast<char>(decrypted_number));
             }
-            // only add possible options
-            // todo: memory saving pls
             if (possible)
             {
+                // save decryption
                 XORDecrypted this_decrypt = {decrypted_str, test_delimiter, test_char_length, test_key, test_base};
                 this_decrypt.score = m_dictionary.get_score(decrypted_str);
                 // when not filled yet
