@@ -34,7 +34,7 @@ ifneq (,$(decryption_config))
 	@${MAKE} --no-print-directory -C decryption -f Makefile config=$(decryption_config)
 endif
 
-encryption:
+encryption: utils
 ifneq (,$(encryption_config))
 	@echo "==== Building encryption ($(encryption_config)) ===="
 	@${MAKE} --no-print-directory -C encryption -f Makefile config=$(encryption_config)

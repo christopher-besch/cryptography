@@ -11,10 +11,8 @@ workspace "cryptography"
     filter "configurations:Release"
         defines { "RELEASE" }
         optimize "On"
-    -- w
-    debugdir {
-        ""
-    }
+    -- cwd
+    debugdir ""
 
 project "decryption"
     language "C++"

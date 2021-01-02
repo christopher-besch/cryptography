@@ -19,12 +19,10 @@ endif
 # #############################################
 
 RESCOMP = windres
-INCLUDES +=
+INCLUDES += -Isrc -I../utils/src
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-LIBS +=
-LDDEPS +=
 LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
 define PREBUILDCMDS
 endef
@@ -40,6 +38,8 @@ OBJDIR = ../bin-int/Debug-linux-x86_64/encryption
 DEFINES += -DDEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -g
+LIBS += ../bin/Debug-linux-x86_64/utils/libutils.a
+LDDEPS += ../bin/Debug-linux-x86_64/utils/libutils.a
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
 
 else ifeq ($(config),release)
@@ -49,6 +49,8 @@ OBJDIR = ../bin-int/Release-linux-x86_64/encryption
 DEFINES += -DRELEASE
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2
+LIBS += ../bin/Release-linux-x86_64/utils/libutils.a
+LDDEPS += ../bin/Release-linux-x86_64/utils/libutils.a
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s
 
 endif
