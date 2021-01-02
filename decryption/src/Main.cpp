@@ -3,29 +3,10 @@
 #include <fstream>
 
 #include <Console.h>
-#include <Trie.h>
 #include "xor/XORDecrypt.h"
+#include "goodness/LibrarySearch.h"
 
-int main()
-{
-    Trie my_trie;
-    my_trie.insert("test");
-    my_trie.insert("apple");
-    my_trie.insert("me");
-
-    std::cout << my_trie.search("test") << std::endl;
-    std::cout << my_trie.search("apple") << std::endl;
-    std::cout << my_trie.search("you") << std::endl;
-    std::cout << my_trie.search("test") << std::endl;
-
-    // todo: memory leak!!!
-    while (true)
-    {
-        Trie *x = new Trie;
-    }
-}
-
-int main_d(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     // todo: read config from json
     // todo: add force mode only searching for requested
@@ -48,7 +29,8 @@ int main_d(int argc, char *argv[])
     }
 
     XORDecrypt decrypts(input, -1);
-
+    // load dictionaries and requests
+    decrypts.load_dictionary("english.txt");
     for (const char *delimiter : console_arguments["-d"].get_arguments())
         decrypts.add_requested_delimiter(delimiter[0]);
     for (const char *length : console_arguments["-l"].get_arguments())
@@ -79,3 +61,5 @@ int main_d(int argc, char *argv[])
     }
     return 0;
 }
+
+// todo: char-digit seperation with length not working

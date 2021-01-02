@@ -19,7 +19,7 @@ endif
 # #############################################
 
 RESCOMP = windres
-INCLUDES += -I../utils/src
+INCLUDES += -I../utils/src -Isrc
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
@@ -65,8 +65,10 @@ endif
 GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/LibrarySearch.o
 GENERATED += $(OBJDIR)/Main.o
 GENERATED += $(OBJDIR)/XORDecrpyt.o
+OBJECTS += $(OBJDIR)/LibrarySearch.o
 OBJECTS += $(OBJDIR)/Main.o
 OBJECTS += $(OBJDIR)/XORDecrpyt.o
 
@@ -133,6 +135,9 @@ endif
 # #############################################
 
 $(OBJDIR)/Main.o: src/Main.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LibrarySearch.o: src/goodness/LibrarySearch.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/XORDecrpyt.o: src/xor/XORDecrpyt.cpp

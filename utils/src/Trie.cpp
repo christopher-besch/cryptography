@@ -1,18 +1,12 @@
 #include "Trie.h"
 
-void Trie::insert(std::string new_key)
+void Trie::insert(std::string key)
 {
-#ifdef DEBUG
-    for (char character : new_key)
-        if (character < 'a' || character > 'z')
-            raise_error(new_key << "is an invalid key for Trie!");
-#endif
-
     // start at root node
     TrieNode *current_node = m_root;
-    for (int idx = 0; idx < new_key.size(); idx++)
+    for (int idx = 0; idx < key.size(); idx++)
     {
-        int char_idx = new_key[idx] - 'a';
+        int char_idx = char_to_idx(key[idx]);
         // when not found
         if (!current_node->children[char_idx])
             current_node->children[char_idx] = new TrieNode;
@@ -22,18 +16,13 @@ void Trie::insert(std::string new_key)
     current_node->end_of_word = true;
 }
 
-bool Trie::search(std::string key)
+bool Trie::search(std::string key) const
 {
-#ifdef DEBUG
-    for (char character : key)
-        if (character < 'a' || character > 'z')
-            raise_error(key << "is an invalid key for Trie!");
-#endif
     // start at root node
     TrieNode *current_node = m_root;
     for (int idx = 0; idx < key.size(); idx++)
     {
-        int char_idx = key[idx] - 'a';
+        int char_idx = char_to_idx(key[idx]);
         // when not found
         if (!current_node->children[char_idx])
             return false;

@@ -3,7 +3,9 @@
 #include <iostream>
 #include <sstream>
 
-#include <Utils.h>
+#include "Utils.h"
+
+#include "goodness/LibrarySearch.h"
 
 // for one valid decryption option
 struct XORDecrypted
@@ -59,6 +61,8 @@ private:
     int m_amount;
     std::vector<XORDecrypted> m_decryptions;
 
+    LibrarySearch m_dictionary;
+
     // decryptions with these parameters are preferred
     std::vector<char> m_requested_delimiters;
     std::vector<int> m_requested_char_lengths;
@@ -79,7 +83,6 @@ private:
     std::vector<std::string> cut_cipher_with_delimiter(char delimiter);
     long long decrypt_number(std::string digit_str, int base, int key);
     void try_decrypt(std::vector<std::string> &encrypted_numbers, char test_delimiter, int test_char_length);
-    void calculate_score(XORDecrypted &decrypt);
 
 public:
     XORDecrypt(std::string &cipher, int amount = -1)
@@ -88,6 +91,11 @@ public:
         if (m_amount != -1)
             m_decryptions.reserve(m_amount);
         preprocess();
+    }
+
+    void load_dictionary(const char *file_path)
+    {
+        m_dictionary.load_file(file_path);
     }
 
     void set_requested_delimiters(std::vector<char> &delimiters) { m_requested_delimiters = delimiters; }

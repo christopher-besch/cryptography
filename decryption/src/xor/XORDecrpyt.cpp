@@ -116,7 +116,7 @@ void XORDecrypt::try_decrypt(std::vector<std::string> &encrypted_numbers, char t
             if (possible)
             {
                 XORDecrypted this_decrypt = {decrypted_str, test_delimiter, test_char_length, test_key, test_base};
-                calculate_score(this_decrypt);
+                this_decrypt.score = m_dictionary.get_score(decrypted_str);
                 // when not filled yet
                 if (m_amount == -1 || m_decryptions.size() < m_amount)
                     m_decryptions.push_back(this_decrypt);
@@ -133,30 +133,31 @@ void XORDecrypt::try_decrypt(std::vector<std::string> &encrypted_numbers, char t
     }
 }
 
-void XORDecrypt::calculate_score(XORDecrypted &decrypt)
-{
-    // todo: maybe Trie good?
-    decrypt.score = 0;
-    for (char character : decrypt.decrypted_str)
-    {
-        // for each printable character
-        if (character >= ' ' && character <= '~')
-            decrypt.score += 1;
-        else
-            decrypt.score -= 1;
-        // extra points for "good" characters
-        if (character >= 'A' && character <= 'Z')
-            decrypt.score += 2;
-        else if (character >= 'a' && character <= 'z')
-            decrypt.score += 2;
-        else if (character == ' ')
-            decrypt.score += 1;
-    }
-    decrypt.score /= decrypt.base;
-
-    if (decrypt.key == 0)
-        decrypt.score *= 2;
-}
+// todo: remove
+// void XORDecrypt::calculate_score(XORDecrypted &decrypt)
+// {
+//     // todo: maybe Trie good?
+//     decrypt.score = 0;
+//     for (char character : decrypt.decrypted_str)
+//     {
+//         // for each printable character
+//         if (character >= ' ' && character <= '~')
+//             decrypt.score += 1;
+//         else
+//             decrypt.score -= 3;
+//     }
+//     // the smaller the base, the better
+//     decrypt.score /= decrypt.base;
+//
+//     decrypt.score += m_dictionary.get_score(decrypt.decrypted_str) * 100;
+//
+//     // no key needed? great!
+//     if (decrypt.key == 0)
+//         decrypt.score *= 2;
+//     // using a delimiter? great!
+//     // if (decrypt.delimiter)
+//     //     decrypt.score *= 2;
+// }
 
 void XORDecrypt::create_decryptions()
 {

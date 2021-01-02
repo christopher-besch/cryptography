@@ -27,7 +27,8 @@ project "decryption"
     }
 
     includedirs {
-        "utils/src"
+        "utils/src",
+        "%{prj.name}/src"
     }
 
     links {

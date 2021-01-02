@@ -8,7 +8,9 @@ const int alphabet_size = 26;
 
 struct TrieNode
 {
+    // when this is leaf node
     bool end_of_word;
+    // either nullptr or pointing to next node
     TrieNode *children[alphabet_size];
 
     TrieNode()
@@ -30,6 +32,16 @@ class Trie
 private:
     TrieNode *m_root;
 
+private:
+    int char_to_idx(char character) const
+    {
+#ifdef DEBUG
+        if (character < 'a' || character > 'z')
+            raise_error(character << "is an invalid character for Trie!");
+#endif
+        return character - 'a';
+    }
+
 public:
     Trie()
         : m_root(new TrieNode) {}
@@ -39,5 +51,5 @@ public:
     }
 
     void insert(std::string new_key);
-    bool search(std::string key);
+    bool search(std::string key) const;
 };
