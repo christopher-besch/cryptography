@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <algorithm>
 #include <vector>
+#include <filesystem>
 
 #ifdef DEBUG
 #define raise_error(msg)                                                                                                  \
@@ -26,7 +27,7 @@ inline int checked_stoi(std::string str)
     {
         return std::stoi(str);
     }
-    catch (std::invalid_argument ex)
+    catch (const std::invalid_argument ex)
     {
         raise_error("Can't convert \"" << str << "\" to int!");
     }

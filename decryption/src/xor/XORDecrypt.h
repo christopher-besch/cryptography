@@ -39,7 +39,12 @@ struct XORDecrypted
         else
             lhs << rhs.char_length;
         lhs << "\t\t\t";
-        lhs << rhs.key << "\t" << rhs.base << "\t" << rhs.decrypted_str;
+        lhs << rhs.key << "\t" << rhs.base << "\t";
+
+        // remove unprintable characters
+        for (char character : rhs.decrypted_str)
+            if (character >= ' ' || character <= '~')
+                lhs << character;
         return lhs;
     }
 };
@@ -56,7 +61,7 @@ private:
     int m_amount;
     std::vector<XORDecrypted> m_decryptions;
 
-    LibrarySearch m_dictionary;
+    LibrarySearch &m_dictionary;
 
     // decryptions with these parameters are preferred
     std::vector<char> m_requested_delimiters;
@@ -100,15 +105,10 @@ private:
     }
 
 public:
-    XORDecrypt(std::string &cipher)
-        : m_cipher(cipher), m_cipher_chars_only(cipher)
+    XORDecrypt(std::string &cipher, LibrarySearch &dictionary)
+        : m_cipher(cipher), m_cipher_chars_only(cipher), m_dictionary(dictionary)
     {
         preprocess();
-    }
-
-    void load_dictionary(const char *file_path)
-    {
-        m_dictionary.load_file(file_path);
     }
 
     void set_requested_delimiters(std::vector<char> &delimiters) { m_requested_delimiters = delimiters; }

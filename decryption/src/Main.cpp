@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 
 #include <Console.h>
 #include "xor/XORDecrypt.h"
@@ -27,9 +28,9 @@ int main(int argc, char *argv[])
         std::getline(std::cin, input);
     }
 
-    XORDecrypt decrypts(input);
-    // load dictionaries and requests
-    decrypts.load_dictionary("english.txt");
+    LibrarySearch dictionary("resources/words.txt");
+    XORDecrypt decrypts(input, dictionary);
+    // load requests
     for (const char *delimiter : console_arguments["-d"].get_arguments())
         decrypts.add_requested_delimiter(delimiter[0]);
     for (const char *length : console_arguments["-l"].get_arguments())

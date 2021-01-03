@@ -7,7 +7,7 @@
 #include "Utils.h"
 
 // load dictionary into Trie
-void LibrarySearch::load_file(const char *file_path)
+void LibrarySearch::load_file(std::string file_path)
 {
     std::ifstream file(file_path);
     if (!file)
@@ -29,6 +29,7 @@ void LibrarySearch::load_file(const char *file_path)
         m_dictionary.insert(buffer);
     }
     file.close();
+    m_empty = false;
 }
 
 // evaluates single word
@@ -76,8 +77,7 @@ int LibrarySearch::get_score(std::string text) const
             found_unprintable = true;
             score -= 10;
         }
-    if (found_unprintable)
-        score -= 1000;
+    score -= found_unprintable * 1000;
 
     // evalute each word on its own
     std::stringstream ss_text(text);

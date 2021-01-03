@@ -49,6 +49,10 @@ public:
     {
         delete m_root;
     }
+    // delete copy construtctor
+    Trie(const Trie &) = delete;
+    // delete copy assignment
+    Trie &operator=(const Trie &) = delete;
 
     void insert(std::string new_key);
     bool search(std::string key) const;
