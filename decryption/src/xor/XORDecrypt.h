@@ -85,23 +85,17 @@ private:
         // when a char_length is defined but no delimiter, the delimiter has to be defined as well to be tested
         return (m_requested_delimiters.empty() && m_requested_char_lengths.empty()) || std::find(m_requested_delimiters.begin(), m_requested_delimiters.end(), delim) != m_requested_delimiters.end();
     }
-    bool is_to_test_char_length(int char_lengths)
+    bool is_to_test_char_length(int char_length)
     {
-        if (m_cipher_chars_only.size() % char_lengths)
-            raise_error("The provided char length is invalid with the cipher " << m_cipher_chars_only << "!");
         // when a delimiter is defined but no char_length, the char_length has to be defined as well to be tested
-        return (m_requested_char_lengths.empty() && m_requested_delimiters.empty()) || std::find(m_requested_char_lengths.begin(), m_requested_char_lengths.end(), char_lengths) != m_requested_char_lengths.end();
+        return (m_requested_char_lengths.empty() && m_requested_delimiters.empty()) || std::find(m_requested_char_lengths.begin(), m_requested_char_lengths.end(), char_length) != m_requested_char_lengths.end();
     }
     bool is_to_test_key(int key)
     {
-        if (key < 0 || key > 255)
-            raise_error("The provided key " << key << " is invalid!");
         return m_requested_keys.empty() || std::find(m_requested_keys.begin(), m_requested_keys.end(), key) != m_requested_keys.end();
     }
     bool is_to_test_base(int base)
     {
-        if (base < 2 || base > 36)
-            raise_error("The provided base " << base << " is invalid!");
         return m_requested_bases.empty() || std::find(m_requested_bases.begin(), m_requested_bases.end(), base) != m_requested_bases.end();
     }
 
@@ -122,21 +116,27 @@ public:
     void set_requested_keys(std::vector<int> &keys) { m_requested_keys = keys; }
     void set_requested_bases(std::vector<int> &bases) { m_requested_bases = bases; }
 
-    void add_requested_delimiter(char delimiters)
+    void add_requested_delimiter(char delimiter)
     {
-        m_requested_delimiters.push_back(delimiters);
+        m_requested_delimiters.push_back(delimiter);
     }
     void add_requested_char_length(int char_length)
     {
+        if (m_cipher_chars_only.size() % char_length)
+            raise_error("The provided char length is invalid with the cipher " << m_cipher_chars_only << "!");
         m_requested_char_lengths.push_back(char_length);
     }
-    void add_requested_key(int keys)
+    void add_requested_key(int key)
     {
-        m_requested_keys.push_back(keys);
+        if (key < 0 || key > 255)
+            raise_error("The provided key " << key << " is invalid!");
+        m_requested_keys.push_back(key);
     }
-    void add_requested_base(int bases)
+    void add_requested_base(int base)
     {
-        m_requested_bases.push_back(bases);
+        if (base < 2 || base > 36)
+            raise_error("The provided base " << base << " is invalid!");
+        m_requested_bases.push_back(base);
     }
 
     void create_decryptions(int amount = -1);
