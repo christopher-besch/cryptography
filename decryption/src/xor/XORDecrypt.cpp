@@ -42,7 +42,6 @@ void XORDecrypt::preprocess()
         if (decrypted_character == -1 && std::find(m_possible_delimiters.begin(), m_possible_delimiters.end(), character) == m_possible_delimiters.end())
             m_possible_delimiters.push_back(character);
 
-        // todo: off-by-one error?
         // e.g. when the character representing the highest number is '9', base 10 is the "smallest" possible base
         else if (decrypted_character + 1 > m_smallest_base)
             m_smallest_base = decrypted_character + 1;
@@ -88,47 +87,60 @@ long long XORDecrypt::decrypt_number(std::string digit_str, int base, int key)
     return result_char_code ^ key;
 }
 
+void XORDecrypt::decrypt(std::vector<std::string> &encrypted_numbers, XORDecrypted &template_decrypt)
+{
+    bool possible = true;
+    std::string decrypted_str = "";
+    // decrypt each number
+    for (std::string encrypted_number : encrypted_numbers)
+    {
+        // is decodable with extended ASCII?
+        long long decrypted_number = decrypt_number(encrypted_number, template_decrypt.base, template_decrypt.key);
+        if (decrypted_number > 255)
+        {
+            possible = false;
+            break;
+        }
+        decrypted_str.push_back(static_cast<char>(decrypted_number));
+    }
+    if (possible)
+    {
+        // save decryption
+        template_decrypt.decrypted_str = decrypted_str;
+        template_decrypt.score = m_dictionary.get_score(decrypted_str);
+        // when not filled yet
+        if (m_amount == -1 || m_decryptions.size() < m_amount)
+            m_decryptions.push_back(template_decrypt);
+        else
+            // when space is rare, overwrite if good enough
+            for (std::vector<XORDecrypted>::iterator ptr = m_decryptions.begin(); ptr < m_decryptions.end(); ptr++)
+                if (*ptr < template_decrypt)
+                {
+                    *ptr = template_decrypt;
+                    break;
+                }
+    }
+}
+
 // decrypt encrypted numbers, trying every base and key possible
-void XORDecrypt::try_decrypt(std::vector<std::string> &encrypted_numbers, char test_delimiter, int test_char_length)
+void XORDecrypt::test_decryptions(std::vector<std::string> &encrypted_numbers, XORDecrypted &template_decrypt)
 {
     // test possible bases
     for (int test_base = m_smallest_base; test_base < 37; test_base++)
     {
-        // todo: test more keys
-        // test possible keys
-        for (int test_key = 0; test_key < 256; test_key++)
+        XORDecrypted this_decrypt;
+        this_decrypt.base = test_base;
+        if (is_to_test_base(test_base))
         {
-            bool possible = true;
-            std::string decrypted_str = "";
-            // decrypt each number
-            for (std::string encrypted_number : encrypted_numbers)
-            {
-                // is decodable with extended ASCII?
-                long long decrypted_number = decrypt_number(encrypted_number, test_base, test_key);
-                if (decrypted_number > 255)
+            template_decrypt.base = test_base;
+            // todo: test more keys
+            // test possible keys
+            for (int test_key = 0; test_key < 256; test_key++)
+                if (is_to_test_key(test_key))
                 {
-                    possible = false;
-                    break;
+                    template_decrypt.key = test_key;
+                    decrypt(encrypted_numbers, template_decrypt);
                 }
-                decrypted_str.push_back(static_cast<char>(decrypted_number));
-            }
-            if (possible)
-            {
-                // save decryption
-                XORDecrypted this_decrypt = {decrypted_str, test_delimiter, test_char_length, test_key, test_base};
-                this_decrypt.score = m_dictionary.get_score(decrypted_str);
-                // when not filled yet
-                if (m_amount == -1 || m_decryptions.size() < m_amount)
-                    m_decryptions.push_back(this_decrypt);
-                else
-                    // when space is rare, overwrite if good enough
-                    for (std::vector<XORDecrypted>::iterator ptr = m_decryptions.begin(); ptr < m_decryptions.end(); ptr++)
-                        if (*ptr < this_decrypt)
-                        {
-                            *ptr = this_decrypt;
-                            break;
-                        }
-            }
         }
     }
 }
@@ -139,22 +151,31 @@ void XORDecrypt::create_decryptions(int amount)
     if (m_amount != -1)
         m_decryptions.reserve(m_amount);
 
+    // more and more settings are getting stored in copies of this object
+    XORDecrypted template_decrypt;
     // test separating encrypted numbers with all possible delimiters
     for (char test_delimiter : m_possible_delimiters)
-    {
-        std::vector<std::string> encrypted_numbers = cut_cipher_with_delimiter(test_delimiter);
-        try_decrypt(encrypted_numbers, test_delimiter, 0);
-    }
+        if (is_to_test_delimiter(test_delimiter))
+        {
+            std::vector<std::string> encrypted_numbers = cut_cipher_with_delimiter(test_delimiter);
+            template_decrypt.delimiter = test_delimiter;
+            template_decrypt.char_length = 0;
+            test_decryptions(encrypted_numbers, template_decrypt);
+        }
 
     // test separating encrypted numbers with different number lengths
     for (int test_char_length = 1; test_char_length <= 8; test_char_length++)
-    {
-        if (m_cipher_chars_only.size() % test_char_length != 0)
-            continue;
-        std::vector<std::string> encrypted_numbers = cut_cipher_with_char_length(test_char_length);
-        try_decrypt(encrypted_numbers, '\0', test_char_length);
-    }
+        if (is_to_test_char_length(test_char_length))
+        {
+            // when cipher cannot be cut into equal sized char-digits
+            if (m_cipher_chars_only.size() % test_char_length)
+                continue;
+            std::vector<std::string> encrypted_numbers = cut_cipher_with_char_length(test_char_length);
+            template_decrypt.delimiter = '\0';
+            template_decrypt.char_length = test_char_length;
+            test_decryptions(encrypted_numbers, template_decrypt);
+        }
     std::sort(m_decryptions.begin(), m_decryptions.end());
 }
 
-// todo: better names for everything
+// todo: better variable names

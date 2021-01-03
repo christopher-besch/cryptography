@@ -9,7 +9,6 @@
 int main(int argc, char *argv[])
 {
     // todo: read config from json
-    // todo: add force mode only searching for requested
     ConsoleArguments console_arguments;
     console_arguments.add_optional({"-d", "--delim"}, 1, -1);
     console_arguments.add_optional({"-l", "--len"}, 1, -1);
@@ -62,4 +61,5 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-// todo: remove really bad results
+// todo: remove really bad results + can't find decryption (e.g. because invalid)
+// todo: add help page

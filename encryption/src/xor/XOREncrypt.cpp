@@ -27,19 +27,19 @@ std::string encrypt_number(int number, int base, int key, int min_length)
 }
 
 // encrypt text with xor to string of numbers in base <base> with delimiter if requested
-std::string encrypt_text(std::string str, int base, int key, char delimiter, bool add_0)
+XOREncrypted encrypt_text(std::string str, int base, int key, char delimiter, bool add_0)
 {
     // add 0 if requested
     int min_length = 1;
     if (add_0)
         min_length = get_encrypted_char_length(base);
 
-    std::string result;
+    std::string encrypted_str;
     for (char chr : str)
     {
-        result.append(encrypt_number(static_cast<int>(chr), base, key, min_length));
+        encrypted_str.append(encrypt_number(static_cast<int>(chr), base, key, min_length));
         if (delimiter != '\0')
-            result.push_back(delimiter);
+            encrypted_str.push_back(delimiter);
     }
-    return result;
+    return {encrypted_str, base, key};
 }

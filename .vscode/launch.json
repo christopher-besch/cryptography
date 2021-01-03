@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/bin/Debug-linux-x86_64/decryption/decryption",
-            "args": ["01001000 01100101 01101100 01101100 01101111 00100000 01010111 01101111 01110010 01101100 01100100 00100001", "-b", "2", "-f"],
+            "args": ["124083107081083011074108011083011081076076077011085115102012"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

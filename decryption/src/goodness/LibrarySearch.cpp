@@ -16,7 +16,6 @@ void LibrarySearch::load_file(const char *file_path)
     for (std::string buffer; std::getline(file, buffer);)
     {
         // remove unsupported characters
-        // todo: fix hack pls
         // todo: weird \r
         for (int idx = buffer.size() - 1; idx >= 0; idx--)
         {
