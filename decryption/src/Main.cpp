@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
         std::getline(std::cin, input);
     }
 
-    XORDecrypt decrypts(input, -1);
+    XORDecrypt decrypts(input);
     // load dictionaries and requests
     decrypts.load_dictionary("english.txt");
     for (const char *delimiter : console_arguments["-d"].get_arguments())
@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
     for (const char *key : console_arguments["-k"].get_arguments())
         decrypts.add_requested_key(checked_stoi(key));
 
-    decrypts.create_decryptions();
+    decrypts.create_decryptions(5);
 
     // print
     std::cout << XORDecrypted::get_header() << std::endl;
@@ -62,9 +62,4 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-// todo: char-digit seperation with length not working
-
-// 54 39 49 c  3c 3j 47  35 42 39  49 3j 45  3b 3j 3j 38  43 3d 42 1
-// base 20
-// key 32
-// todo: not working
+// todo: remove really bad results

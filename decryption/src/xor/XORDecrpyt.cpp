@@ -133,14 +133,17 @@ void XORDecrypt::try_decrypt(std::vector<std::string> &encrypted_numbers, char t
     }
 }
 
-void XORDecrypt::create_decryptions()
+void XORDecrypt::create_decryptions(int amount)
 {
+    m_amount = amount;
+    if (m_amount != -1)
+        m_decryptions.reserve(m_amount);
+
     // test separating encrypted numbers with all possible delimiters
     for (char test_delimiter : m_possible_delimiters)
     {
         std::vector<std::string> encrypted_numbers = cut_cipher_with_delimiter(test_delimiter);
-        // todo: not only the first one please
-        try_decrypt(encrypted_numbers, test_delimiter, encrypted_numbers[0].size());
+        try_decrypt(encrypted_numbers, test_delimiter, 0);
     }
 
     // test separating encrypted numbers with different number lengths
@@ -155,4 +158,3 @@ void XORDecrypt::create_decryptions()
 }
 
 // todo: better names for everything
-// todo: sorting missing

@@ -27,18 +27,12 @@ struct XORDecrypted
 
     static std::string get_header()
     {
-#ifdef DEBUG
         return "score\tdelimiter/char_length\tkey\tbase\tresult";
-#else
-        return "delimiter/char_length\tkey\tbase\tresult";
-#endif
     }
 
     friend std::ostream &operator<<(std::ostream &lhs, const XORDecrypted &rhs)
     {
-#ifdef DEBUG
         lhs << rhs.score << "\t";
-#endif
         if (rhs.delimiter)
             lhs << "'" << rhs.delimiter << "'";
         else
@@ -85,11 +79,9 @@ private:
     void try_decrypt(std::vector<std::string> &encrypted_numbers, char test_delimiter, int test_char_length);
 
 public:
-    XORDecrypt(std::string &cipher, int amount = -1)
-        : m_cipher(cipher), m_cipher_chars_only(cipher), m_amount(amount)
+    XORDecrypt(std::string &cipher)
+        : m_cipher(cipher), m_cipher_chars_only(cipher)
     {
-        if (m_amount != -1)
-            m_decryptions.reserve(m_amount);
         preprocess();
     }
 
@@ -108,7 +100,7 @@ public:
     void add_requested_key(int keys) { m_requested_keys.push_back(keys); }
     void add_requested_base(int bases) { m_requested_bases.push_back(bases); }
 
-    void create_decryptions();
+    void create_decryptions(int amount = -1);
 
     const std::vector<XORDecrypted> &get_decryptions() const { return m_decryptions; }
 };
