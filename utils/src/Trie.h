@@ -57,3 +57,5 @@ public:
     void insert(std::string new_key);
     bool search(std::string key) const;
 };
+
+// todo: add copy constructor, move constructor (temp), copy assignment operator, move assignment operator (temp)
