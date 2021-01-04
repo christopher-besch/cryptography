@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     console_arguments.add_optional({"-l", "--len"}, 1, -1);
     console_arguments.add_optional({"-b", "--base"}, 1, -1);
     console_arguments.add_optional({"-k", "--key"}, 1, -1);
+    console_arguments.add_optional({"-a", "--amount"}, 1, 1);
     console_arguments.add_optional({"-f", "--file"}, 0, 1);
     console_arguments.load_arguments(argc, argv);
 
@@ -39,7 +40,11 @@ int main(int argc, char *argv[])
     for (const char *key : console_arguments["-k"].get_arguments())
         decrypts.add_requested_key(checked_stoi(key));
 
-    decrypts.create_decryptions(5);
+    // set amount of requested decryptions
+    if (console_arguments["-a"])
+        decrypts.create_decryptions(checked_stoi(console_arguments["-a"].get_arguments()[0]));
+    else
+        decrypts.create_decryptions(5);
 
     // print
     std::cout << XORDecrypted::get_header() << std::endl;

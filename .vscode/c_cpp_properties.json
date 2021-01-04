@@ -9,11 +9,13 @@
                 "_DEBUG",
                 "DEBUG",
                 "UNICODE",
-                "_UNICODE"
+                "_UNICODE",
+                "IDE",
+                "LINUX"
             ],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "gnu17",
-            "cppStandard": "gnu++14",
+            "cppStandard": "gnu++17",
             "intelliSenseMode": "gcc-x64"
         }
     ],

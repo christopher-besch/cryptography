@@ -109,7 +109,7 @@ void XORDecrypt::decrypt(std::vector<std::string> &encrypted_numbers, XORDecrypt
         template_decrypt.decrypted_str = decrypted_str;
         template_decrypt.score = m_dictionary.get_score(decrypted_str);
         // when not filled yet
-        if (m_amount == -1 || m_decryptions.size() < m_amount)
+        if (!m_amount || m_decryptions.size() < m_amount)
             m_decryptions.push_back(template_decrypt);
         else
             // when space is rare, overwrite if good enough
@@ -149,7 +149,7 @@ void XORDecrypt::test_decryptions(std::vector<std::string> &encrypted_numbers, X
 void XORDecrypt::create_decryptions(int amount)
 {
     m_amount = amount;
-    if (m_amount != -1)
+    if (m_amount)
         m_decryptions.reserve(m_amount);
 
     // more and more settings are getting stored in copies of this object

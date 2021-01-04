@@ -57,7 +57,7 @@ private:
     // cipher with all possible delimiters removed
     std::string m_cipher_chars_only;
 
-    // how many decryptions should be stored, -1 for as many as possible
+    // how many decryptions should be stored, 0 for as many as possible
     int m_amount;
     std::vector<XORDecrypted> m_decryptions;
 
