@@ -27,3 +27,5 @@ public:
 
     bool empty() const { return m_empty; }
 };
+
+// todo: m_empty bad

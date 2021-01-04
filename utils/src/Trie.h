@@ -19,6 +19,48 @@ struct TrieNode
         for (int idx = 0; idx < alphabet_size; idx++)
             children[idx] = nullptr;
     }
+    TrieNode(const TrieNode &other)
+    {
+        for (int idx = 0; idx < alphabet_size; idx++)
+        {
+            end_of_word = other.end_of_word;
+            if (other.children[idx])
+                children[idx] = new TrieNode(*other.children[idx]);
+            else
+                children[idx] = nullptr;
+        }
+    }
+    TrieNode(const TrieNode &&other)
+    {
+        for (int idx = 0; idx < alphabet_size; idx++)
+        {
+            end_of_word = other.end_of_word;
+            children[idx] = std::move(other.children[idx]);
+        }
+    }
+    TrieNode &operator=(const TrieNode &other)
+    {
+        for (int idx = 0; idx < alphabet_size; idx++)
+        {
+            delete children[idx];
+            end_of_word = other.end_of_word;
+            if (other.children[idx])
+                children[idx] = new TrieNode(*other.children[idx]);
+            else
+                children[idx] = nullptr;
+        }
+        return *this;
+    }
+    TrieNode &operator=(const TrieNode &&other)
+    {
+        for (int idx = 0; idx < alphabet_size; idx++)
+        {
+            delete children[idx];
+            end_of_word = other.end_of_word;
+            children[idx] = std::move(other.children[idx]);
+        }
+        return *this;
+    }
 
     ~TrieNode()
     {
@@ -45,17 +87,30 @@ private:
 public:
     Trie()
         : m_root(new TrieNode) {}
+    Trie(const Trie &other)
+        : m_root(new TrieNode(*other.m_root)) {}
+    Trie(const Trie &&other)
+        : m_root(new TrieNode(std::move(*other.m_root))) {}
+    Trie &operator=(const Trie &other)
+    {
+        delete m_root;
+        m_root = new TrieNode(*other.m_root);
+        return *this;
+    }
+    Trie &operator=(const Trie &&other)
+    {
+        delete m_root;
+        m_root = std::move(other.m_root);
+        return *this;
+    }
+
     ~Trie()
     {
         delete m_root;
     }
-    // delete copy construtctor
-    Trie(const Trie &) = delete;
-    // delete copy assignment
-    Trie &operator=(const Trie &) = delete;
 
     void insert(std::string new_key);
     bool search(std::string key) const;
 };
 
-// todo: add copy constructor, move constructor (temp), copy assignment operator, move assignment operator (temp)
+// todo: does this work?
