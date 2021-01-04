@@ -77,10 +77,8 @@ private:
 private:
     int char_to_idx(char character) const
     {
-#ifdef DEBUG
         if (character < 'a' || character > 'z')
             raise_error(character << "is an invalid character for Trie!");
-#endif
         return character - 'a';
     }
 
@@ -90,7 +88,7 @@ public:
     Trie(const Trie &other)
         : m_root(new TrieNode(*other.m_root)) {}
     Trie(const Trie &&other)
-        : m_root(new TrieNode(std::move(*other.m_root))) {}
+        : m_root(std::move(other.m_root)) {}
     Trie &operator=(const Trie &other)
     {
         delete m_root;

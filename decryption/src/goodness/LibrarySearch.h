@@ -7,25 +7,23 @@ class LibrarySearch
 {
 private:
     Trie m_dictionary;
-    bool m_empty;
 
 private:
     int get_word_score(std::string word) const;
 
 public:
-    LibrarySearch()
-        : m_empty(true) {}
+    LibrarySearch() {}
     LibrarySearch(const char *file_path)
-        : m_empty(true)
     {
         load_file(file_path);
     }
+    // copies are not allowed
+    LibrarySearch(const LibrarySearch &) = delete;
+    LibrarySearch &operator=(const LibrarySearch) = delete;
 
     void load_file(std::string file_path);
 
     int get_score(std::string text) const;
-
-    bool empty() const { return m_empty; }
 };
 
 // todo: m_empty bad

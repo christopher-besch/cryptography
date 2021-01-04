@@ -2,16 +2,14 @@
 
 #include <vector>
 
-// #include "Core.h"
-
 // let's make hkarrson happy
-// abstraction for arguments belonging to same parameter
+// for arguments belonging to same parameter
 class VectorArgument
 {
 private:
     // like '-b' or '--base'
     std::vector<const char *> m_init_arguments;
-    // arguments following the init argument
+    // arguments following an init argument
     std::vector<const char *> m_arguments;
     // raise error when found and not enough arguments
     int m_min_arguments;
@@ -30,13 +28,13 @@ public:
 
     const std::vector<const char *> &get_init_arguments() const { return m_init_arguments; }
     const std::vector<const char *> &get_arguments() const { return m_arguments; }
-    int get_max_amount_arguments() const { return m_max_arguments; }
+    int get_max_amount() const { return m_max_arguments; }
     bool is_required() const { return !m_optional; }
     bool is_found() const { return m_found; }
 
     bool contains_init_argument(const char *init_argument) const;
 
-    bool is_satisfied() const
+    bool is_maxed() const
     {
         return m_arguments.size() == m_max_arguments;
     }
@@ -73,10 +71,8 @@ public:
         m_vector_arguments.push_back({init_arguments, 0, 0, true});
     }
 
-    // returns vector argument with supplied init_argument
     const VectorArgument &operator[](const char *init_argument) const;
 
-    // return other argument at that position
     const char *operator[](int idx) const;
 
     int other_size() { return m_other_arguments.size(); }

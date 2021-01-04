@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
             // default
             delimiter = ' ';
         else
-            int delimiter = console_arguments["-d"].get_arguments()[0][0];
+            delimiter = console_arguments["-d"].get_arguments()[0][0];
     }
 
     // should leading 0s be added -> all char-digits are of same length

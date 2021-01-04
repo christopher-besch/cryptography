@@ -1,7 +1,6 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <filesystem>
 
 #include <Console.h>
 #include "xor/XORDecrypt.h"
@@ -47,6 +46,7 @@ int main(int argc, char *argv[])
     for (const XORDecrypted &decrypt : decrypts.get_decryptions())
         std::cout << decrypt << std::endl;
 
+    // todo: bad alignment
     // file output
     if (console_arguments["-f"])
     {

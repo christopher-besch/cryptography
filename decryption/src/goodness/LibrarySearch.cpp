@@ -6,32 +6,6 @@
 
 #include "Utils.h"
 
-// load dictionary into Trie
-void LibrarySearch::load_file(std::string file_path)
-{
-    std::ifstream file(file_path);
-    if (!file)
-        raise_error("Can't open dictionary " << file_path);
-
-    for (std::string buffer; std::getline(file, buffer);)
-    {
-        // remove unsupported characters
-        // todo: weird \r
-        for (int idx = buffer.size() - 1; idx >= 0; idx--)
-        {
-#ifdef DEBUG
-            if (buffer[idx] >= 'A' && buffer[idx] <= 'Z')
-                raise_error("'" << buffer << "' in file " << file_path << " is invalid!");
-#endif
-            if (buffer[idx] < 'a' || buffer[idx] > 'z')
-                buffer.erase(idx, 1);
-        }
-        m_dictionary.insert(buffer);
-    }
-    file.close();
-    m_empty = false;
-}
-
 // evaluates single word
 int LibrarySearch::get_word_score(std::string word) const
 {
@@ -63,6 +37,31 @@ int LibrarySearch::get_word_score(std::string word) const
 
     // capital letters are half as good as lower case ones
     return score;
+}
+
+// load dictionary into Trie
+void LibrarySearch::load_file(std::string file_path)
+{
+    std::ifstream file(file_path);
+    if (!file)
+        raise_error("Can't open dictionary " << file_path);
+
+    for (std::string buffer; std::getline(file, buffer);)
+    {
+        // remove unsupported characters
+        // todo: weird \r
+        for (int idx = buffer.size() - 1; idx >= 0; idx--)
+        {
+#ifdef DEBUG
+            if (buffer[idx] >= 'A' && buffer[idx] <= 'Z')
+                raise_error("'" << buffer << "' in file " << file_path << " is invalid!");
+#endif
+            if (buffer[idx] < 'a' || buffer[idx] > 'z')
+                buffer.erase(idx, 1);
+        }
+        m_dictionary.insert(buffer);
+    }
+    file.close();
 }
 
 // evaluate whole decrypted text

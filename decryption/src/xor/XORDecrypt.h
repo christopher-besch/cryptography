@@ -63,7 +63,7 @@ private:
 
     LibrarySearch &m_dictionary;
 
-    // decryptions with these parameters are preferred
+    // when there are elements in these, only search for decryptions with these settings
     std::vector<char> m_requested_delimiters;
     std::vector<int> m_requested_char_lengths;
     std::vector<int> m_requested_keys;
@@ -71,11 +71,10 @@ private:
 
     // all characters in the cipher that can't be decrypted
     std::vector<char> m_possible_delimiters;
-    // the highest decryptable character defines the lower limit of the base
+    // the highest decryptable character defines the lower limit of the possible bases
     int m_smallest_base;
 
 private:
-    // convert digit in base <check_base> to int
     int character_to_int(char character, int check_base = 36, bool error = true);
     void preprocess();
     std::vector<std::string> cut_cipher_with_char_length(int char_length);
@@ -110,20 +109,20 @@ public:
     {
         preprocess();
     }
-
-    void set_requested_delimiters(std::vector<char> &delimiters) { m_requested_delimiters = delimiters; }
-    void set_requested_char_lengths(std::vector<int> &char_length) { m_requested_char_lengths = char_length; }
-    void set_requested_keys(std::vector<int> &keys) { m_requested_keys = keys; }
-    void set_requested_bases(std::vector<int> &bases) { m_requested_bases = bases; }
+    // copies are not allowed
+    XORDecrypt(const XORDecrypt &) = delete;
+    XORDecrypt &operator=(const XORDecrypt &) = delete;
 
     void add_requested_delimiter(char delimiter)
     {
+        if (character_to_int(delimiter, 36, false) != -1)
+            raise_error("The provided delimiter '" << delimiter << "' is invalid!");
         m_requested_delimiters.push_back(delimiter);
     }
     void add_requested_char_length(int char_length)
     {
         if (m_cipher_chars_only.size() % char_length)
-            raise_error("The provided char length is invalid with the cipher " << m_cipher_chars_only << "!");
+            raise_error("The provided char length " << char_length << " is invalid with the cipher " << m_cipher_chars_only << "!");
         m_requested_char_lengths.push_back(char_length);
     }
     void add_requested_key(int key)

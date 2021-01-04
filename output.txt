@@ -1,2 +1,6 @@
 score	delimiter/char_length	key	base	result
-20	3			42	9	Marca is a cool guy!
+2	2			116	10	x-8_#
+2	2			117	10	y,9^"
+2	2			118	10	z/:]!
+4	2			65	13	N0 v.
+4	2			72	14	X1 s?

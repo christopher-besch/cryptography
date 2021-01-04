@@ -16,6 +16,7 @@ void Trie::insert(std::string key)
     current_node->end_of_word = true;
 }
 
+// return true if found
 bool Trie::search(std::string key) const
 {
     // start at root node

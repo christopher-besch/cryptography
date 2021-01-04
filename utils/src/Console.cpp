@@ -5,7 +5,9 @@
 
 #include "Utils.h"
 
-// VectorArgument
+////////////////////
+// VectorArgument //
+////////////////////
 VectorArgument::VectorArgument(std::vector<const char *> init_arguments, int min_arguments, int max_arguments, bool optional)
     : m_init_arguments(init_arguments), m_min_arguments(min_arguments), m_max_arguments(max_arguments), m_optional(optional), m_found(false)
 {
@@ -42,7 +44,9 @@ void VectorArgument::test_requirements() const
         raise_error("Console Parameter " << m_init_arguments[0] << " needs more arguments!");
 }
 
-// ConsoleArguments
+//////////////////////
+// ConsoleArguments //
+//////////////////////
 // test if all VectorArguments fullfill their requirements
 void ConsoleArguments::test_requirements() const
 {
@@ -50,6 +54,7 @@ void ConsoleArguments::test_requirements() const
         vector_argument.test_requirements();
 }
 
+// returns vector argument with supplied init_argument
 const VectorArgument &ConsoleArguments::operator[](const char *init_argument) const
 {
     for (const VectorArgument &vector_argument : m_vector_arguments)
@@ -58,6 +63,7 @@ const VectorArgument &ConsoleArguments::operator[](const char *init_argument) co
     raise_error("Can't find init argument " << init_argument << "!");
 }
 
+// return other argument at that position
 const char *ConsoleArguments::operator[](int idx) const
 {
 #ifdef DEBUG
@@ -95,13 +101,14 @@ void ConsoleArguments::load_arguments(int argc, char *argv[])
         // is other argument
         else
         {
+            // when no init argument found before this
             if (!current_vector_argument)
                 m_other_arguments.push_back(argv[idx]);
             else
             {
                 current_vector_argument->add_argument(argv[idx]);
                 // when enough found
-                if (current_vector_argument->is_satisfied())
+                if (current_vector_argument->is_maxed())
                     current_vector_argument = nullptr;
             }
         }
