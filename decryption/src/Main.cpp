@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
         std::getline(std::cin, input);
     }
 
+    // todo: this is bad
     LibrarySearch dictionary("resources/words.txt");
     XORDecrypt decrypts(input, dictionary);
     // load requests
