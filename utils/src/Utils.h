@@ -7,6 +7,34 @@
 #include <vector>
 #include <filesystem>
 
+#ifdef LINUX
+#define file_slash '/'
+#endif
+#ifdef WINDOWS
+#define file_slash '\\'
+#endif
+
+// load files from cwd or from execution location
+#ifdef IDE
+inline std::string get_virtual_cwd(const char *execution_path)
+{
+    return "";
+}
+#else
+inline std::string get_virtual_cwd(const char *execution_path)
+{
+    // cut at last slash
+    std::string virtual_cwd = execution_path;
+    for (int idx = virtual_cwd.size() - 1; idx >= 0; idx--)
+        if (virtual_cwd[idx] == file_slash)
+        {
+            virtual_cwd = virtual_cwd.substr(0, idx + 1);
+            break;
+        }
+    return virtual_cwd;
+}
+#endif
+
 #ifdef DEBUG
 #define raise_error(msg)                                                                                                  \
     {                                                                                                                     \

@@ -27,8 +27,7 @@ int main(int argc, char *argv[])
         std::getline(std::cin, input);
     }
 
-    // todo: this is bad
-    LibrarySearch dictionary("resources/words.txt");
+    LibrarySearch dictionary(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "words.txt");
     XORDecrypt decrypts(input, dictionary);
     // load requests
     for (const char *delimiter : console_arguments["-d"].get_arguments())

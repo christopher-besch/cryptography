@@ -13,7 +13,7 @@ private:
 
 public:
     LibrarySearch() {}
-    LibrarySearch(const char *file_path)
+    LibrarySearch(std::string file_path)
     {
         load_file(file_path);
     }
