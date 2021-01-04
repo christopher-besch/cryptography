@@ -26,7 +26,7 @@ workspace "cryptography"
     debugdir ""
 
     -- include mingw libraries statically
-    configuration { "windows", "gmake" }
+    configuration { "windows", "gmake2" }
         buildoptions { "-static", "-static-libgcc", "-static-libstdc++" }
 
 project "decryption"
