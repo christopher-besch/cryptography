@@ -60,7 +60,7 @@ If the user has more information about the encryption used, she can use the foll
   This amount can be altered with this parameter.
   (0 will print all found decryptions.)
 
-# How to build?
+# How to Build?
 
 This repository uses [premake5](https://github.com/premake/premake-core/wiki) as its build system.
 Therefore premake5 can be used to create e.g. Makefiles, Visual Studio .sln and .vcxproj files, etc...
