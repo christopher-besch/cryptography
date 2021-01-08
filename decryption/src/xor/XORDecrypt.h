@@ -43,8 +43,8 @@ struct XORDecrypted
 
         // remove unprintable characters
         for (char character : rhs.decrypted_str)
-            if (character >= ' ' || character <= '~')
-                lhs << character;
+            // if (character >= ' ' || character <= '~')
+            lhs << character;
         return lhs;
     }
 };

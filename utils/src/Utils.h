@@ -15,7 +15,7 @@
 #endif
 
 // load files from cwd or from execution location
-#ifdef IDEs
+#ifdef IDE
 inline std::string get_virtual_cwd(std::string execution_path)
 {
     return "";
