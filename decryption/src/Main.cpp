@@ -70,3 +70,4 @@ int main(int argc, char *argv[])
 // todo: remove really bad results + can't find decryption (e.g. because invalid)
 // todo: add help page
 // todo: add good readme
+// todo: Üöäß
