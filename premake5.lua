@@ -75,6 +75,29 @@ project "encryption"
         "utils"
     }
 
+project "test"
+    language "C++"
+    architecture "x86_64"
+    cppdialect "C++14"
+    kind "ConsoleApp"
+
+    location "%{prj.name}"
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    files {
+        "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp"
+    }
+
+    includedirs {
+        "%{prj.name}/src",
+        "utils/src"
+    }
+
+    links {
+        "utils"
+    }
+
 project "utils"
     language "C++"
     architecture "x86_64"

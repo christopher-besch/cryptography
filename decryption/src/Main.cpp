@@ -71,3 +71,4 @@ int main(int argc, char *argv[])
 // todo: add help page
 // todo: add good readme
 // todo: Üöäß
+// todo: reverse xor?
