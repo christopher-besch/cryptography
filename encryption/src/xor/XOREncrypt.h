@@ -2,35 +2,33 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <algorithm>
 
 #include <Utils.h>
 
-struct XOREncrypted
+#include "Encrypted.h"
+
+class XOREncrypted : public Encrypted
 {
-    std::string encrypted_str;
-    int base;
-    int key;
+private:
+    int m_base;
+    int m_key;
 
-    // todo: make better
-    static std::string get_header()
-    {
-        return "key\tbase\tresult";
-    }
+public:
+    XOREncrypted(std::string encrypted_string, int base, int key)
+        : Encrypted(encrypted_string), m_base(base), m_key(key) {}
 
-    friend std::ostream &operator<<(std::ostream &lhs, const XOREncrypted &rhs)
-    {
-        lhs << rhs.key << "\t" << rhs.base << "\t" << rhs.encrypted_str;
-        return lhs;
-    }
+    int get_base() const { return m_base; }
+    int get_key() const { return m_key; }
 };
 
-std::string encrypt_number(int number, int base, int key = 0, int min_length = 1);
+std::string xor_encrypt_number(int number, int base, int key = 0, int min_length = 1);
 
 // get length of biggest ASCII char (255) in base <base>
-inline int get_encrypted_char_length(int base)
+inline int get_xor_encrypted_char_length(int base)
 {
-    return encrypt_number(255, base).size();
+    return xor_encrypt_number(255, base).size();
 }
 
-XOREncrypted encrypt_text(std::string str, int base, int key = 0, char delimiter = '\0', bool add_0 = false);
+XOREncrypted xor_encrypt(std::string str, int base, int key = 0, char delimiter = '\0', bool add_0 = false);

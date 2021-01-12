@@ -67,3 +67,10 @@ inline void remove_chars(std::string &str, std::vector<char> chars)
         if (std::find(chars.begin(), chars.end(), str[idx]) != chars.end())
             str.erase(idx, 1);
 }
+
+inline void make_lower_case(std::string &str)
+{
+    for (char &character : str)
+        if (character >= 'A' && character <= 'Z')
+            character += 'a' - 'A';
+}

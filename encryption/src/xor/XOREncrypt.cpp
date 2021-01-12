@@ -1,10 +1,10 @@
 #include "XOREncrypt.h"
 
 // use xor on single number and encode to base <base>
-std::string encrypt_number(int number, int base, int key, int min_length)
+std::string xor_encrypt_number(int number, int base, int key, int min_length)
 {
 #ifdef DEBUG
-    if (min_length != 1 && min_length < get_encrypted_char_length(base))
+    if (min_length != 1 && min_length < get_xor_encrypted_char_length(base))
         raise_error("min_length " << min_length << " is too small for base " << base << "!");
 #endif
     char digit_chars[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -27,17 +27,17 @@ std::string encrypt_number(int number, int base, int key, int min_length)
 }
 
 // encrypt text with xor to string of numbers in base <base> with delimiter if requested
-XOREncrypted encrypt_text(std::string str, int base, int key, char delimiter, bool add_0)
+XOREncrypted xor_encrypt(std::string str, int base, int key, char delimiter, bool add_0)
 {
     // add 0 if requested
     int min_length = 1;
     if (add_0)
-        min_length = get_encrypted_char_length(base);
+        min_length = get_xor_encrypted_char_length(base);
 
     std::string encrypted_str;
     for (char chr : str)
     {
-        encrypted_str.append(encrypt_number(static_cast<int>(chr), base, key, min_length));
+        encrypted_str.append(xor_encrypt_number(static_cast<int>(chr), base, key, min_length));
         if (delimiter != '\0')
             encrypted_str.push_back(delimiter);
     }
