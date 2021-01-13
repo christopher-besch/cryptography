@@ -1,7 +1,7 @@
 #include <Console.h>
 
 #include "xor/XOREncrypt.h"
-#include "transpose/TransposeEncrypt.h"
+#include "transform/TransformEncrypt.h"
 
 // create and print xor encryptions
 void do_xor_encryption(const std::string &str, int input_base, int input_key, char delimiter, bool add_0)
@@ -36,43 +36,20 @@ void do_xor_encryption(const std::string &str, int input_base, int input_key, ch
         std::cout << encrypt.get_base() << "\t" << encrypt.get_key() << "\t" << encrypt.get_encrypted_str() << std::endl;
 }
 
-// todo: make one function out of these
-void do_plow_encryption(const std::string &str, int input_key)
+// create and print all transformation encryption
+void do_transformation_encryption(const std::string &str, ElementParams (*transformation)(ElementParams), int input_key)
 {
     std::vector<TransposeEncrypted> encryptions;
     if (input_key != -1)
     {
         if (input_key < 1)
             raise_error("Unsupported key: " << input_key);
-        encryptions.push_back(plow_encrypt(str, input_key));
+        encryptions.push_back(transform_encrypt(str, transformation, input_key));
     }
     // go through every key
     else
         for (int key = str.size(); key >= 1; --key)
-            encryptions.push_back(plow_encrypt(str, key));
-
-    if (encryptions.empty())
-        raise_error("Error while creating encryptions!");
-
-    // print encryptions
-    std::cout << "key\tresult" << std::endl;
-    for (TransposeEncrypted &encrypt : encryptions)
-        std::cout << encrypt.get_key() << "\t" << encrypt.get_encrypted_str() << std::endl;
-}
-
-void do_transpose_encryption(const std::string &str, int input_key)
-{
-    std::vector<TransposeEncrypted> encryptions;
-    if (input_key != -1)
-    {
-        if (input_key < 1)
-            raise_error("Unsupported key: " << input_key);
-        encryptions.push_back(transpose_encrypt(str, input_key));
-    }
-    // go through every key
-    else
-        for (int key = str.size(); key >= 1; --key)
-            encryptions.push_back(transpose_encrypt(str, key));
+            encryptions.push_back(transform_encrypt(str, transformation, key));
 
     if (encryptions.empty())
         raise_error("Error while creating encryptions!");
@@ -151,9 +128,9 @@ int main(int argc, char *argv[])
     if (algorithm == "xor")
         do_xor_encryption(str, base, key, delimiter, add_0);
     else if (algorithm == "plow")
-        do_plow_encryption(str, key);
+        do_transformation_encryption(str, plow_transform, key);
     else if (algorithm == "transpose")
-        do_transpose_encryption(str, key);
+        do_transformation_encryption(str, transpose_transform, key);
     else
         raise_error("'" << algorithm << "' is an unsupported encryption algorithm");
 }
