@@ -78,7 +78,7 @@ private:
     int char_to_idx(char character) const
     {
         if (character < 'a' || character > 'z')
-            raise_error(character << "is an invalid character for Trie!");
+            raise_error("'" << character << "' is an invalid character for Trie!");
         return character - 'a';
     }
 
@@ -109,6 +109,7 @@ public:
 
     void insert(std::string new_key);
     bool search(std::string key) const;
+    int count_matching_chars(std::string key) const;
 };
 
 // todo: does this work?

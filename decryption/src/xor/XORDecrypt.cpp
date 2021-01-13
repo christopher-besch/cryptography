@@ -9,7 +9,7 @@
 #include <Utils.h>
 
 // convert encrypted char-digit in base <check_base> to int
-int XORDecrypt::character_to_int(char character, int check_base, bool error)
+int XORDecryptor::character_to_int(char character, int check_base, bool error)
 {
     int digit = check_base;
     if (character >= '0' && character <= '9')
@@ -31,7 +31,7 @@ int XORDecrypt::character_to_int(char character, int check_base, bool error)
 }
 
 // find possible delimiters and smallest possible base
-void XORDecrypt::preprocess()
+void XORDecryptor::preprocess()
 {
     m_smallest_base = 0;
     for (char character : m_cipher)
@@ -50,7 +50,7 @@ void XORDecrypt::preprocess()
 }
 
 // cut cipher into individual encrypted numbers by their length
-std::vector<std::string> XORDecrypt::cut_cipher_with_char_length(int char_length)
+std::vector<std::string> XORDecryptor::cut_cipher_with_char_length(int char_length)
 {
     std::vector<std::string> encrypted_numbers;
     for (int idx = 0; idx < m_cipher_chars_only.size(); idx += char_length)
@@ -59,7 +59,7 @@ std::vector<std::string> XORDecrypt::cut_cipher_with_char_length(int char_length
 }
 
 // cut cipher into individual encrypted numbers by delimiter
-std::vector<std::string> XORDecrypt::cut_cipher_with_delimiter(char delimiter)
+std::vector<std::string> XORDecryptor::cut_cipher_with_delimiter(char delimiter)
 {
     std::vector<std::string> encrypted_numbers;
     std::stringstream ss_cipher(m_cipher);
@@ -76,7 +76,7 @@ std::vector<std::string> XORDecrypt::cut_cipher_with_delimiter(char delimiter)
 }
 
 // convert encrypted number in base <base> to int
-long long XORDecrypt::decrypt_number(std::string encrypted_number, int base, int key)
+long long XORDecryptor::decrypt_number(std::string encrypted_number, int base, int key)
 {
     long long result_char_code = 0;
     for (char character : encrypted_number)
@@ -87,7 +87,7 @@ long long XORDecrypt::decrypt_number(std::string encrypted_number, int base, int
 }
 
 // decrypt encrypted numbers with settings found int the template decrypt, add it to copy of that decrypt and store in this
-void XORDecrypt::decrypt(std::vector<std::string> &encrypted_numbers, XORDecrypted &template_decrypt)
+void XORDecryptor::decrypt(std::vector<std::string> &encrypted_numbers, XORDecrypted &template_decrypt)
 {
     bool possible = true;
     std::string decrypted_str = "";
@@ -123,7 +123,7 @@ void XORDecrypt::decrypt(std::vector<std::string> &encrypted_numbers, XORDecrypt
 }
 
 // decrypt encrypted numbers, trying every base and key possible
-void XORDecrypt::test_decryptions(std::vector<std::string> &encrypted_numbers, XORDecrypted &template_decrypt)
+void XORDecryptor::test_decryptions(std::vector<std::string> &encrypted_numbers, XORDecrypted &template_decrypt)
 {
     // test possible bases
     for (int test_base = m_smallest_base; test_base < 37; test_base++)
@@ -145,8 +145,7 @@ void XORDecrypt::test_decryptions(std::vector<std::string> &encrypted_numbers, X
     }
 }
 
-// find <amount> ways to decrypt <m_cipher>
-void XORDecrypt::create_decryptions(int amount)
+void XORDecryptor::create_decryptions(int amount)
 {
     m_amount = amount;
     if (m_amount)
@@ -176,7 +175,6 @@ void XORDecrypt::create_decryptions(int amount)
             template_decrypt.char_length = test_char_length;
             test_decryptions(encrypted_numbers, template_decrypt);
         }
-    std::sort(m_decryptions.begin(), m_decryptions.end());
 }
 
 // todo: better variable names

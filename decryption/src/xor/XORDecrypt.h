@@ -6,62 +6,40 @@
 #include "Utils.h"
 
 #include "goodness/LibrarySearch.h"
+#include "Decrypted.h"
 
 // for one valid decryption option
-struct XORDecrypted
+struct XORDecrypted : public Decrypted
 {
-    std::string decrypted_str;
     char delimiter;
     int char_length;
     int key;
     int base;
-    // used to compare different decryption options
-    int score;
 
-    bool operator<(XORDecrypted &other) { return score < other.score; }
-    bool operator<=(XORDecrypted &other) { return score <= other.score; }
-    bool operator>(XORDecrypted &other) { return score > other.score; }
-    bool operator>=(XORDecrypted &other) { return score >= other.score; }
-    bool operator==(XORDecrypted &other) { return score == other.score; }
-    bool operator!=(XORDecrypted &other) { return score != other.score; }
+    XORDecrypted() {}
+    XORDecrypted(std::string decrypted_str, int score, char delimiter, int char_length, int key, int base)
+        : Decrypted(decrypted_str, score), delimiter(delimiter), char_length(char_length), key(key), base(base) {}
 
-    // todo: make this better
-    static std::string get_header()
+    // todo: better alignment
+    virtual std::string get_report() const override
     {
-        return "score\tdelimiter/char_length\tkey\tbase\tresult";
-    }
-
-    friend std::ostream &operator<<(std::ostream &lhs, const XORDecrypted &rhs)
-    {
-        lhs << rhs.score << "\t";
-        if (rhs.delimiter)
-            lhs << "'" << rhs.delimiter << "'";
+        std::stringstream report;
+        if (delimiter == '\0')
+            report << decrypted_str << "\t-XOR Base " << base << ", Key " << key << ", CharLength " << char_length << " Score " << score;
         else
-            lhs << rhs.char_length;
-        lhs << "\t\t\t";
-        lhs << rhs.key << "\t" << rhs.base << "\t";
-
-        // remove unprintable characters
-        for (char character : rhs.decrypted_str)
-            // if (character >= ' ' || character <= '~')
-            lhs << character;
-        return lhs;
+            report << decrypted_str << "\t-XOR Base " << base << ", Key " << key << ", Delimiter '" << delimiter << "' Score " << score;
+        return report.str();
     }
 };
 
 // for one cipher and all valid decryption options
-class XORDecrypt
+class XORDecryptor : public Decryptor
 {
 private:
-    std::string m_cipher;
-    // cipher with all possible delimiters removed
-    std::string m_cipher_chars_only;
-
-    // how many decryptions should be stored, 0 for as many as possible
-    int m_amount;
     std::vector<XORDecrypted> m_decryptions;
 
-    LibrarySearch &m_dictionary;
+    // cipher with all possible delimiters removed
+    std::string m_cipher_chars_only;
 
     // when there are elements in these, only search for decryptions with these settings
     std::vector<char> m_requested_delimiters;
@@ -104,14 +82,14 @@ private:
     }
 
 public:
-    XORDecrypt(std::string &cipher, LibrarySearch &dictionary)
-        : m_cipher(cipher), m_cipher_chars_only(cipher), m_dictionary(dictionary)
+    XORDecryptor(std::string &cipher, LibrarySearch &dictionary)
+        : Decryptor(cipher, dictionary), m_cipher_chars_only(cipher)
     {
         preprocess();
     }
     // copies are not allowed
-    XORDecrypt(const XORDecrypt &) = delete;
-    XORDecrypt &operator=(const XORDecrypt &) = delete;
+    XORDecryptor(const XORDecryptor &) = delete;
+    XORDecryptor &operator=(const XORDecryptor &) = delete;
 
     void add_requested_delimiter(char delimiter)
     {
@@ -138,7 +116,7 @@ public:
         m_requested_bases.push_back(base);
     }
 
-    void create_decryptions(int amount = -1);
-
     const std::vector<XORDecrypted> &get_decryptions() const { return m_decryptions; }
+
+    virtual void create_decryptions(int amount = 0) override;
 };

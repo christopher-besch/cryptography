@@ -9,14 +9,14 @@
 std::string transform_str(transformation_func transformation, const std::string &str, int orig_row_count, int orig_column_count, char filler)
 {
     // when only row count known
-    if (orig_column_count < 1 || orig_row_count >= 1)
+    if (orig_column_count < 1 && orig_row_count >= 1)
     {
         orig_column_count = str.size() / orig_row_count;
         if (str.size() % orig_row_count)
             ++orig_column_count;
     }
     // when only column count known
-    else if (orig_column_count >= 1 || orig_row_count < 1)
+    else if (orig_column_count >= 1 && orig_row_count < 1)
     {
         orig_row_count = str.size() / orig_column_count;
         if (str.size() % orig_column_count)

@@ -32,3 +32,23 @@ bool Trie::search(std::string key) const
     // only when existent and leaf
     return current_node && current_node->end_of_word;
 }
+
+// return amount of found words in the Trie that are a substring of the key (starting at the first element)
+int Trie::count_matching_chars(std::string key) const
+{
+    int count = 0;
+    // start at root node
+    TrieNode *current_node = m_root;
+    for (int idx = 0; idx < key.size(); idx++)
+    {
+        int char_idx = char_to_idx(key[idx]);
+        // when not found
+        if (!current_node->children[char_idx])
+            return count;
+        current_node = current_node->children[char_idx];
+        // when existent and leaf
+        if (current_node && current_node->end_of_word)
+            count = idx + 1;
+    }
+    return count;
+}

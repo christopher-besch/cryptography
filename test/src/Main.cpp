@@ -4,6 +4,8 @@
 #include <algorithm>
 
 #include "Utils.h"
+#include "Transformation.h"
+#include "Trie.h"
 
 std::string fence_encrypt(std::string str)
 {
@@ -176,13 +178,26 @@ std::string transpose_decrypt(const std::string &str, int original_column_count,
     return result;
 }
 
+ElementParams transpose_transform(ElementParams orig_array_params)
+{
+    // transpose
+    int transposed_x = orig_array_params.y;
+    int transposed_y = orig_array_params.x;
+    int transposed_column_count = orig_array_params.row_count;
+    int transposed_row_count = orig_array_params.column_count;
+
+    return {transposed_x, transposed_y, transposed_row_count, transposed_column_count};
+}
+
 int main()
 {
-    // std::cout << plow_encrypt("derschatzliegtunterderpalme", 6, 'x') << std::endl;
-    // std::cout << plow_encrypt("0123456789abcdefgh", 6) << std::endl;
-    // std::cout << plow_decrypt("xaeehcitpxxrnlsrzueemdttedagrl", 6, 'x') << std::endl;
-    // std::cout << plow_decrypt("HIHANNKEGCECAOITKSACSNSFNTRIAD", 6, 'x') << std::endl;
-    // std::cout << plow_decrypt("XGCNEITMISRSEHIEHTCIDAHE", 6, 'x') << std::endl;
+    // std::cout << transform_str(transpose_transform, "05afkp16bgl 27chm 38din 49ejo ", -1, 6) << std::endl;
 
-    std::cout << transpose_decrypt("KUITKSOHTZEPMETUTIMUAMBESTGBALTEMALEDMISLN", 6, 'x') << std::endl;
+    Trie t;
+    t.insert("marca");
+    t.insert("marc");
+    t.insert("ma");
+    t.insert("arc");
+    std::cout << t.count_matching_chars("marca") << std::endl;
+    std::cout << t.count_matching_chars("arcafsdakjh") << std::endl;
 }

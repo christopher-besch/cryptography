@@ -6,6 +6,8 @@
 
 #include "Utils.h"
 
+// todo: not working!!!
+// todo: no word delimiters
 // evaluates single word
 int LibrarySearch::get_word_score(std::string word) const
 {
@@ -33,14 +35,32 @@ int LibrarySearch::get_word_score(std::string word) const
         }
     }
 
-    score += m_dictionary.search(word) * word.size() * 2;
+    int matching_chars = m_dictionary.count_matching_chars(word);
+    // punished if whole word doesn't match
+    if (matching_chars != word.size())
+        matching_chars /= 2;
 
+    score += m_dictionary.count_matching_chars(word) * 2;
     // capital letters are half as good as lower case ones
     return score;
 }
 
+int LibrarySearch::get_uncut_word_score(const std::string &uncut_word) const
+{
+    int score = 0;
+    score += get_word_score(uncut_word.substr(0, uncut_word.size()));
+
+    // empty word is no use -> noone cares about last element
+    // todo: for (int start_idx = 0; start_idx < uncut_word.size() - 1; ++start_idx)
+    for (int start_idx = 1; start_idx < uncut_word.size(); ++start_idx)
+    {
+        score += get_word_score(uncut_word.substr(start_idx, uncut_word.size() - start_idx)) / 2;
+    }
+    return score;
+}
+
 // load dictionary into Trie
-void LibrarySearch::load_file(std::string file_path)
+void LibrarySearch::load_file(const std::string &file_path)
 {
     std::ifstream file(file_path);
     if (!file)
@@ -65,12 +85,12 @@ void LibrarySearch::load_file(std::string file_path)
 }
 
 // evaluate whole decrypted text
-int LibrarySearch::get_score(std::string text) const
+int LibrarySearch::get_score(const std::string &text) const
 {
     int score = 0;
     // the first unprintable character gets punished the most
     bool found_unprintable = false;
-    for (std::string::iterator ptr = text.begin(); ptr < text.end(); ptr++)
+    for (auto ptr = text.begin(); ptr < text.end(); ptr++)
         if (*ptr < ' ' || *ptr > '~')
         {
             found_unprintable = true;
@@ -81,6 +101,6 @@ int LibrarySearch::get_score(std::string text) const
     // evalute each word on its own
     std::stringstream ss_text(text);
     for (std::string word; std::getline(ss_text, word, ' ');)
-        score += get_word_score(word);
+        score += get_uncut_word_score(word);
     return score;
 }
