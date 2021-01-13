@@ -22,6 +22,17 @@ public:
     int get_key() const { return m_key; }
 };
 
+// perform transformation for whole string using supplied transformation callback
+inline TransposeEncrypted transform_encrypt(const std::string &str, transformation_func transformation, int key, char filler = '_')
+{
+    std::string result = transform_str(transformation, str, -1, key, filler);
+    return {result, key};
+}
+
+/*
+    a set of transformation, taking size of 2d array and vector-> moving vector to new location
+*/
+
 // equivalent to: fill row by row, read column by column like a snake
 inline ElementParams plow_transform(ElementParams orig_array_params)
 {
@@ -52,11 +63,4 @@ inline ElementParams transpose_transform(ElementParams orig_array_params)
     int transposed_column_count = orig_array_params.row_count;
 
     return {transposed_x, transposed_y, transposed_row_count, transposed_column_count};
-}
-
-// perform transformation for whole string using supplied transformation callback
-inline TransposeEncrypted transform_encrypt(const std::string &str, transformation_func transformation, int key, char filler = '_')
-{
-    std::string result = transform_str(transformation, str, -1, key, filler);
-    return {result, key};
 }

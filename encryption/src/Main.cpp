@@ -37,6 +37,7 @@ void do_xor_encryption(const std::string &str, int input_base, int input_key, ch
         std::cout << encrypt.get_base() << "\t" << encrypt.get_key() << "\t" << encrypt.get_encrypted_str() << std::endl;
 }
 
+// print fence encryption
 void do_fence_encrypt(const std::string &str)
 {
     SimpleEncrypted encryption = fence_encrypt(str);
@@ -44,7 +45,7 @@ void do_fence_encrypt(const std::string &str)
     std::cout << encryption.get_encrypted_str() << std::endl;
 }
 
-// create and print all transformation encryption
+// create and print all transformation encryption with specified transformation callback
 void do_transformation_encryption(const std::string &str, transformation_func transformation, int input_key)
 {
     std::vector<TransposeEncrypted> encryptions;

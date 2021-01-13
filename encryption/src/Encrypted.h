@@ -2,6 +2,7 @@
 
 #include <string>
 
+// abstract base class for encryptions
 class Encrypted
 {
 protected:
