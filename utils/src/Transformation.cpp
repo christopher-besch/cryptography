@@ -3,10 +3,10 @@
 #include "Utils.h"
 
 // fill virtual array row by row
-// go thorugh all elements and give coordinates of each element and dimensions or virtual array to transformation function
+// go thorugh all elements and give coordinates of each element and dimensions or virtual array to transformation callback
 // move every element according to transformation function
 // read new array row by row
-std::string transform_str(ElementParams (*transformation)(ElementParams), const std::string &str, int orig_row_count, int orig_column_count, char filler)
+std::string transform_str(transformation_func transformation, const std::string &str, int orig_row_count, int orig_column_count, char filler)
 {
     // when only row count known
     if (orig_column_count < 1 || orig_row_count >= 1)

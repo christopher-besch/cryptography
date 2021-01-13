@@ -11,4 +11,6 @@ struct ElementParams
     int column_count;
 };
 
-std::string transform_str(ElementParams (*transformation)(ElementParams), const std::string &str, int orig_row_count, int orig_column_count, char filler = '_');
+typedef ElementParams (*transformation_func)(ElementParams);
+
+std::string transform_str(transformation_func transformation, const std::string &str, int orig_row_count, int orig_column_count, char filler = '_');

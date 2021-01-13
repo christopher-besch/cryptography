@@ -1,6 +1,7 @@
 #include <Console.h>
 
 #include "xor/XOREncrypt.h"
+#include "simple/SimpleEncryptions.h"
 #include "transform/TransformEncrypt.h"
 
 // create and print xor encryptions
@@ -36,8 +37,15 @@ void do_xor_encryption(const std::string &str, int input_base, int input_key, ch
         std::cout << encrypt.get_base() << "\t" << encrypt.get_key() << "\t" << encrypt.get_encrypted_str() << std::endl;
 }
 
+void do_fence_encrypt(const std::string &str)
+{
+    SimpleEncrypted encryption = fence_encrypt(str);
+    std::cout << "result" << std::endl;
+    std::cout << encryption.get_encrypted_str() << std::endl;
+}
+
 // create and print all transformation encryption
-void do_transformation_encryption(const std::string &str, ElementParams (*transformation)(ElementParams), int input_key)
+void do_transformation_encryption(const std::string &str, transformation_func transformation, int input_key)
 {
     std::vector<TransposeEncrypted> encryptions;
     if (input_key != -1)
@@ -127,6 +135,8 @@ int main(int argc, char *argv[])
     // do right encryption
     if (algorithm == "xor")
         do_xor_encryption(str, base, key, delimiter, add_0);
+    else if (algorithm == "fence")
+        do_fence_encrypt(str);
     else if (algorithm == "plow")
         do_transformation_encryption(str, plow_transform, key);
     else if (algorithm == "transpose")

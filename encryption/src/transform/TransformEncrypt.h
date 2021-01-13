@@ -54,7 +54,8 @@ inline ElementParams transpose_transform(ElementParams orig_array_params)
     return {transposed_x, transposed_y, transposed_row_count, transposed_column_count};
 }
 
-inline TransposeEncrypted transform_encrypt(const std::string &str, ElementParams (*transformation)(ElementParams), int key, char filler = '_')
+// perform transformation for whole string using supplied transformation callback
+inline TransposeEncrypted transform_encrypt(const std::string &str, transformation_func transformation, int key, char filler = '_')
 {
     std::string result = transform_str(transformation, str, -1, key, filler);
     return {result, key};
