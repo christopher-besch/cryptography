@@ -9,7 +9,7 @@ struct Decrypted
 {
     std::string decrypted_str;
     // used to compare different decryption options
-    int score;
+    float score;
 
     Decrypted() {}
     Decrypted(std::string decrypted_str, int score)

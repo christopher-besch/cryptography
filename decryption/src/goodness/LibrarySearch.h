@@ -9,8 +9,7 @@ private:
     Trie m_dictionary;
 
 private:
-    int get_word_score(std::string word) const;
-    int get_uncut_word_score(const std::string &uncut_word) const;
+    float get_word_score(std::string word) const;
 
 public:
     LibrarySearch() {}
@@ -24,7 +23,7 @@ public:
 
     void load_file(const std::string &file_path);
 
-    int get_score(const std::string &text) const;
+    float get_score(const std::string &text) const;
 };
 
 // todo: m_empty bad

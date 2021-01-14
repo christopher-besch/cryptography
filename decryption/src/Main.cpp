@@ -69,12 +69,18 @@ int main(int argc, char *argv[])
     std::sort(decryptions.begin(), decryptions.end(), [](const Decrypted *a, const Decrypted *b) { return *a < *b; });
     // todo: make list of results smaller
 
-    for (int idx = 0; idx < std::min(static_cast<int>(decryptions.size()), decryptions_amount); ++idx)
+    int start_idx = decryptions.size() - decryptions_amount;
+    // when start idx is negative
+    if (!decryptions_amount || start_idx < 0)
+        start_idx = 0;
+
+    // only print as many as requested
+    for (int idx = start_idx; idx < decryptions.size(); ++idx)
         std::cout << (*decryptions[idx]).get_report() << std::endl;
 
     // print
-    for (const Decrypted *decrypted : decryptions)
-        std::cout << (*decrypted).get_report() << std::endl;
+    // for (const Decrypted *decrypted : decryptions)
+    // std::cout << (*decrypted).get_report() << std::endl;
 
     return 0;
 }

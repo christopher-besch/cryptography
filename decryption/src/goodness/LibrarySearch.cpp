@@ -3,15 +3,16 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <cmath>
 
 #include "Utils.h"
 
 // todo: not working!!!
 // todo: no word delimiters
 // evaluates single word
-int LibrarySearch::get_word_score(std::string word) const
+float LibrarySearch::get_word_score(std::string word) const
 {
-    int score = 0;
+    float score = 0.0f;
     // remove unsupported characters
     for (int idx = word.size() - 1; idx >= 0; idx--)
         if (!(word[idx] >= 'a' && word[idx] <= 'z' || word[idx] >= 'A' && word[idx] <= 'Z'))
@@ -19,44 +20,30 @@ int LibrarySearch::get_word_score(std::string word) const
             // unsupported characters at the end are allowed
             // todo: only not punish commas and such
             if (idx != word.size() - 1)
-                score -= 2;
+                score -= 2.0f;
             word.erase(idx, 1);
         }
 
-    // make lower-case
-    for (int idx = 0; idx < word.size(); idx++)
-    {
-        if (word[idx] >= 'A' && word[idx] <= 'Z')
-        {
-            word[idx] += 'a' - 'A';
-            // the first letter can be capital without any punishment
-            if (idx != 0)
-                score--;
-        }
-    }
+    if (word.empty())
+        return 0.0f;
 
-    int matching_chars = m_dictionary.count_matching_chars(word);
-    // punished if whole word doesn't match
-    if (matching_chars != word.size())
-        matching_chars /= 2;
-
-    score += m_dictionary.count_matching_chars(word) * 2;
-    // capital letters are half as good as lower case ones
-    return score;
-}
-
-int LibrarySearch::get_uncut_word_score(const std::string &uncut_word) const
-{
-    int score = 0;
-    score += get_word_score(uncut_word.substr(0, uncut_word.size()));
+    make_lower_case(word);
 
     // empty word is no use -> noone cares about last element
     // todo: for (int start_idx = 0; start_idx < uncut_word.size() - 1; ++start_idx)
-    for (int start_idx = 1; start_idx < uncut_word.size(); ++start_idx)
+    for (int start_idx = 0; start_idx < word.size();)
     {
-        score += get_word_score(uncut_word.substr(start_idx, uncut_word.size() - start_idx)) / 2;
+        // todo: this is broken!!!
+        int matching_chars = m_dictionary.count_matching_chars(word.substr(start_idx, word.size() - start_idx));
+        score += std::pow(2, matching_chars);
+        // all matching chars get skipped
+        if (matching_chars)
+            start_idx += matching_chars;
+        // or one not matching char gets skipped
+        else
+            ++start_idx;
     }
-    return score;
+    return score / std::pow(2, word.size());
 }
 
 // load dictionary into Trie
@@ -85,22 +72,23 @@ void LibrarySearch::load_file(const std::string &file_path)
 }
 
 // evaluate whole decrypted text
-int LibrarySearch::get_score(const std::string &text) const
+float LibrarySearch::get_score(const std::string &text) const
 {
-    int score = 0;
+    float score = 0;
     // the first unprintable character gets punished the most
     bool found_unprintable = false;
     for (auto ptr = text.begin(); ptr < text.end(); ptr++)
-        if (*ptr < ' ' || *ptr > '~')
+        // todo: odd characters
+        if (*ptr < ' ') //|| *ptr == '\127' || *ptr == '\129' || *ptr == '\141' || *ptr == '\143' || *ptr == '\144' || *ptr == '\157' || *ptr == '\160')
         {
             found_unprintable = true;
-            score -= 10;
+            score -= 10.0f;
         }
-    score -= found_unprintable * 1000;
+    score -= found_unprintable * 1000.0f;
 
     // evalute each word on its own
     std::stringstream ss_text(text);
     for (std::string word; std::getline(ss_text, word, ' ');)
-        score += get_uncut_word_score(word);
+        score += get_word_score(word);
     return score;
 }

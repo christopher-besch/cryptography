@@ -51,134 +51,57 @@ std::string fence_decrypt(std::string str)
 }
 
 // equivalent to: fill row by row, read column by column like a snake
-std::string plow_encrypt(const std::string &str, int original_column_count, char filler = ' ')
+inline ElementParams plow_encrypt_transform(ElementParams orig_array_params)
 {
-    int original_row_count = str.size() / original_column_count;
-    // add column when at least one character in that column
-    if (str.size() % original_column_count)
-        ++original_row_count;
+    // flip every second column, last column gets flipped
+    int flipped_y = orig_array_params.y;
+    if ((orig_array_params.column_count - orig_array_params.x) % 2)
+        flipped_y = orig_array_params.row_count - 1 - orig_array_params.y;
 
-    std::string result(original_row_count * original_column_count, filler);
+    // flip all rows
+    int flipped_x = orig_array_params.column_count - 1 - orig_array_params.x;
 
-    for (int idx = 0; idx < str.size(); ++idx)
-    {
-        // fill virtual array row by row (original rows)
-        int original_x = idx % original_column_count;
-        int original_y = idx / original_column_count;
+    // transpose
+    int transposed_x = flipped_y;
+    int transposed_y = flipped_x;
+    int transposed_row_count = orig_array_params.column_count;
+    int transposed_column_count = orig_array_params.row_count;
 
-        // flip every second column, last column gets flipped
-        int flipped_y = original_y;
-        if ((original_column_count - original_x) % 2)
-            flipped_y = original_row_count - 1 - original_y;
-
-        // flip all rows
-        int flipped_x = original_column_count - 1 - original_x;
-
-        // transpose
-        int transposed_x = flipped_y;
-        int transposed_y = flipped_x;
-        int transposed_column_count = original_row_count;
-        int transposed_row_count = original_column_count;
-
-        // write character row by row (new rows)
-        result[transposed_y * transposed_column_count + transposed_x] = str[idx];
-    }
-    return result;
-}
-
-// equivalent to: fill column by column like a snake, read row by row
-std::string plow_decrypt(const std::string &str, int original_row_count, char filler = ' ')
-{
-    int original_column_count = str.size() / original_row_count;
-    // add column when at least one character in that column
-    if (str.size() % original_row_count)
-        ++original_column_count;
-
-    std::string result(original_row_count * original_column_count, filler);
-
-    for (int idx = 0; idx < str.size(); ++idx)
-    {
-        // fill virtual array row by row (original rows)
-        int original_x = idx % original_column_count;
-        int original_y = idx / original_column_count;
-
-        // transpose
-        int transposed_x = original_y;
-        int transposed_y = original_x;
-        int transposed_column_count = original_row_count;
-        int transposed_row_count = original_column_count;
-
-        // flip all rows
-        int flipped_x = transposed_column_count - 1 - transposed_x;
-
-        // flip every second column, last column gets flipped
-        int flipped_y = transposed_y;
-        if ((transposed_column_count - flipped_x) % 2)
-            flipped_y = transposed_row_count - 1 - transposed_y;
-
-        // write character row by row (new rows)
-        result[flipped_y * transposed_column_count + flipped_x] = str[idx];
-    }
-    return result;
+    return {transposed_x, transposed_y, transposed_row_count, transposed_column_count};
 }
 
 // equivalent to: fill row by row, read column by column
-std::string transpose_encrypt(const std::string &str, int original_row_count, char filler = ' ')
+inline ElementParams transpose_encrypt_transform(ElementParams orig_array_params)
 {
-    // add column when at least one character in that column
-    int original_column_count = str.size() / original_row_count;
-    if (str.size() % original_row_count)
-        ++original_column_count;
+    // transpose
+    int transposed_x = orig_array_params.y;
+    int transposed_y = orig_array_params.x;
+    int transposed_row_count = orig_array_params.column_count;
+    int transposed_column_count = orig_array_params.row_count;
 
-    std::string result(original_row_count * original_column_count, filler);
-
-    for (int idx = 0; idx < str.size(); ++idx)
-    {
-        // fill virtual array row by row (original rows)
-        int original_x = idx % original_column_count;
-        int original_y = idx / original_column_count;
-
-        // transpose
-        int transposed_x = original_y;
-        int transposed_y = original_x;
-        int transposed_column_count = original_row_count;
-        int transposed_row_count = original_column_count;
-
-        // write character row by row (new rows)
-        result[transposed_y * transposed_column_count + transposed_x] = str[idx];
-    }
-    return result;
+    return {transposed_x, transposed_y, transposed_row_count, transposed_column_count};
 }
 
-// equivalent to: fill column by column, read row by row
-std::string transpose_decrypt(const std::string &str, int original_column_count, char filler = ' ')
+ElementParams plow_decrypt_transform(ElementParams orig_array_params)
 {
-    // add row when at least one character in that row
-    int original_row_count = str.size() / original_column_count;
-    if (str.size() % original_column_count)
-        ++original_row_count;
+    // transpose
+    int transposed_x = orig_array_params.y;
+    int transposed_y = orig_array_params.x;
+    int transposed_column_count = orig_array_params.row_count;
+    int transposed_row_count = orig_array_params.column_count;
 
-    std::string result(original_row_count * original_column_count, filler);
+    // flip all rows
+    int flipped_x = transposed_column_count - 1 - transposed_x;
 
-    for (int idx = 0; idx < str.size(); ++idx)
-    {
-        // fill virtual array row by row (original rows)
-        int original_x = idx % original_column_count;
-        int original_y = idx / original_column_count;
+    // flip every second column, last column gets flipped
+    int flipped_y = transposed_y;
+    if ((transposed_column_count - flipped_x) % 2)
+        flipped_y = transposed_row_count - 1 - transposed_y;
 
-        // transpose
-        int transposed_x = original_y;
-        int transposed_y = original_x;
-        int transposed_column_count = original_row_count;
-        int transposed_row_count = original_column_count;
-
-        // write character row by row (new rows)
-        result[transposed_y * transposed_column_count + transposed_x] = str[idx];
-    }
-    return result;
+    return {flipped_x, flipped_y, transposed_row_count, transposed_column_count};
 }
 
-ElementParams transpose_transform(ElementParams orig_array_params)
+ElementParams transpose_decrypt_transform(ElementParams orig_array_params)
 {
     // transpose
     int transposed_x = orig_array_params.y;
@@ -189,15 +112,125 @@ ElementParams transpose_transform(ElementParams orig_array_params)
     return {transposed_x, transposed_y, transposed_row_count, transposed_column_count};
 }
 
+ElementParams block_transform1(ElementParams orig_array_params)
+{
+    int new_x = -1;
+    switch (orig_array_params.x)
+    {
+    case 0:
+        new_x = 2;
+        break;
+    case 1:
+        new_x = 5;
+        break;
+    case 2:
+        new_x = 4;
+        break;
+    case 3:
+        new_x = 3;
+        break;
+    case 4:
+        new_x = 0;
+        break;
+    case 5:
+        new_x = 1;
+        break;
+    }
+
+    return {new_x, orig_array_params.y, orig_array_params.row_count, orig_array_params.column_count};
+}
+
+ElementParams block_transform2(ElementParams orig_array_params)
+{
+    int new_x = -1;
+    switch (orig_array_params.x)
+    {
+    case 0:
+        new_x = 1;
+        break;
+    case 1:
+        new_x = 3;
+        break;
+    case 2:
+        new_x = 2;
+        break;
+    case 3:
+        new_x = 0;
+        break;
+    case 4:
+        new_x = 5;
+        break;
+    case 5:
+        new_x = 7;
+        break;
+    case 6:
+        new_x = 4;
+        break;
+    case 7:
+        new_x = 6;
+        break;
+    }
+
+    return {new_x, orig_array_params.y, orig_array_params.row_count, orig_array_params.column_count};
+}
+
+ElementParams block_transform3(ElementParams orig_array_params)
+{
+    int new_x = -1;
+    switch (orig_array_params.x)
+    {
+    case 0:
+        new_x = 3;
+        break;
+    case 1:
+        new_x = 0;
+        break;
+    case 2:
+        new_x = 2;
+        break;
+    case 3:
+        new_x = 1;
+        break;
+    case 4:
+        new_x = 6;
+        break;
+    case 5:
+        new_x = 4;
+        break;
+    case 6:
+        new_x = 7;
+        break;
+    case 7:
+        new_x = 5;
+        break;
+    }
+
+    return {new_x, orig_array_params.y, orig_array_params.row_count, orig_array_params.column_count};
+}
+
 int main()
 {
-    // std::cout << transform_str(transpose_transform, "05afkp16bgl 27chm 38din 49ejo ", -1, 6) << std::endl;
+    std::cout << "fence:" << std::endl;
+    std::cout << fence_encrypt("liebertugendhaftalsjugendhaft") << std::endl;
+    std::cout << fence_encrypt("HABEAMSONNTAGKEINEZEITMUSSLERNENSORRY") << std::endl;
+    std::cout << fence_decrypt("LEEMTEOAEENLMTITROLNIBRIVRNKGLASIDEEBHE") << std::endl;
+    std::cout << fence_decrypt("AMTWCFLEDERTNWITNEASMITOHALNIESEZESUDNU") << std::endl;
 
-    Trie t;
-    t.insert("marca");
-    t.insert("marc");
-    t.insert("ma");
-    t.insert("arc");
-    std::cout << t.count_matching_chars("marca") << std::endl;
-    std::cout << t.count_matching_chars("arcafsdakjh") << std::endl;
+    std::cout << "\nplow:" << std::endl;
+    std::cout << transform_str(plow_encrypt_transform, "derschatzliegtunterdenpalmen", -1, 6) << std::endl;
+
+    std::cout << transform_str(plow_decrypt_transform, "_aeehcitp_nnnlsrzueemdttedagrl", 6, -1) << std::endl;
+    std::cout << transform_str(plow_decrypt_transform, "XGCNEITMISRSEHIEHTCIDAHE", 6, -1) << std::endl;
+
+    std::cout << "\ntranspose:" << std::endl;
+    // todo: broken
+    std::cout << transform_str(transpose_encrypt_transform, "ALLESGUTEZUMGEBURTSTAGANNEGRET", -1, 6) << std::endl;
+
+    std::cout << transform_str(transpose_decrypt_transform, "AUGSNLTETELEBAGEZUGRSURAEGMTNT", -1, 6) << std::endl;
+    std::cout << transform_str(transpose_decrypt_transform, "KUITKSOHTZEPMETUTIMUAMBESTGBALTEMALEDMISLN", -1, 6) << std::endl;
+
+    std::cout << "\nblock:" << std::endl;
+    std::cout << transform_str(block_transform1, "dasgeschenkliegtunterdemstuhl", -1, 6) << std::endl;
+    std::cout << transform_str(block_transform2, "wirtreffenunsumdreiuhr", -1, 8) << std::endl;
+    std::cout << transform_str(block_transform3, "TDREFRFEKPNUSTTIAAHMNFDE", -1, 8) << std::endl;
 }
