@@ -29,12 +29,19 @@ int main(int argc, char *argv[])
         std::cout << "Input Cipher: ";
         std::getline(std::cin, input);
     }
+    for (char character : input)
+        if (!(character >= ' ' && character <= '~'))
+            raise_error("Unsupported character '" << character << "' found!");
+
     // amount of requested decryptions
-    int decryptions_amount = 5;
+    int decryptions_amount = -1;
     if (console_arguments["-a"])
         decryptions_amount = checked_stoi(console_arguments["-a"].get_arguments()[0]);
 
-    LibrarySearch dictionary(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "words.txt");
+    LibrarySearch dictionary;
+    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "english.txt");
+    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "german1.txt");
+    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "german2.txt");
     std::vector<const Decrypted *> decryptions;
 
     // xor
@@ -49,7 +56,7 @@ int main(int argc, char *argv[])
     for (const char *key : console_arguments["-k"].get_arguments())
         xor_decryptor.add_requested_key(checked_stoi(key));
     // perform decryption
-    xor_decryptor.create_decryptions(decryptions_amount);
+    xor_decryptor.create_decryptions(std::max(decryptions_amount, 0));
     // save decryptions
     for (const XORDecrypted &decrypted : xor_decryptor.get_decryptions())
         decryptions.push_back(static_cast<const Decrypted *>(&decrypted));
@@ -66,26 +73,40 @@ int main(int argc, char *argv[])
     for (const TransformDecrypted &decrypted : transform_decryptor.get_decryptions())
         decryptions.push_back(static_cast<const Decrypted *>(&decrypted));
 
-    std::sort(decryptions.begin(), decryptions.end(), [](const Decrypted *a, const Decrypted *b) { return *a < *b; });
-    // todo: make list of results smaller
+    if (decryptions.empty())
+    {
+        std::cout << "No results could be found!";
+        return 0;
+    }
 
-    int start_idx = decryptions.size() - decryptions_amount;
-    // when start idx is negative
-    if (!decryptions_amount || start_idx < 0)
-        start_idx = 0;
+    if (decryptions_amount < 0)
+    {
+        // best results come first
+        std::sort(decryptions.begin(), decryptions.end(), [](const Decrypted *a, const Decrypted *b) { return *a > *b; });
+        // print all best results
+        int best_score = decryptions[0]->score;
+        for (const Decrypted *decryption : decryptions)
+        {
+            if (decryption->score != best_score)
+                break;
+            std::cout << (*decryption).get_report() << std::endl;
+        }
+    }
+    else
+    {
+        // best results come last
+        std::sort(decryptions.begin(), decryptions.end(), [](const Decrypted *a, const Decrypted *b) { return *a < *b; });
 
-    // only print as many as requested
-    for (int idx = start_idx; idx < decryptions.size(); ++idx)
-        std::cout << (*decryptions[idx]).get_report() << std::endl;
+        int start_idx = decryptions.size() - decryptions_amount;
+        // when start idx is negative
+        if (!decryptions_amount || start_idx < 0)
+            start_idx = 0;
 
-    // print
-    // for (const Decrypted *decrypted : decryptions)
-    // std::cout << (*decrypted).get_report() << std::endl;
+        // only print as many as requested
+        for (int idx = start_idx; idx < decryptions.size(); ++idx)
+            std::cout << (*decryptions[idx]).get_report() << std::endl;
+    }
 
     return 0;
 }
-
-// todo: remove really bad results + can't find decryption (e.g. because invalid)
 // todo: add help page
-// todo: Üöäß
-// todo: reverse xor?

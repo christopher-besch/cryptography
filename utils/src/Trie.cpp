@@ -33,7 +33,7 @@ bool Trie::search(std::string key) const
     return current_node && current_node->end_of_word;
 }
 
-// return amount of found words in the Trie that are a substring of the key (starting at the first element)
+// return amount of characters that can be matched to a word (starting at the first element)
 int Trie::count_matching_chars(std::string key) const
 {
     int count = 0;

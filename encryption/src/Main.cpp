@@ -88,6 +88,9 @@ int main(int argc, char *argv[])
         std::cout << "Input Text: ";
         std::getline(std::cin, str);
     }
+    for (char character : str)
+        if (!(character >= ' ' && character <= '~'))
+            raise_error("Unsupported character '" << character << "' found!");
 
     // todo: read from json
     // select delimiter

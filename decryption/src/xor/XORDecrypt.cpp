@@ -70,7 +70,12 @@ std::vector<std::string> XORDecryptor::cut_cipher_with_delimiter(char delimiter)
         remove_chars(buffer, m_possible_delimiters);
         // doupled delimiters aren't a problem
         if (!buffer.empty())
+        {
             encrypted_numbers.push_back(buffer);
+            // when this string is too big to represent a number
+            if (buffer.size() > 8)
+                return {};
+        }
     }
     return encrypted_numbers;
 }
@@ -96,7 +101,7 @@ void XORDecryptor::decrypt(std::vector<std::string> &encrypted_numbers, XORDecry
     {
         // is decodable with extended ASCII?
         long long decrypted_number = decrypt_number(encrypted_number, template_decrypt.base, template_decrypt.key);
-        if (decrypted_number > 255)
+        if (decrypted_number < 0 || decrypted_number > 255)
         {
             possible = false;
             break;
@@ -158,6 +163,9 @@ void XORDecryptor::create_decryptions(int amount)
         if (is_to_test_delimiter(test_delimiter))
         {
             std::vector<std::string> encrypted_numbers = cut_cipher_with_delimiter(test_delimiter);
+            // when unable to find anything or numbers are too long
+            if (encrypted_numbers.empty())
+                continue;
             template_decrypt.delimiter = test_delimiter;
             template_decrypt.char_length = 0;
             test_decryptions(encrypted_numbers, template_decrypt);
@@ -176,5 +184,3 @@ void XORDecryptor::create_decryptions(int amount)
             test_decryptions(encrypted_numbers, template_decrypt);
         }
 }
-
-// todo: better variable names

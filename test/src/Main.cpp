@@ -210,27 +210,30 @@ ElementParams block_transform3(ElementParams orig_array_params)
 
 int main()
 {
-    std::cout << "fence:" << std::endl;
-    std::cout << fence_encrypt("liebertugendhaftalsjugendhaft") << std::endl;
-    std::cout << fence_encrypt("HABEAMSONNTAGKEINEZEITMUSSLERNENSORRY") << std::endl;
-    std::cout << fence_decrypt("LEEMTEOAEENLMTITROLNIBRIVRNKGLASIDEEBHE") << std::endl;
-    std::cout << fence_decrypt("AMTWCFLEDERTNWITNEASMITOHALNIESEZESUDNU") << std::endl;
-
-    std::cout << "\nplow:" << std::endl;
-    std::cout << transform_str(plow_encrypt_transform, "derschatzliegtunterdenpalmen", -1, 6) << std::endl;
-
-    std::cout << transform_str(plow_decrypt_transform, "_aeehcitp_nnnlsrzueemdttedagrl", 6, -1) << std::endl;
-    std::cout << transform_str(plow_decrypt_transform, "XGCNEITMISRSEHIEHTCIDAHE", 6, -1) << std::endl;
-
-    std::cout << "\ntranspose:" << std::endl;
-    // todo: broken
-    std::cout << transform_str(transpose_encrypt_transform, "ALLESGUTEZUMGEBURTSTAGANNEGRET", -1, 6) << std::endl;
-
-    std::cout << transform_str(transpose_decrypt_transform, "AUGSNLTETELEBAGEZUGRSURAEGMTNT", -1, 6) << std::endl;
-    std::cout << transform_str(transpose_decrypt_transform, "KUITKSOHTZEPMETUTIMUAMBESTGBALTEMALEDMISLN", -1, 6) << std::endl;
-
-    std::cout << "\nblock:" << std::endl;
-    std::cout << transform_str(block_transform1, "dasgeschenkliegtunterdemstuhl", -1, 6) << std::endl;
-    std::cout << transform_str(block_transform2, "wirtreffenunsumdreiuhr", -1, 8) << std::endl;
-    std::cout << transform_str(block_transform3, "TDREFRFEKPNUSTTIAAHMNFDE", -1, 8) << std::endl;
+    // std::cout << "fence:" << std::endl;
+    // std::cout << fence_encrypt("liebertugendhaftalsjugendhaft") << std::endl;
+    // std::cout << fence_encrypt("HABEAMSONNTAGKEINEZEITMUSSLERNENSORRY") << std::endl;
+    // std::cout << fence_decrypt("LEEMTEOAEENLMTITROLNIBRIVRNKGLASIDEEBHE") << std::endl;
+    // std::cout << fence_decrypt("AMTWCFLEDERTNWITNEASMITOHALNIESEZESUDNU") << std::endl;
+    //
+    // std::cout << "\nplow:" << std::endl;
+    // std::cout << transform_str(plow_encrypt_transform, "derschatzliegtunterdenpalmen", -1, 6) << std::endl;
+    //
+    // std::cout << transform_str(plow_decrypt_transform, "_aeehcitp_nnnlsrzueemdttedagrl", 6, -1) << std::endl;
+    // std::cout << transform_str(plow_decrypt_transform, "XGCNEITMISRSEHIEHTCIDAHE", 6, -1) << std::endl;
+    //
+    // std::cout << "\ntranspose:" << std::endl;
+    // // todo: broken
+    // std::cout << transform_str(transpose_encrypt_transform, "0123456789abcdefghijklmnop", -1, 6) << std::endl;
+    std::cout << transform_str(transpose_encrypt_transform, transform_str(transpose_encrypt_transform, "ALLESGUTEZUMGEBURTSTAGANNEGRET!", -1, 6), 6, -1) << std::endl;
+    //
+    // std::cout << transform_str(transpose_encrypt_transform, "ALLESGUTEZUMGEBURTSTAGANNEGRET", -1, 6) << std::endl;
+    //
+    // std::cout << transform_str(transpose_decrypt_transform, "AUGSNLTETELEBAGEZUGRSURAEGMTNT", -1, 6) << std::endl;
+    // std::cout << transform_str(transpose_decrypt_transform, "KUITKSOHTZEPMETUTIMUAMBESTGBALTEMALEDMISLN", -1, 6) << std::endl;
+    //
+    // std::cout << "\nblock:" << std::endl;
+    // std::cout << transform_str(block_transform1, "dasgeschenkliegtunterdemstuhl", -1, 6) << std::endl;
+    // std::cout << transform_str(block_transform2, "wirtreffenunsumdreiuhr", -1, 8) << std::endl;
+    // std::cout << transform_str(block_transform3, "TDREFRFEKPNUSTTIAAHMNFDE", -1, 8) << std::endl;
 }

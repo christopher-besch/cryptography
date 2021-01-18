@@ -31,6 +31,7 @@ These parameters can be used to more closely tweak the parameters used for the e
 ## [Decryption](decryption)
 
 The following decryption algorithms are currently supported:
+
 - XOR
 
 This is a console application able to decrypt certain ciphers automatically.
@@ -65,3 +66,9 @@ If the user has more information about the encryption used, she can use the foll
 This repository uses [premake5](https://github.com/premake/premake-core/wiki) as its build system.
 Therefore premake5 can be used to create e.g. Makefiles, Visual Studio .sln and .vcxproj files, etc...
 Once the files for the compiler of your liking have been created, you can use that compiler to build the projects.
+
+# Resources
+
+- (english.txt)[https://github.com/LordHypersonic/C-Spell-Checker]
+- (german1.txt)[https://sourceforge.net/projects/germandict/]
+- (german2.txt)[https://sourceforge.net/p/germandict/code/HEAD/tree/variants.dic]

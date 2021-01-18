@@ -3,39 +3,40 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
-#include <cmath>
 
 #include "Utils.h"
 
-// todo: not working!!!
-// todo: no word delimiters
 // evaluates single word
+// returns relative amount of matchable characters in the string
 float LibrarySearch::get_word_score(std::string word) const
 {
     float score = 0.0f;
-    // remove unsupported characters
+    // preprocess
     for (int idx = word.size() - 1; idx >= 0; idx--)
-        if (!(word[idx] >= 'a' && word[idx] <= 'z' || word[idx] >= 'A' && word[idx] <= 'Z'))
+    {
+        // make lower case
+        if (word[idx] >= 'A' && word[idx] <= 'Z')
+            word[idx] += 'a' - 'A';
+        // remove and punish unsupported characters
+        else if (!(word[idx] >= 'a' && word[idx] <= 'z'))
         {
-            // unsupported characters at the end are allowed
-            // todo: only not punish commas and such
+            // unsupported characters at the end are allowed (i.e. commas or full stops)
             if (idx != word.size() - 1)
                 score -= 2.0f;
             word.erase(idx, 1);
         }
-
+    }
     if (word.empty())
         return 0.0f;
 
-    make_lower_case(word);
-
-    // empty word is no use -> noone cares about last element
+    // scan through whole string searching for words
+    // when word found skip ahead of found word
+    // empty word is no use -> last element is not useful
     // todo: for (int start_idx = 0; start_idx < uncut_word.size() - 1; ++start_idx)
     for (int start_idx = 0; start_idx < word.size();)
     {
-        // todo: this is broken!!!
         int matching_chars = m_dictionary.count_matching_chars(word.substr(start_idx, word.size() - start_idx));
-        score += std::pow(2, matching_chars);
+        score += matching_chars;
         // all matching chars get skipped
         if (matching_chars)
             start_idx += matching_chars;
@@ -43,7 +44,7 @@ float LibrarySearch::get_word_score(std::string word) const
         else
             ++start_idx;
     }
-    return score / std::pow(2, word.size());
+    return score / word.size();
 }
 
 // load dictionary into Trie

@@ -25,5 +25,3 @@ public:
 
     float get_score(const std::string &text) const;
 };
-
-// todo: m_empty bad

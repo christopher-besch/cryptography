@@ -74,3 +74,9 @@ inline void make_lower_case(std::string &str)
         if (character >= 'A' && character <= 'Z')
             character += 'a' - 'A';
 }
+
+template <typename T, typename R>
+inline bool contains(T list, R element)
+{
+    return std::find(list.begin(), list.end(), element) != list.end();
+}
