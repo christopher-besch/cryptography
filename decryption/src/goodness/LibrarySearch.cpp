@@ -7,7 +7,6 @@
 #include "Utils.h"
 
 // evaluates single word
-// returns relative amount of matchable characters in the string
 float LibrarySearch::get_word_score(std::string word) const
 {
     float score = 0.0f;
@@ -79,8 +78,8 @@ float LibrarySearch::get_score(const std::string &text) const
     // the first unprintable character gets punished the most
     bool found_unprintable = false;
     for (auto ptr = text.begin(); ptr < text.end(); ptr++)
-        // todo: odd characters
-        if (*ptr < ' ') //|| *ptr == '\127' || *ptr == '\129' || *ptr == '\141' || *ptr == '\143' || *ptr == '\144' || *ptr == '\157' || *ptr == '\160')
+        // todo: punishment of unprintable characters might have to be better
+        if (*ptr < ' ' && *ptr != '\n' && *ptr != '\r')
         {
             found_unprintable = true;
             score -= 10.0f;

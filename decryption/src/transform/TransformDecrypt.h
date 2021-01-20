@@ -20,11 +20,11 @@ struct TransformDecrypted : public Decrypted
         : Decrypted(decrypted_str, score), key(key), transformation_type(transformation_type) {}
 
     // todo: better alignment
-    virtual std::string get_report() const override
+    virtual void create_report() override
     {
-        std::stringstream report;
-        report << decrypted_str << "\t-Transformation Type " << transformation_type << ", Key " << key << " Score " << score;
-        return report.str();
+        std::stringstream report_ss;
+        report_ss << decrypted_str << "\t-Transformation Type " << transformation_type << ", Key " << key << ", Score " << score;
+        report = report_ss.str();
     }
 };
 
@@ -52,7 +52,7 @@ private:
     void test_decryptions(transformation_func transformation, TransformDecrypted &template_decrypt, bool row_count_known);
 
 public:
-    TransformDecryptor(std::string &cipher, LibrarySearch &dictionary)
+    TransformDecryptor(const std::string &cipher, const LibrarySearch &dictionary)
         : Decryptor(cipher, dictionary) {}
     // copies are not allowed
     TransformDecryptor(const TransformDecryptor &) = delete;
@@ -71,10 +71,7 @@ public:
         m_requested_transformation_type.push_back(transformation_type);
     }
 
-    const std::vector<TransformDecrypted> &get_decryptions() const
-    {
-        return m_decryptions;
-    }
+    std::vector<TransformDecrypted> &get_decryptions() { return m_decryptions; }
 
     virtual void create_decryptions(int amount = 0) override;
 };

@@ -21,14 +21,14 @@ struct XORDecrypted : public Decrypted
         : Decrypted(decrypted_str, score), delimiter(delimiter), char_length(char_length), key(key), base(base) {}
 
     // todo: better alignment
-    virtual std::string get_report() const override
+    virtual void create_report() override
     {
-        std::stringstream report;
+        std::stringstream report_ss;
         if (delimiter == '\0')
-            report << decrypted_str << "\t-XOR Base " << base << ", Key " << key << ", CharLength " << char_length << " Score " << score;
+            report_ss << decrypted_str << "\t-XOR Base " << base << ", Key " << key << ", CharLength " << char_length << ", Score " << score;
         else
-            report << decrypted_str << "\t-XOR Base " << base << ", Key " << key << ", Delimiter '" << delimiter << "' Score " << score;
-        return report.str();
+            report_ss << decrypted_str << "\t-XOR Base " << base << ", Key " << key << ", Delimiter '" << delimiter << "', Score " << score;
+        report = report_ss.str();
     }
 };
 
@@ -82,7 +82,7 @@ private:
     }
 
 public:
-    XORDecryptor(std::string &cipher, LibrarySearch &dictionary)
+    XORDecryptor(const std::string &cipher, const LibrarySearch &dictionary)
         : Decryptor(cipher, dictionary), m_cipher_chars_only(cipher)
     {
         preprocess();
@@ -116,7 +116,7 @@ public:
         m_requested_bases.push_back(base);
     }
 
-    const std::vector<XORDecrypted> &get_decryptions() const { return m_decryptions; }
+    std::vector<XORDecrypted> &get_decryptions() { return m_decryptions; }
 
     virtual void create_decryptions(int amount = 0) override;
 };

@@ -64,6 +64,10 @@ void TransformDecryptor::test_decryptions(transformation_func transformation, Tr
 
 void TransformDecryptor::create_decryptions(int amount)
 {
+    m_amount = amount;
+    if (m_amount)
+        m_decryptions.reserve(m_amount);
+
     // more and more settings get stored in copies of this object
     TransformDecrypted template_decrypt;
     template_decrypt.transformation_type = "plow";

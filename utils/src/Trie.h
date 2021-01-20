@@ -111,5 +111,3 @@ public:
     bool search(std::string key) const;
     int count_matching_chars(std::string key) const;
 };
-
-// todo: does this work?

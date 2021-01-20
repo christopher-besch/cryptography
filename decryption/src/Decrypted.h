@@ -10,6 +10,7 @@ struct Decrypted
     std::string decrypted_str;
     // used to compare different decryption options
     float score;
+    std::string report;
 
     Decrypted() {}
     Decrypted(std::string decrypted_str, int score)
@@ -22,20 +23,20 @@ struct Decrypted
     bool operator==(const Decrypted &other) const { return score == other.score; }
     bool operator!=(const Decrypted &other) const { return score != other.score; }
 
-    virtual std::string get_report() const = 0;
+    virtual void create_report() = 0;
 };
 
 // abstraction for single type of cipher and all valid decryption options
 class Decryptor
 {
 protected:
-    std::string m_cipher;
-    LibrarySearch &m_dictionary;
+    std::string const m_cipher;
+    LibrarySearch const &m_dictionary;
     // how many decryptions should be stored, 0 for as many as possible
     int m_amount;
 
 public:
-    Decryptor(std::string &cipher, LibrarySearch &dictionary)
+    Decryptor(const std::string &cipher, const LibrarySearch &dictionary)
         : m_cipher(cipher), m_dictionary(dictionary) {}
     // copies are not allowed
     Decryptor(const Decryptor &) = delete;
