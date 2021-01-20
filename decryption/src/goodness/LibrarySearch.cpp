@@ -90,5 +90,6 @@ float LibrarySearch::get_score(const std::string &text) const
     std::stringstream ss_text(text);
     for (std::string word; std::getline(ss_text, word, ' ');)
         score += get_word_score(word);
+
     return score;
 }

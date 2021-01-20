@@ -25,9 +25,9 @@ struct XORDecrypted : public Decrypted
     {
         std::stringstream report_ss;
         if (delimiter == '\0')
-            report_ss << decrypted_str << "\t-XOR Base " << base << ", Key " << key << ", CharLength " << char_length << ", Score " << score;
+            report_ss << decrypted_str << "\t-XOR, Base " << base << ", Key " << key << ", CharLength " << char_length << ", Score " << score;
         else
-            report_ss << decrypted_str << "\t-XOR Base " << base << ", Key " << key << ", Delimiter '" << delimiter << "', Score " << score;
+            report_ss << decrypted_str << "\t-XOR, Base " << base << ", Key " << key << ", Delimiter '" << delimiter << "', Score " << score;
         report = report_ss.str();
     }
 };

@@ -72,10 +72,8 @@ std::string do_decryptions(const std::string &str, const LibrarySearch &dictiona
         }
     }
 
-#ifdef DEBUG
     if (decryptions.empty())
         raise_error("Failed to create any decryptions for '" << str << "'!");
-#endif
 
     if (decryptions_amount < 0)
     {
@@ -163,7 +161,7 @@ int main(int argc, char *argv[])
         std::ofstream out_file(console_arguments["-f"].get_arguments()[1]);
 
         int line = 1;
-        for (std::string cipher; std::getline(in_file, cipher);)
+        for (std::string cipher; std::getline(in_file, cipher); ++line)
         {
             // perform checks
             if (cipher.empty())
@@ -178,7 +176,6 @@ int main(int argc, char *argv[])
 
             out_file << std::endl;
             std::cerr << "line " << line << " decrypted" << std::endl;
-            ++line;
         }
     }
     // only one input cipher from the console

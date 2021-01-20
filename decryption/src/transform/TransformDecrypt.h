@@ -23,7 +23,7 @@ struct TransformDecrypted : public Decrypted
     virtual void create_report() override
     {
         std::stringstream report_ss;
-        report_ss << decrypted_str << "\t-Transformation Type " << transformation_type << ", Key " << key << ", Score " << score;
+        report_ss << decrypted_str << "\t-" << transformation_type << " Transformation, Key " << key << ", Score " << score;
         report = report_ss.str();
     }
 };
