@@ -109,36 +109,36 @@ void substitution_decrypt(std::string &str, std::string key)
             character = swapped_sub_tab[character];
 }
 
-int main()
-{
-    std::string text = "DIE SCHWALBE HAT UNTER FOLTER ALLES VERRATEN STOP SOFORTIGER ABBRUCH VON OPERATION KLEOPATRA";
-    substitution_encrypt(text, "Nofretete");
-    std::cout << text << std::endl;
-    substitution_decrypt(text, "Nofretete");
-    std::cout << text << std::endl;
-
-    text = "GDY HENSLDYY GDY LXDB HEUEX QEEXZE, CEXFEEXZE NFXE QEUEXHEXZE";
-    substitution_decrypt(text, "dumm gelaufen");
-    std::cout << text << std::endl;
-
-    text = "ZQ EQR SJQ BZHSJBZJ, YZJ SQ-MPDZQEYZJRZJ YSPLC ZEJZJ SJQZPZP GHKJZ XS ZPQZRXZJI";
-    substitution_decrypt(text, "dolly");
-    std::cout << text << std::endl;
-
-    text = "ACHTUNGWIRWERDENABGEHOERT";
-    substitution_encrypt(text, "UFLPWDRASJMCONQYBVTEXHZKGI");
-    std::cout << text << std::endl;
-
-    text = "AUFWHWVTEUNPWN";
-    substitution_decrypt(text, "UFLPWDRASJMCONQYBVTEXHZKGI");
-    std::cout << text << std::endl;
-
-    text = "ZSV ZWVPWN XNT SN PWN NUWLATEWN OQNUEWN HWVTEUWVME XO PWN UXDFUX PWV QVRUNSTUESQN SN FVUNPWNFXVR MXWOOWVN. FWHQV ZSV RWOWSNTUO CQTTLACURWN, ZWVPWN ZSV UXD XNTWVWO EVWDDWN SN FWVCSN WSN NWXWT UCYAUFWE IXV HWVTLACXWTTWCXNR HWVWSNFUVWN";
-    substitution_decrypt(text, "UFLPWDRASJMCONQYBVTEXHZKGI");
-    std::cout << text << std::endl;
-
-    return 0;
-}
+// int main()
+// {
+//     std::string text = "DIE SCHWALBE HAT UNTER FOLTER ALLES VERRATEN STOP SOFORTIGER ABBRUCH VON OPERATION KLEOPATRA";
+//     substitution_encrypt(text, "Nofretete");
+//     std::cout << text << std::endl;
+//     substitution_decrypt(text, "Nofretete");
+//     std::cout << text << std::endl;
+//
+//     text = "GDY HENSLDYY GDY LXDB HEUEX QEEXZE, CEXFEEXZE NFXE QEUEXHEXZE";
+//     substitution_decrypt(text, "dumm gelaufen");
+//     std::cout << text << std::endl;
+//
+//     text = "ZQ EQR SJQ BZHSJBZJ, YZJ SQ-MPDZQEYZJRZJ YSPLC ZEJZJ SJQZPZP GHKJZ XS ZPQZRXZJI";
+//     substitution_decrypt(text, "dolly");
+//     std::cout << text << std::endl;
+//
+//     text = "ACHTUNGWIRWERDENABGEHOERT";
+//     substitution_encrypt(text, "UFLPWDRASJMCONQYBVTEXHZKGI");
+//     std::cout << text << std::endl;
+//
+//     text = "AUFWHWVTEUNPWN";
+//     substitution_decrypt(text, "UFLPWDRASJMCONQYBVTEXHZKGI");
+//     std::cout << text << std::endl;
+//
+//     text = "ZSV ZWVPWN XNT SN PWN NUWLATEWN OQNUEWN HWVTEUWVME XO PWN UXDFUX PWV QVRUNSTUESQN SN FVUNPWNFXVR MXWOOWVN. FWHQV ZSV RWOWSNTUO CQTTLACURWN, ZWVPWN ZSV UXD XNTWVWO EVWDDWN SN FWVCSN WSN NWXWT UCYAUFWE IXV HWVTLACXWTTWCXNR HWVWSNFUVWN";
+//     substitution_decrypt(text, "UFLPWDRASJMCONQYBVTEXHZKGI");
+//     std::cout << text << std::endl;
+//
+//     return 0;
+// }
 
 // output:
 // rwe ifvmnzoe vnj kbjeh tczjeh nzzei lehhnjeb ijcd ictchjwueh noohkfv lcb cdehnjwcb yzecdnjhn

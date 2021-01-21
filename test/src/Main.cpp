@@ -237,3 +237,9 @@ ElementParams block_transform3(ElementParams orig_array_params)
 //     // std::cout << transform_str(block_transform2, "wirtreffenunsumdreiuhr", -1, 8) << std::endl;
 //     // std::cout << transform_str(block_transform3, "TDREFRFEKPNUSTTIAAHMNFDE", -1, 8) << std::endl;
 // }
+
+int main(int argc, char *argv[])
+{
+    for (int idx = 0; idx < argc; ++idx)
+        std::cout << argv[idx] << std::endl;
+}

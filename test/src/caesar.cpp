@@ -12,7 +12,6 @@ void caesar_encrypt(std::string &str, int key)
 {
     make_lower_case(str);
     for (char &character : str)
-    {
         // spaces don't get substituted
         if (character >= 'a' && character <= 'z')
         {
@@ -20,7 +19,6 @@ void caesar_encrypt(std::string &str, int key)
             int moved_id = (character_id + key) % 26;
             character = 'a' + moved_id;
         }
-    }
 }
 
 // int main()
