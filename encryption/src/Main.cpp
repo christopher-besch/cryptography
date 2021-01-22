@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
     }
     for (char character : str)
         if (!(character >= ' ' && character <= '~'))
-            raise_error("Unsupported character '" << character << "' found!");
+            raise_error("Unsupported character '" << character << "' (char code " << static_cast<int>(character) << ") found!");
 
     // todo: read from json
     // select delimiter
