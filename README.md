@@ -65,7 +65,7 @@ These parameters are supported with all algorithms:
 - `-f <input_file_path> <output_file_path>` or `--file <input_file_path> <output_file_path>`: When this flag is used, each line from `<input_file_path>` will be treated as an individual cipher and decrypted into `<output_file_path>`.
   Every line can use a different algorithm / settings.
 
-### xor
+### XOR
 
 The program starts by separating the cipher into individual encrypted numbers.
 There are two ways of doing this:
@@ -85,7 +85,7 @@ These are the supported parameters:
 - `-b <bases...>` or `--base <bases...>`: If this parameter is used, only these bases will be tested.
 - `-k <keys...>` or `--key <keys...>`: Only these keys will be tested if supplied.
 
-### transformation
+### Transformation
 
 This implements multiple decryption algorithms (plow, transpose and fence).
 
