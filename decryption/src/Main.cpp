@@ -187,7 +187,7 @@ int main(int argc, char *argv[])
             // create and store decryptions
             out_file << "# line " << line << ": " << cipher << std::endl;
             std::string decryption_result = do_decryptions(cipher, dictionary, console_arguments, decryptions_amount);
-            out_file << decryption_result;
+            out_file << decryption_result << std::endl;
             std::cerr << "line " << line << " decrypted" << std::endl;
             empty = false;
         }

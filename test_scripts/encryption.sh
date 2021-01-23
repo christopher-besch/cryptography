@@ -34,8 +34,8 @@ while IFS= read -r line; do
         printf "encrypted $idx\n"
         IFS=
     fi
-done < "$dir_path/correct_sentences.txt"
+done < "$dir_path/input1.txt"
 # return IFS to be sane again
 IFS=$'\n\t'
 
-printf '%s\n' "${encryptions[@]}" > "$dir_path/ciphers.txt"
+printf '%s\n' "${encryptions[@]}" > "$dir_path/ciphers1.txt"

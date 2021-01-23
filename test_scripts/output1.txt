@@ -2,999 +2,799 @@
 The ants enjoyed the barbecue more than the family.	-XOR, Base 16, Key 43, CharLength 2, Score 9
 ------------------------------
 
-
 # line 2: Teat noe h abcemr hntefml.h nsejydtebreu oeta h aiy
 The ants enjoyed the barbecue more than the family._	-transpose Transformation, Key 26, Score 9
 ------------------------------
-
 
 # line 3: _yf   beeea  yhreen l__iearuatosehtj bcohhm_.attme dnnT
 The ants enjoyed the barbecue more than the family.____	-plow Transformation, Key 5, Score 9
 ------------------------------
 
-
 # line 4: T  brtlheteehyenhc e. jeut _ao ehf_nyb aa_teamnm_sdro i_
 The ants enjoyed the barbecue more than the family._____	-transpose Transformation, Key 7, Score 9
 ------------------------------
-
 
 # line 5: 7b474e4a584e0b5f4e47470b464e0b52445e0b4f44450c5f0b5c4459400b42450b4a0b4644594c5e4e05
 Please tell me you don't work in a morgue.	-XOR, Base 16, Key 43, CharLength 2, Score 8.5
 ------------------------------
 
-
 # line 6: Pes elm o o' oki  ogelaetl eyudntwr namru.
 Please tell me you don't work in a morgue.	-transpose Transformation, Key 21, Score 8.5
 ------------------------------
-
 
 # line 7: _u   d lsaee tkag__r r'umtel  onono.emiwoyleP
 Please tell me you don't work in a morgue.___	-plow Transformation, Key 5, Score 8.5
 ------------------------------
 
-
 # line 8: Peo  elluwa.el o _a drm_smoko_een r_  'ig_tytnu_
 Please tell me you don't work in a morgue.______	-transpose Transformation, Key 6, Score 8.5
 ------------------------------
-
 
 # line 9: 7b4a42590b52445e590b4f4e58424c454e590b48445c4944520b434a5f0b5c425f430b58485e494a0b4c4e4a590b4d44590b4a0b464e4644594a49474e0b4448484a5842444505
 Pair your designer cowboy hat with scuba gear for a memorable occasion.	-XOR, Base 16, Key 43, CharLength 2, Score 12
 ------------------------------
 
-
 # line 10: Pi ordsge obyhtwt cb erframmrbeocso.aryu einrcwo a ihsuaga o  eoal cain
 Pair your designer cowboy hat with scuba gear for a memorable occasion._	-transpose Transformation, Key 36, Score 12
 ------------------------------
-
 
 # line 11: _nclm ra  ycg  rri othbarebco__ioamoeutabrsuiaoeewhicgf r s_.aeoa  sw ondyP
 Pair your designer cowboy hat with scuba gear for a memorable occasion.____	-plow Transformation, Key 5, Score 12
 ------------------------------
 
-
 # line 12: Preyt rrca r hg aaid h eabsrecasa li sotcrmeoyiw u e nogbwbfmo.unoiaooc_
 Pair your designer cowboy hat with scuba gear for a memorable occasion._	-transpose Transformation, Key 9, Score 12
 ------------------------------
-
 
 # line 13: 7f434e0b5f44520b4959445e4c435f0b494a48400b4d44454f0b464e464459424e580b444d0b494e42454c0b4744585f0b42450b5f434e0b594a42450b4d44594e585f05
 The toy brought back fond memories of being lost in the rain forest.	-XOR, Base 16, Key 43, CharLength 2, Score 13
 ------------------------------
 
-
 # line 14: Tetybogtbc odmmre fbigls nteri oeth o ruh akfn eoiso en oti h anfrs.
 The toy brought back fond memories of being lost in the rain forest.	-transpose Transformation, Key 34, Score 13
 ------------------------------
-
 
 # line 15: _eneile odktrt bhcnmsb  hir_.oattg eeoag ehyubfmifns rfts  noior   ooT
 The toy brought back fond memories of being lost in the rain forest.__	-plow Transformation, Key 5, Score 13
 ------------------------------
 
-
 # line 16: Tbbdei rehra sniaseocm gnit ukeo  n.tg mflt _ohfo ohf_ytorbseo_  niet r_
 The toy brought back fond memories of being lost in the rain forest.____	-transpose Transformation, Key 9, Score 13
 ------------------------------
-
 
 # line 17: 66520b4f4e455f42585f0b5f4e4747580b464e0b5f434a5f0b48434e5c42454c0b4959424840580b42580b5d4e59520b494a4f0b4d44590b52445e590b5f4e4e5f4305
 My dentist tells me that chewing bricks is very bad for your teeth.	-XOR, Base 16, Key 43, CharLength 2, Score 13
 ------------------------------
 
-
 # line 18: M ets el eta hwn rcsi eybdfryu et.ydnittlsm htceigbik svr a o orteh
 My dentist tells me that chewing bricks is very bad for your teeth._	-transpose Transformation, Key 34, Score 13
 ------------------------------
-
 
 # line 19: _trrae ri  ltedsletwbsvboue__eof  k eamei ytt hhgcsy yt.h  driincts nM
 My dentist tells me that chewing bricks is very bad for your teeth.___	-plow Transformation, Key 5, Score 13
 ------------------------------
 
-
 # line 20: Ms   ibytytmcbsaoh  ehr du.dt eiv r_eetwcef _nlhikrot_tlansyre_istg   e_
 My dentist tells me that chewing bricks is very bad for your teeth._____	-transpose Transformation, Key 9, Score 13
 ------------------------------
-
 
 # line 21: 7f434e0b494e4a5e5f520b444d0b5f434e0b585e45584e5f0b5c4a580b444958485e594e4f0b49520b5f434e0b42454f5e585f59424a470b48594a454e5805
 The beauty of the sunset was obscured by the industrial cranes.	-XOR, Base 16, Key 43, CharLength 2, Score 11
 ------------------------------
 
-
 # line 22: Tebat ftesne a bcrdb h nutilcae.h euyo h ustwsosue yteidsra rns
 The beauty of the sunset was obscured by the industrial cranes._	-transpose Transformation, Key 32, Score 11
 ------------------------------
-
 
 # line 23: _nls yro utyb t st ubeuaa_.ridh cse fuehaoesasdtnrcse ti ebwnh eT
 The beauty of the sunset was obscured by the industrial cranes.__	-plow Transformation, Key 5, Score 11
 ------------------------------
 
-
 # line 24: Tte c uchy wutsre sarhta ouseernbfn d iee so iasatebbnl.uhtsyd _
 The beauty of the sunset was obscured by the industrial cranes._	-transpose Transformation, Key 8, Score 11
 ------------------------------
-
 
 # line 25: 634e0b4d445e454f0b4a0b474e5b594e48434a5e450b42450b4342580b5c4a47455e5f0b58434e474705
 He found a leprechaun in his walnut shell.	-XOR, Base 16, Key 43, CharLength 2, Score 8
 ------------------------------
 
-
 # line 26: H on  ercani i antselefudalpehu nhswlu hl.
 He found a leprechaun in his walnut shell.	-transpose Transformation, Key 21, Score 8
 ------------------------------
-
 
 # line 27: _ltw uraof pan ue__hnsihed enlc ils.l ahne uH
 He found a leprechaun in his walnut shell.___	-plow Transformation, Key 5, Score 8
 ------------------------------
 
-
 # line 28: H c nleahhu.  ait_flus _oen s_up wh_nriae_denll_
 He found a leprechaun in his walnut shell.______	-transpose Transformation, Key 6, Score 8
 ------------------------------
-
 
 # line 29: 78434e0b46445d4e4f0b4d44595c4a594f0b444547520b494e484a5e584e0b58434e0b5f595e585f4e4f0b5f434a5f0b5f434e0b4e454f42454c0b58434e0b45445c0b5c4a580b4c4442454c0b5f4359445e4c430b465e585f0b494e0b4d444747445c4e4f0b49520b4a0b454e5c0b494e4c42454542454c05
 She moved forward only because she trusted that the ending she now was going through must be followed by a new beginning.	-XOR, Base 16, Key 43, CharLength 2, Score 22
 ------------------------------
 
-
 # line 30: Semvdfradol eas h rse htteedn h o a on hog utb olwdb  e einn.h oe owr nybcuesetutdta h nigsenwwsgigtruhms efloe yanwbgnig
 She moved forward only because she trusted that the ending she now was going through must be followed by a new beginning._	-transpose Transformation, Key 61, Score 22
 ------------------------------
-
 
 # line 31: _giw eo  rnsosdhht eena m dwobsesttn naihhtfwyegn__ienbo sgtow ge  uhu  reehvodyasrdt ne g uuel  bn_.n adlbmog whieaet clrfoS
 She moved forward only because she trusted that the ending she now was going through must be followed by a new beginning.____	-plow Transformation, Key 5, Score 22
 ------------------------------
 
-
 # line 32: Sddehetnoootl e.h  cedhgwiu oag_efoa  e  ngbw i_ onutt swgheenn_mrlsrheha   den_owyeuanestmf wi_va  std  huob n_erbst ingrslybg_
 She moved forward only because she trusted that the ending she now was going through must be followed by a new beginning._______	-transpose Transformation, Key 16, Score 22
 ------------------------------
-
 
 # line 33: 7f434e594e0b5c4a580b48444a470b42450b4342580b585f44484042454c0b4a454f0b434e0b5c4a580b5f43594247474e4f05
 There was coal in his stocking and he was thrilled.	-XOR, Base 16, Key 43, CharLength 2, Score 10
 ------------------------------
 
-
 # line 34: Teewsca nhssokn n ewstrle.hr a oli i tcigadh a hild
 There was coal in his stocking and he was thrilled._	-transpose Transformation, Key 26, Score 10
 ------------------------------
-
 
 # line 35: _dra goi  erslhtndwhe__lt nis aaehwon kae l_.ish csic T
 There was coal in his stocking and he was thrilled.____	-plow Transformation, Key 5, Score 10
 ------------------------------
 
-
 # line 36: Tsnonseh  cd dechk t.roiihh_easner_ l g i_w s wl_aitaal_
 There was coal in his stocking and he was thrilled._____	-transpose Transformation, Key 7, Score 10
 ------------------------------
-
 
 # line 37: 7f434e0b59425d4e590b585f44474e0b5f434e0b4c444f5805
 The river stole the gods.	-XOR, Base 16, Key 43, CharLength 2, Score 5
 ------------------------------
 
-
 # line 38: Tervrsoetegd.h ie tl h os
 The river stole the gods._	-transpose Transformation, Key 13, Score 5
 ------------------------------
-
 
 # line 39: . e r rlesdhoeehvttog siT
 The river stole the gods.	-plow Transformation, Key 5, Score 5
 ------------------------------
 
-
 # line 40: Trt.h h_ese_ t _rog_ilo_ved_e s_
 The river stole the gods._______	-transpose Transformation, Key 4, Score 5
 ------------------------------
-
 
 # line 41: 78434e0b4f424f0b45445f0b48434e4a5f0b44450b5f434e0b5f4e585f070b4d44590b425f0b5c4a580b45445f0b5f434e0b59424c435f0b5f4342454c0b5f440b4f4405
 She did not cheat on the test, for it was not the right thing to do.	-XOR, Base 16, Key 43, CharLength 2, Score 16
 ------------------------------
 
-
 # line 42: Seddntceto h et o twsnttergttigt oh i o ha ntets,fri a o h ih hn od.
 She did not cheat on the test, for it was not the right thing to do.	-transpose Transformation, Key 34, Score 16
 ------------------------------
-
 
 # line 43: _ nt ta , neod nhoetrwoehio_.thghn osh c ehd tteft tit odg r si t atiS
 She did not cheat on the test, for it was not the right thing to do.__	-plow Transformation, Key 5, Score 16
 ------------------------------
 
-
 # line 44: Snt oset ho tr  hdetoe nrio  nsioin.dc tttgg_iht,  h _deh wttt_ aefah o_
 She did not cheat on the test, for it was not the right thing to do.____	-transpose Transformation, Key 9, Score 16
 ------------------------------
-
 
 # line 45: 7f434e0b585e4549474448400b5c4a580b434a454f4e4f0b5f440b5f434e0b4c4259470b494e4d44594e0b5b594a485f42484e070b495e5f0b5f434e0b495e59454e4f0b584042450b5c4a580b5b5944444d0b58434e0b4f424f0b45445f0b4a5b5b47520b425f05
 The sunblock was handed to the girl before practice, but the burned skin was proof she did not apply it.	-XOR, Base 16, Key 43, CharLength 2, Score 20
 ------------------------------
 
-
 # line 46: Tesnlc a addt h ilbfr rcie u h undsi a ro h i o pl th ubokwshne otegr eoepatc,bttebre knwspofseddntapyi.
 The sunblock was handed to the girl before practice, but the burned skin was proof she did not apply it.	-transpose Transformation, Key 52, Score 20
 ------------------------------
-
 
 # line 47: _y dhoakneucroletnaos lwa hrfpibhrswrsitl.tpod p  ut t eitdh behnk e gbec, bdn f npi a eosie tear  odscuT
 The sunblock was handed to the girl before practice, but the burned skin was proof she did not apply it._	-plow Transformation, Key 5, Score 20
 ------------------------------
 
-
 # line 48: Tl tiri n oiphohorectewfdpeca l ehda  l knt p,e ssnys dhbr  s ho uweeeabbkpetinad fcuuir  tbs gottrnoda.
 The sunblock was handed to the girl before practice, but the burned skin was proof she did not apply it.	-transpose Transformation, Key 13, Score 20
 ------------------------------
-
 
 # line 49: 78434e0b4a475c4a52580b434a4f0b4a450b42455f4e594e585f42454c0b5b4e59585b4e485f425d4e0b44450b5c43520b5f434e0b5c4459474f0b465e585f0b494e0b4d474a5f05
 She always had an interesting perspective on why the world must be flat.	-XOR, Base 16, Key 43, CharLength 2, Score 13
 ------------------------------
 
-
 # line 50: Seawy a nitrsigprpcieo h h ol utb lth lashda neetn esetv nwytewrdms efa.
 She always had an interesting perspective on why the world must be flat.	-transpose Transformation, Key 36, Score 13
 ------------------------------
-
 
 # line 51: _abmot vp sn sa ydiegsin w  l__ftd yotrnr aaehwhneiec hels .teurhweeptta lS
 She always had an interesting perspective on why the world must be flat.___	-plow Transformation, Key 5, Score 13
 ------------------------------
 
-
 # line 52: Synsre lbhs ts tdee iipoh   hnnenemfaatgc  ullde twwsaw rpihottaaeevyr .
 She always had an interesting perspective on why the world must be flat.	-transpose Transformation, Key 9, Score 13
 ------------------------------
-
 
 # line 53: 634e0b4742404e4f0b5f440b5b474a520b5c425f430b5c44594f580b42450b5f434e0b494a5f435f5e4905
 He liked to play with words in the bathtub.	-XOR, Base 16, Key 43, CharLength 2, Score 9
 ------------------------------
 
-
 # line 54: H ie opa ihwrsi h ahu.elkdt lywt od ntebttb
 He liked to play with words in the bathtub._	-transpose Transformation, Key 22, Score 9
 ------------------------------
-
 
 # line 55: _t nrtatil lioieh_.th wwpd ee   stabub dhyokH
 He liked to play with words in the bathtub.__	-plow Transformation, Key 5, Score 9
 ------------------------------
 
-
 # line 56: H  rhuetwdeb ois .l t b_iphia_kl nt_eaw h_dyott_
 He liked to play with words in the bathtub._____	-transpose Transformation, Key 6, Score 9
 ------------------------------
-
 
 # line 57: 7f444f4a520b620b434e4a594f0b5844464e5f4342454c0b454e5c0b4a454f0b5e45464e4644594a49474e05
 Today I heard something new and unmemorable.	-XOR, Base 16, Key 43, CharLength 2, Score 6
 ------------------------------
 
-
 # line 58: TdyIhadsmtignwadummrbeoa  er oehn e n neoal.
 Today I heard something new and unmemorable.	-transpose Transformation, Key 22, Score 6
 ------------------------------
-
 
 # line 59: _amnnhseyah t anr.eou ged doIrmnw mlbedeioa T
 Ted wod unaaynm iemnI gor henaaoblmrdee.t sh_	-plow Transformation, Key 15, Score 6.58571
 ------------------------------
 
-
 # line 60: Thmnuboeeenldatwmearh e.ydiam_  nno_Isgdr_ o  a_
 Today I heard something new and unmemorable.____	-transpose Transformation, Key 6, Score 6
 ------------------------------
-
 
 # line 61: 784e4e400b585e48484e5858070b495e5f0b4a475c4a52580b494e0b5b594e5b4a594e4f0b4d44590b594a454f44460b484a5f5805
 Seek success, but always be prepared for random cats.	-XOR, Base 16, Key 43, CharLength 2, Score 9
 ------------------------------
 
-
 # line 62: Se ucs,btawy epeae o admct.eksces u lasb rprdfrrno as
 Seek success, but always be prepared for random cats._	-transpose Transformation, Key 27, Score 9
 ------------------------------
-
 
 # line 63: _adrer lbe kc aspronc_. afa y ,ceeustaep rmsto debwussS
 Seek success, but always be prepared for random cats.__	-plow Transformation, Key 5, Score 9
 ------------------------------
 
-
 # line 64: Sct a cee brraesaeeatksl dns ,wp d.s arfo_ubyeom_cuspr _
 Seek success, but always be prepared for random cats.___	-transpose Transformation, Key 7, Score 9
 ------------------------------
-
 
 # line 65: 7f434e0b6c594e4a5f0b6f4a454e0b474444404e4f0b4644594e0b4742404e0b4a0b434459584e0b5f434a450b4a0b4f444c05
 The Great Dane looked more like a horse than a dog.	-XOR, Base 16, Key 43, CharLength 2, Score 11
 ------------------------------
 
-
 # line 66: TeGetDn okdmr ieahreta  o.h ra aeloe oelk  os hnadg
 The Great Dane looked more like a horse than a dog._	-transpose Transformation, Key 26, Score 11
 ------------------------------
-
 
 # line 67: _g  hkre  G tekoi eno__dasalmonaeheao   rh _.atoeedlDrT
 The Great Dane looked more like a horse than a dog.____	-plow Transformation, Key 5, Score 11
 ------------------------------
 
-
 # line 68: Ttoratoh oe hgeDk ha. aelon_Gndir _re ksa_e mee _alo  d_
 The Great Dane looked more like a horse than a dog._____	-transpose Transformation, Key 7, Score 11
 ------------------------------
-
 
 # line 69: 634e0b4d424c5e594e4f0b4a0b4d4e5c0b585f424840580b444d0b4f52454a46425f4e0b5c4e594e0b4e4a58424e590b5f434a450b4a0b4d42584342454c0b5b44474e0b5f440b484a5f48430b4d42584305
 He figured a few sticks of dynamite were easier than a fishing pole to catch fish.	-XOR, Base 16, Key 43, CharLength 2, Score 16
 ------------------------------
 
-
 # line 70: H iue  e tcso yaiewr airta  ihn oet ac ihefgrdafwsik fdnmt eeese hnafsigpl octhfs.
 He figured a few sticks of dynamite were easier than a fishing pole to catch fish.	-transpose Transformation, Key 41, Score 16
 ------------------------------
-
 
 # line 71: _scooi hieenoiedifeft ytrstahptti__fa  s  aeidss r eua k mwernigec .hh lnfae  afcw gH
 He figured a few sticks of dynamite were easier than a fishing pole to catch fish.___	-plow Transformation, Key 5, Score 16
 ------------------------------
 
-
 # line 72: He oi tioahedsftehslt.  t eaahec_faid sni h_i cywi nt _gfkneeagof_uesarr   i_rw me fpcs_
 He figured a few sticks of dynamite were easier than a fishing pole to catch fish.______	-transpose Transformation, Key 11, Score 16
 ------------------------------
-
 
 # line 73: 625f0b5c4a580b4f424d4d42485e475f0b4d44590b664a59520b5f440b4a4f46425f0b5f434a5f0b4644585f0b444d0b434e590b5c445940445e5f0b4844455842585f4e4f0b444d0b4e534e5948425842454c0b5b4444590b415e4f4c464e455f05
 It was difficult for Mary to admit that most of her workout consisted of exercising poor judgment.	-XOR, Base 16, Key 43, CharLength 2, Score 17
 ------------------------------
 
-
 # line 74: I a ifcl o ayt di htms fhrwrotcnitdo xriigpo ugettwsdfiutfrMr oamtta oto e oku osse feecsn orjdmn.
 It was difficult for Mary to admit that most of her workout consisted of exercising poor judgment.	-transpose Transformation, Key 49, Score 17
 ------------------------------
-
 
 # line 75: _ejpsx i re   ayrlfawiuor ttthotsdei  m_.grgc enuw saioafcd t i Mtmhof ootfrnodtnuoieosckromtd  tfsI
 It was difficult for Mary to admit that most of her workout consisted of exercising poor judgment.__	-plow Transformation, Key 5, Score 17
 ------------------------------
 
-
 # line 76: Ii yimhoi i ttff toeusenj. fot srttxgu_wirott  ee d_ac  h wcdrpg_suMaaooo com_ ladtfrnoioe_dtrm  ksfsrn_
 It was difficult for Mary to admit that most of her workout consisted of exercising poor judgment.______	-transpose Transformation, Key 13, Score 17
 ------------------------------
-
 
 # line 77: 7b4e445b474e0b5c43440b42455842585f0b44450b5b42484042454c0b5f434e42590b5f4e4e5f430b5c425f430b5f434e42590b4e4749445c580b4a594e0b58440b4a4545445242454c0a
 People who insist on picking their teeth with their elbows are so annoying!	-XOR, Base 16, Key 43, CharLength 2, Score 13
 ------------------------------
 
-
 # line 78: Pol h nito ikn hi et ihterebw r oanyn!epewoiss npcigtertehwt hi losaes noig
 People who insist on picking their teeth with their elbows are so annoying!_	-transpose Transformation, Key 38, Score 13
 ------------------------------
-
 
 # line 79: !ooabihh tkniolphsoc rttel sngnn sehieigi nwoe itpneewt weaiy ror  thi s eP
 People who insist on picking their teeth with their elbows are so annoying!	-plow Transformation, Key 5, Score 13
 ------------------------------
 
-
 # line 80: Phtki ewoneo irwis go on ir a!pingtt an_ln  ehern_espte leo_ iihttb y_wscehhosi_
 People who insist on picking their teeth with their elbows are so annoying!_____	-transpose Transformation, Key 10, Score 13
 ------------------------------
-
 
 # line 81: 7844464e44454e0b620b4045445c0b594e484e455f47520b4844464942454e4f0b664a5b474e0b7852595e5b0b0d0b495e5f5f4e594e4f0b7b445b484459450b5f4342454042454c0b425f0b5c445e474f0b5f4a585f4e0b4742404e0b484a594a464e470b5b445b48445945050b625f0b4f424f450c5f0b4a454f0b5f434e520b4f44450c5f0b594e484446464e454f0b4a455244454e0b4e47584e0b4f440b425f0b4e425f434e5905
 Someone I know recently combined Maple Syrup & buttered Popcorn thinking it would taste like caramel popcorn. It didn't and they don't recommend anyone else do it either.	-XOR, Base 16, Key 43, CharLength 2, Score 25.1
 ------------------------------
 
-
 # line 82: SmoeIko eetycmie al yu  utrdPpontikn twudtselk aae ocr.I intadte o' eomn noees oi ihroen  nwrcnl obndMpeSrp&btee ocr hnigi ol at iecrmlppon tdd' n hydntrcmedayn led tete.
 Someone I know recently combined Maple Syrup & buttered Popcorn thinking it would taste like caramel popcorn. It didn't and they don't recommend anyone else do it either.	-transpose Transformation, Key 85, Score 25.1
 ------------------------------
-
 
 # line 83: .i sn m dt i claisltitcdt Sancn  oeIwe iM puep kiualcep.dt  todoloere deync'yd' nom  to nnorbue byco moenelmdlr ePrigw eeaprtnneneen  thtieeamrohadIo rktd nho t&ypeotrknS
 Someone I know recently combined Maple Syrup & buttered Popcorn thinking it would taste like caramel popcorn. It didn't and they don't recommend anyone else do it either.	-plow Transformation, Key 5, Score 25.1
 ------------------------------
 
-
 # line 84: SIec yuPt dlac a e eiro coMrtohi imodndcalt.mkemautpittkeridoons _ennbppecn aelnd nmyee_ootil rokws  .nt'mo i_nwlne&eriotcp 'htendt_e ye  dnnueaoIte neoh_ r dSb  gl rpt yrd  e_
 Someone I know recently combined Maple Syrup & buttered Popcorn thinking it would taste like caramel popcorn. It didn't and they don't recommend anyone else do it either.______	-transpose Transformation, Key 22, Score 25.1
 ------------------------------
-
 
 # line 85: 620b5c4a580b5d4e59520b5b59445e4f0b444d0b46520b45424840454a464e0b5f4359445e4c43445e5f0b43424c430b5848434444470b495e5f0b5f444f4a52060b620b48445e474f450c5f0b494e0b4a45520b4f424d4d4e594e455f0b5f440b5c434a5f0b46520b45424840454a464e0b5c4a5805
 I was very proud of my nickname throughout high school but today- I couldn't be any different to what my nickname was.	-XOR, Base 16, Key 43, CharLength 2, Score 19.7143
 ------------------------------
 
-
 # line 86: Iwsvr ru fm ikaetruhu ihsho u oa-Icud' eaydfeett htm ikaews a eypodo yncnm hogothg colbttdy  olntb n ifrn owa yncnm a.
 I was very proud of my nickname throughout high school but today- I couldn't be any different to what my nickname was.	-transpose Transformation, Key 59, Score 19.7143
 ------------------------------
-
 
 # line 87: _wn atrd 'o-t ciormi uysarofnahhhsl ycne e hyk _.ecmwtfybd ato  gtn orew vp yk uthoudIl nfn  imsaantoeiatu obhguoecmd  I
 I was very proud of my nickname throughout high school but today- I couldn't be any different to what my nickname was.__	-plow Transformation, Key 5, Score 19.7143
 ------------------------------
 
-
 # line 88: Ir itusu-dae  e yochtct nnrwn w fkr h I'yehiwap nohot t nacasrmauiooc dttks oymggldobi  n.vu ehh aueftma_edn o byl foym_
 I was very proud of my nickname throughout high school but today- I couldn't be any different to what my nickname was.__	-transpose Transformation, Key 15, Score 19.7143
 ------------------------------
-
 
 # line 89: 78434e0b4d4e475f0b5f434a5f0b48434247470b5f434a5f0b464a404e580b5f434e0b434a4259580b44450b5f434e0b494a48400b444d0b52445e590b454e48400b5c434e450b434e0b5c4a47404e4f0b42455f440b5f434e0b5944444605
 She felt that chill that makes the hairs on the back of your neck when he walked into the room.	-XOR, Base 16, Key 43, CharLength 2, Score 20
 ------------------------------
 
-
 # line 90: Sefl htcilta ae h ar ntebc fyu ekwe ewle notero.h etta hl htmkstehiso h ako ornc hnh akdit h om
 She felt that chill that makes the hairs on the back of your neck when he walked into the room._	-transpose Transformation, Key 48, Score 20
 ------------------------------
-
 
 # line 91: . odwnkrfats s  ctf   lteer bouce etemohnkeheo  nihkalttehlaihataoekynwhlitor  a    ch h mthheS
 She felt that chill that makes the hairs on the back of your neck when he walked into the room.	-plow Transformation, Key 5, Score 20
 ------------------------------
 
-
 # line 92: S i h byke ehtlmeoao  i ehla ncuwwnr a kh krhatoftteat  elooe hsihonnk mlca refe et.thtts  chdh_
 She felt that chill that makes the hairs on the back of your neck when he walked into the room._	-transpose Transformation, Key 12, Score 20
 ------------------------------
-
 
 # line 93: 7f434e0b58434a59400642454d4e585f4e4f0b78445e5f430b7b42454e0b48434a45454e470b5c4a580b5f434e0b444547520b5c4a520b42450b44590b445e5f05
 The shark-infested South Pine channel was the only way in or out.	-XOR, Base 16, Key 43, CharLength 2, Score 11.6923
 ------------------------------
 
-
 # line 94: Tesakifse ot iecanlwsteol a no u.h hr-netdSuhPn hne a h nywyi rot
 The shark-infested South Pine channel was the only way in or out._	-transpose Transformation, Key 33, Score 11.6923
 ------------------------------
-
 
 # line 95: .r yean  Ss-s ke henwhlyotu ant antdfrehaneuihl owno i  secPotihT
 The shark-infested South Pine channel was the only way in or out.	-plow Transformation, Key 5, Score 11.6923
 ------------------------------
 
-
 # line 96: Tke asln.h-dPn y _ei int o_ nSnehwr_sfoelea _heu   yo_astcwo u_rthhanit_
 The shark-infested South Pine channel was the only way in or out._______	-transpose Transformation, Key 9, Score 11.6923
 ------------------------------
-
 
 # line 97: 78434e0b5c4a580b5f44440b495e58520b4a475c4a52580b5f4a474042454c0b4a49445e5f0b5c434a5f0b58434e0b5c4a455f4e4f0b5f440b4f440b5f440b4a485f5e4a4747520b4f440b4a45520b444d0b425f05
 She was too busy always talking about what she wanted to do to actually do any of it.	-XOR, Base 16, Key 43, CharLength 2, Score 18
 ------------------------------
 
-
 # line 98: Sewstobs lastligaotwa h atdt ot culyd n fi.h a o uyawy akn bu htsewne od oatal oayo t
 She was too busy always talking about what she wanted to do to actually do any of it._	-transpose Transformation, Key 43, Score 18
 ------------------------------
-
 
 # line 99: .o lc tnhhontwsow tul ibwsa oalo tiyda ddw  aksab ehs  yl tt e ou n fayttoteaugaayoaS
 She was too busy always talking about what she wanted to do to actually do any of it.	-plow Transformation, Key 5, Score 18
 ------------------------------
 
-
 # line 100: St taaa cdfhoaabtndto eollo tou i  wkuse aatwbaithdtln.auyn e oly_sssgw t y _ y  hwoa o_
 She was too busy always talking about what she wanted to do to actually do any of it.___	-transpose Transformation, Key 11, Score 18
 ------------------------------
-
 
 # line 101: 7f444f4f474e59580b4d4e4e4f42454c0b594a4848444445580b585e595b5942584e4f0b4e5d4e450b5f434e0b584e4a5844454e4f0b5b4a59400b594a454c4e5905
 Toddlers feeding raccoons surprised even the seasoned park ranger.	-XOR, Base 16, Key 43, CharLength 2, Score 9
 ------------------------------
 
-
 # line 102: Tdlr edn acossrrsdee h esndpr agrodesfeigrcon upie vntesaoe akrne.
 Toddlers feeding raccoons surprised even the seasoned park ranger.	-transpose Transformation, Key 33, Score 9
 ------------------------------
-
 
 # line 103: _rrpo ndpscnfld ianreees  e__gkdahvsuordsdore osieteern_.aans  r cgeeT
 Toddlers feeding raccoons surprised even the seasoned park ranger.____	-plow Transformation, Key 5, Score 9
 ------------------------------
 
-
 # line 104: T  ss srrofr etok.deasdhn _decu eer_ldcre da_eiopvs n_rnoreepg_sgninaae_
 Toddlers feeding raccoons surprised even the seasoned park ranger.______	-transpose Transformation, Key 9, Score 9
 ------------------------------
-
 
 # line 105: 634e0b584a424f0b434e0b5c4a580b45445f0b5f434e594e0b524e585f4e594f4a52100b43445c4e5d4e59070b464a45520b5b4e445b474e0b584a5c0b4342460b5f434e594e05
 He said he was not there yesterday; however, many people saw him there.	-XOR, Base 16, Key 43, CharLength 2, Score 13
 ------------------------------
 
-
 # line 106: H adh a o hr etra;hwvr aypol a i hr.esi ewsntteeysedy oee,mn epeswhmtee
 He said he was not there yesterday; however, many people saw him there._	-transpose Transformation, Key 36, Score 13
 ------------------------------
-
 
 # line 107: _e wl  e;e t eashs etyw,ypamr__eisonroasrta  edwoeedheae hh_.t epmv ryhn iH
 He said he was not there yesterday; however, many people saw him there.____	-plow Transformation, Key 5, Score 13
 ------------------------------
 
-
 # line 108: Hho avy  eetyye st   e;rpahswts ,eweaahth o riseeomphed rrwali. nedenem_
 He said he was not there yesterday; however, many people saw him there._	-transpose Transformation, Key 9, Score 13
 ------------------------------
-
 
 # line 109: 674a585f0b6d59424f4a520b620b584a5c0b4a0b585b445f5f4e4f0b585f59425b4e4f0b49475e4e0b5c4459460b58434a404e0b434a454f580b5c425f430b4a0b474e4c474e58580b4742514a594f05
 Last Friday I saw a spotted striped blue worm shake hands with a legless lizard.	-XOR, Base 16, Key 43, CharLength 2, Score 14
 ------------------------------
 
-
 # line 110: Ls rdyIswasotdsrpdbu omsaehnswt  els iadatFia  a  pte tie lewr hk ad ihalgeslzr.
 Last Friday I saw a spotted striped blue worm shake hands with a legless lizard.	-transpose Transformation, Key 40, Score 14
 ------------------------------
-
 
 # line 111: .ie inkmedtt sa td atseuraawalldr g  hholp o Iisar wpdibws shesazsltde   resayFL
 Last Friday I saw a spotted striped blue worm shake hands with a legless lizard.	-plow Transformation, Key 5, Score 14
 ------------------------------
 
-
 # line 112: Ldwtp as  aa eewk llsyaddoeweit    r igz IssbmhtlaF ptl aherrsorusn sdiatiehdas.
 Last Friday I saw a spotted striped blue worm shake hands with a legless lizard.	-transpose Transformation, Key 10, Score 14
 ------------------------------
-
 
 # line 113: 624d0b46520b484a47485e474a5f44590b434a4f0b4a0b4342585f445952070b425f0b5c445e474f0b494e0b4644594e0b4e46494a59594a585842454c0b5f434a450b46520b4959445c584e590b4342585f44595205
 If my calculator had a history, it would be more embarrassing than my browser history.	-XOR, Base 16, Key 43, CharLength 2, Score 15
 ------------------------------
 
-
 # line 114: I ycluao a  itr,i ol emr marsigta ybosrhsoyfm acltrhdahsoy twudb oeebrasn hnm rwe itr.
 If my calculator had a history, it would be more embarrassing than my browser history.	-transpose Transformation, Key 43, Score 15
 ------------------------------
-
 
 # line 115: _yis anremd yidocymltahrtl  rihywhr__o omtsaeeuio haa fcl at obrbs  rrt_.sebngamo w,s ru I
 If my calculator had a history, it would be more embarrassing than my browser history.____	-plow Transformation, Key 5, Score 15
 ------------------------------
 
-
 # line 116: Il ii  saosfchstbesnwt uat emi somldow bnmerya romagyry tayuor   .co ,lrrtbh_arh deahri_
 If my calculator had a history, it would be more embarrassing than my browser history.__	-transpose Transformation, Key 11, Score 15
 ------------------------------
-
 
 # line 117: 7f434e0b5f44595f4442584e0b415e465b4e4f0b42455f440b5f434e0b474a404e0b5c425f430b4f594e4a46580b444d0b494e48444642454c0b4a0b584e4a0b5f5e595f474e05
 The tortoise jumped into the lake with dreams of becoming a sea turtle.	-XOR, Base 16, Key 43, CharLength 2, Score 13
 ------------------------------
 
-
 # line 118: Tetros updit h aewt raso eoigasatrl.h otiejme notelk ihdem fbcmn  e ute
 The tortoise jumped into the lake with dreams of becoming a sea turtle._	-transpose Transformation, Key 36, Score 13
 ------------------------------
-
 
 # line 119: _et ibsdwl  uit ojdo   m ma l__ta ofaheete tehrepnhkteocger_.usne riatimsoT
 The tortoise jumped into the lake with dreams of becoming a sea turtle.____	-plow Transformation, Key 5, Score 13
 ------------------------------
 
-
 # line 120: Top er gthiet eb uesdhwaear e eimc tt i tsoslojnlh meeruta oia.tmokdfn _
 The tortoise jumped into the lake with dreams of becoming a sea turtle._	-transpose Transformation, Key 9, Score 13
 ------------------------------
-
 
 # line 121: 7f5e4e584f4a52580b4a594e0b4d594e4e0b424d0b52445e0b495942454c0b4a0b4c4544464e0b4844585f5e464e05
 Tuesdays are free if you bring a gnome costume.	-XOR, Base 16, Key 43, CharLength 2, Score 9
 ------------------------------
 
-
 # line 122: Tedy r rei o rn  nm otm.usasaefe fyubigagoecsue
 Tuesdays are free if you bring a gnome costume._	-transpose Transformation, Key 24, Score 9
 ------------------------------
-
 
 # line 123: _mcng frads fiung u__te io  seuyeeyrams.eoo b eraT
 Tuesdays are free if you bring a gnome costume.___	-plow Transformation, Key 5, Score 9
 ------------------------------
 
-
 # line 124: T e  oua bgserirntsefioud  nmmafygeeyro  .seuac_
 Tuesdays are free if you bring a gnome costume._	-transpose Transformation, Key 6, Score 9
 ------------------------------
-
 
 # line 125: 634e0b404e5b5f0b5f4e474742454c0b434246584e474d0b5f434a5f0b44454e0b4f4a520b425f0b5c445e474f0b4a47470b5844464e43445c0b464a404e0b584e45584e05
 He kept telling himself that one day it would all somehow make sense.	-XOR, Base 16, Key 43, CharLength 2, Score 13
 ------------------------------
 
-
 # line 126: H ettlighmefta n a twudalsmhwmk es.ekp eln isl htoedyi ol l oeo aesne
 He kept telling himself that one day it would all somehow make sense._	-transpose Transformation, Key 35, Score 13
 ------------------------------
-
 
 # line 127: _eah d aotsgeektnm  dtllems.e  mlui tfii  etlhlae oaowesnkos wynhe lpH
 He kept telling himself that one day it would all somehow make sense._	-plow Transformation, Key 5, Score 13
 ------------------------------
 
-
 # line 128: Htht wlweeeihdo  n lmaausmsklstyloaeeie  dmk.pnloi ee_tgfntah _   e los_
 He kept telling himself that one day it would all somehow make sense.___	-transpose Transformation, Key 9, Score 13
 ------------------------------
-
 
 # line 129: 684a5f580b4a594e0b4c44444f0b5b4e5f58070b4d44590b5f434e520b4a594e0b48474e4a450b4a454f0b4a594e0b45445f0b454442585205
 Cats are good pets, for they are clean and are not noisy.	-XOR, Base 16, Key 43, CharLength 2, Score 12
 ------------------------------
 
-
 # line 130: Ct r odpt,frte r la n r o os.asaego es o hyaecenadaentniy
 Cats are good pets, for they are clean and are not noisy._	-transpose Transformation, Key 29, Score 12
 ------------------------------
-
 
 # line 131: _stralat pg s  ,  c aoi__on n yrsdetarotoeead n.y enerhfeoaC
 Cats are good pets, for they are clean and are not noisy.___	-plow Transformation, Key 5, Score 12
 ------------------------------
 
-
 # line 132: C tt no.agshcdt_to,el  _so yean_ df aro_a oanei_rprr  s_ee eany_
 Cats are good pets, for they are clean and are not noisy._______	-transpose Transformation, Key 8, Score 12
 ------------------------------
-
 
 # line 133: 7f434e594e0b5c4e594e0b5c43425f4e0b445e5f0b4844454f425f424445580b42450b5f434e0b5f445c45100b585e49584e5a5e4e455f4752070b5f434e0b59444a4f580b5c4e594e0b42465b4a58584a49474e05
 There were white out conditions in the town; subsequently, the roads were impassable.	-XOR, Base 16, Key 43, CharLength 2, Score 13
 ------------------------------
 
-
 # line 134: Teewr ht u odtosi h on usqety h od eeipsal.hr eewieotcniin ntetw;sbeunl,teraswr masbe
 There were white out conditions in the town; subsequently, the roads were impassable._	-transpose Transformation, Key 43, Score 13
 ------------------------------
-
 
 # line 135: .siwotte t ndtteerriunon ;sn r  selaes ,ebneiiooheehww ct hwuuyedrpbameahlqsotsi e  T
 There were white out conditions in the town; subsequently, the roads were impassable.	-plow Transformation, Key 5, Score 13
 ------------------------------
 
-
 # line 136: Tr diosyoeaheoinwe,a be ut nq dilrwtit;utsmeeh oh eh p. icnesnewa_wtos ut es_een tblrrs_
 There were white out conditions in the town; subsequently, the roads were impassable.___	-transpose Transformation, Key 11, Score 13
 ------------------------------
-
 
 # line 137: 6c4a59520b4f424f450c5f0b5e454f4e59585f4a454f0b5c43520b6f445e4c0b5c4e455f0b5e5b585f4a4259580b5f440b4c4e5f0b44454e0b4f4447474a590b49424747580b5c434e450b434e0b42455d425f4e4f0b4342460b5f440b4c440b48445c0b5f425b5b42454c05
 Gary didn't understand why Doug went upstairs to get one dollar bills when he invited him to go cow tipping.	-XOR, Base 16, Key 43, CharLength 2, Score 19.6
 ------------------------------
 
-
 # line 138: Gr intudrtn h ogwn ptist e n olrblswe eivtdhmt ocwtpigaydd' nesadwyDu etusar ogtoedla il hnh nie i og o ipn.
 Gary didn't understand why Doug went upstairs to get one dollar bills when he invited him to go cow tipping.	-transpose Transformation, Key 54, Score 19.6
 ------------------------------
-
 
 # line 139: _i o dn  blngssnuhad' ynntwoepr oo sniemgwp_.po it elrd oiuwD sudrai rd   att alheihocignt t vhwilee ttgynetdG
 Gary didn't understand why Doug went upstairs to get one dollar bills when he invited him to go cow tipping.__	-plow Transformation, Key 5, Score 19.6
 ------------------------------
 
-
 # line 140: Gnrhwt  bevmcia'syeagdini onrtt nieol ttwgy aDtrtllheo . uno s lsed t_dnduu oa   gi_id gptnrwihop_dew soe hni p_
 Gary didn't understand why Doug went upstairs to get one dollar bills when he invited him to go cow tipping.____	-transpose Transformation, Key 14, Score 19.6
 ------------------------------
-
 
 # line 141: 785f445b0b5c4a425f42454c0b4d44590b4e53484e5b5f4244454a470b5f4342454c580b5f440b415e585f0b434a5b5b4e4505
 Stop waiting for exceptional things to just happen.	-XOR, Base 16, Key 43, CharLength 2, Score 8
 ------------------------------
 
-
 # line 142: So atn o xetoa hnst uthpe.tpwiigfrecpinltig ojs apn
 Stop waiting for exceptional things to just happen._	-transpose Transformation, Key 26, Score 8
 ------------------------------
-
 
 # line 143: _nhjstocoi ptfxi g  e__ptonlte iotag paitsp_.au hnernwS
 Stop waiting for exceptional things to just happen.____	-plow Transformation, Key 5, Score 8
 ------------------------------
 
-
 # line 144: St onuetiengsnonxast.pgcl  _  e th_wfptoa_aoth p_iriijp_
 Stop waiting for exceptional things to just happen._____	-transpose Transformation, Key 7, Score 8
 ------------------------------
-
 
 # line 145: 6a4d5f4e590b4e535b47445942454c0b5f434e0b4a494a454f44454e4f0b495e42474f42454c070b434e0b585f4a595f4e4f0b5f440b494e47424e5d4e0b42450b4c4344585f5805
 After exploring the abandoned building, he started to believe in ghosts.	-XOR, Base 16, Key 43, CharLength 2, Score 11
 ------------------------------
 
-
 # line 146: Atrepoigteaadndbidn,h tre obleei hssfe xlrn h bnoe ulig esatdt eiv ngot.
 After exploring the abandoned building, he started to believe in ghosts.	-transpose Transformation, Key 36, Score 11
 ------------------------------
-
 
 # line 147: _t vbdt d d glrepnendl,se ens__oiiot gieahixtfertbnunertl h.sgee ahiboa o A
 After exploring the abandoned building, he started to believe in ghosts.___	-plow Transformation, Key 5, Score 11
 ------------------------------
 
-
 # line 148: Aptdihel flholedigtoend  eher eistvoriadntoes nb ga  tegab,rbisx nu ten.
 After exploring the abandoned building, he started to believe in ghosts.	-transpose Transformation, Key 9, Score 11
 ------------------------------
-
 
 # line 149: 78434e0b5c59445f4e0b4342460b4a0b4744454c0b474e5f5f4e59070b495e5f0b434e0b4f424f450c5f0b594e4a4f0b425f05
 She wrote him a long letter, but he didn't read it.	-XOR, Base 16, Key 43, CharLength 2, Score 10.6
 ------------------------------
 
-
 # line 150: Sewoehmaln etr u edd' edi.h rt i  oglte,bth intra t
 She wrote him a long letter, but he didn't read it._	-transpose Transformation, Key 26, Score 10.6
 ------------------------------
-
 
 # line 151: _tenebtga w e nt hdri__  i ,eomtehoillrtdtd_.a' ue  hrS
 She wrote him a long letter, but he didn't read it.____	-plow Transformation, Key 5, Score 10.6
 ------------------------------
 
-
 # line 152: Selt 'ih oehttehnre . ig, r_wm  de_r lbia_oaeudd_t ttn _
 She wrote him a long letter, but he didn't read it._____	-transpose Transformation, Key 7, Score 10.6
 ------------------------------
-
 
 # line 153: 7f5c440b4644594e0b4f4a52580b4a454f0b4a47470b4342580b5b594449474e46580b5c445e474f0b494e0b5844475d4e4f05
 Two more days and all his problems would be solved.	-XOR, Base 16, Key 43, CharLength 2, Score 10
 ------------------------------
 
-
 # line 154: Tomr asadalhspolm ol esle.w oedy n l i rbeswudb ovd
 Two more days and all his problems would be solved._	-transpose Transformation, Key 26, Score 10
 ------------------------------
-
 
 # line 155: _dsd bsladm   aiosl e__veumrh seowryd peobl_.o wl lnaoT
 Two more days and all his problems would be solved.____	-plow Transformation, Key 5, Score 10
 ------------------------------
 
-
 # line 156: T dsm ewd  sbdoaap e. ylrw _msloos_o  buo_rahlll_eniedv_
 Two more days and all his problems would be solved._____	-transpose Transformation, Key 7, Score 10
 ------------------------------
-
 
 # line 157: 7b4a5f594248424a0b47445d4e580b5f434e0b58445e454f0b444d0b454a4247580b585f5944454c47520b5b594e58584e4f0b4a4c4a4245585f0b5f434e0b48434a474049444a594f05
 Patricia loves the sound of nails strongly pressed against the chalkboard.	-XOR, Base 16, Key 43, CharLength 2, Score 11
 ------------------------------
 
-
 # line 158: Ptii oe h on fnissrnl rse gis h hlbadarcalvstesudo al togypesdaanttecakor.
 Patricia loves the sound of nails strongly pressed against the chalkboard.	-transpose Transformation, Key 37, Score 11
 ------------------------------
-
 
 # line 159: _ohtidrgsa s lir s dn npea cb.dk tgs os neeataivhuflrysaselraahn eltiootocP
 Patricia loves the sound of nails strongly pressed against the chalkboard._	-plow Transformation, Key 5, Score 11
 ------------------------------
 
-
 # line 160: P h sleshdaleo ydta.to fs   l_rvs tpatk_ieonrrghb_csuaoeaeo_i ninsi a_atdlgsncr_
 Patricia loves the sound of nails strongly pressed against the chalkboard.______	-transpose Transformation, Key 10, Score 11
 ------------------------------
-
 
 # line 161: 634e0b5b5e5f0b434e4a5f0b44450b5f434e0b5c445e454f0b5f440b584e4e0b5c434a5f0b5c445e474f0b4c59445c05
 He put heat on the wound to see what would grow.	-XOR, Base 16, Key 43, CharLength 2, Score 11
 ------------------------------
 
-
 # line 162: H u eto h on osewa ol rweptha ntewudt e htwudgo.
 He put heat on the wound to see what would grow.	-transpose Transformation, Key 24, Score 11
 ------------------------------
-
 
 # line 163: _ruae w aupen dshog_. ww neoh e  huo  dwoltetotttH
 He put heat on the wound to see what would grow.__	-plow Transformation, Key 5, Score 11
 ------------------------------
 
-
 # line 164: Heh wleaethd t oa p w tguoos rtnuewo  neowhtd u.
 He put heat on the wound to see what would grow.	-transpose Transformation, Key 6, Score 11
 ------------------------------
-
 
 # line 165: 65445f4342454c0b42580b4a580b484a5e5f42445e5847520b485e4f4f47520b4a580b4a0b5b4e5f0b5b4459485e5b42454e05
 Nothing is as cautiously cuddly as a pet porcupine.	-XOR, Base 16, Key 43, CharLength 2, Score 9
 ------------------------------
 
-
 # line 166: Ntigi scuiul udya  e ocpn.ohn sa atosycdl saptpruie
 Nothing is as cautiously cuddly as a pet porcupine._	-transpose Transformation, Key 26, Score 9
 ------------------------------
-
 
 # line 167: _ect l ocsihi iydsern__iopadlts togausu  pp_.u aycua nN
 Nothing is as cautiously cuddly as a pet porcupine.____	-plow Transformation, Key 5, Score 9
 ------------------------------
 
-
 # line 168: Niu a nostcspet iu o.haodar_isud c_n slpu_gclyep_ ay ti_
 Nothing is as cautiously cuddly as a pet porcupine._____	-transpose Transformation, Key 7, Score 9
 ------------------------------
-
 
 # line 169: 62450b5f434a5f0b4245585f4a455f070b4e5d4e59525f4342454c0b48434a454c4e4f05
 In that instant, everything changed.	-XOR, Base 16, Key 43, CharLength 2, Score 5
 ------------------------------
 
-
 # line 170: I htisat vrtigcagdnta ntn,eeyhn hne.
 In that instant, everything changed.	-transpose Transformation, Key 18, Score 5
 ------------------------------
-
 
 # line 171: _dhietnhtinvhce__g tea  ntt ygn_.anr,saI
 In that instant, everything changed.____	-plow Transformation, Key 5, Score 5
 ------------------------------
 
-
 # line 172: Ii ignnene svgdtte .harc_anyh_ttta_ ,hn_
 In that instant, everything changed.____	-transpose Transformation, Key 5, Score 5
 ------------------------------
-
 
 # line 173: 7b4e445b474e0b4c4e454e594a4747520b4a5b5b59445d4e0b444d0b4f444c580b4e4a5f42454c0b484a5f0b4d44444f0b495e5f0b45445f0b484a5f580b4e4a5f42454c0b4f444c0b4d44444f05
 People generally approve of dogs eating cat food but not cats eating dog food.	-XOR, Base 16, Key 43, CharLength 2, Score 14
 ------------------------------
 
-
 # line 174: Pol eeal prv fdg aigctfo u o asetn o odepegnrlyapoeo osetn a odbtntct aigdgfo.
 People generally approve of dogs eating cat food but not cats eating dog food.	-transpose Transformation, Key 39, Score 14
 ------------------------------
-
 
 # line 175: _odttobf ao plnlpelpedeg  naa f_. gec dtn  vaagoe r ofsiaot  ngdooistuoctgoryeeP
 People generally approve of dogs eating cat food but not cats eating dog food.__	-plow Transformation, Key 5, Score 14
 ------------------------------
 
-
 # line 176: Pe   c  t enaoeabcifoepfatuanoprp t ttgolardif s deloonon d. lvggooeo_gyes dtag_
 People generally approve of dogs eating cat food but not cats eating dog food.__	-transpose Transformation, Key 10, Score 14
 ------------------------------
-
 
 # line 177: 7f43594e4e0b4c4e454e594a5f424445580b5c425f430b5842530b4f4e484a4f4e580b444d0b47424d4e0b4e535b4e59424e45484e05
 Three generations with six decades of life experience.	-XOR, Base 16, Key 43, CharLength 2, Score 8
 ------------------------------
 
-
 # line 178: Tregnrtoswt i eae flf xeinehe eeain ihsxdcdso ieeprec.
 Three generations with six decades of life experience.	-transpose Transformation, Key 27, Score 8
 ------------------------------
-
 
 # line 179: _exi ciioeeeniwseslei.er  ed  terhgash dfeecnpfoaxtnr T
 Three generations with six decades of life experience._	-plow Transformation, Key 5, Score 8
 ------------------------------
 
-
 # line 180: Tnsiefihe xseerrw   neaidoecettefxe ihc p.go ale_ensdir_
 Three generations with six decades of life experience.__	-transpose Transformation, Key 7, Score 8
 ------------------------------
-
 
 # line 181: 78434e0b474e4a59454e4f0b5f434a5f0b5c4a5f4e590b49445f5f474e580b4a594e0b45440b4744454c4e590b415e585f0b5f440b4344474f0b47425a5e424f070b495e5f0b5f434e520c594e0b4a4758440b585f4a5f5e580b5852464944475805
 She learned that water bottles are no longer just to hold liquid, but they're also status symbols.	-XOR, Base 16, Key 43, CharLength 2, Score 16.6667
 ------------------------------
 
-
 # line 182: Selandta ae ote r olne utt odlqi,btte'eas ttssmosh ere htwtrbtlsaen ogrjs ohl iud u hyr losau ybl.
 She learned that water bottles are no longer just to hold liquid, but they're also status symbols.	-transpose Transformation, Key 49, Score 16.6667
 ------------------------------
-
 
 # line 183: _o tl' ,io  o sotael nhabeelrthldtyassb_.mu  eui  se rl wtreha  rtaoguodubheotyslsasrt qltjnn tetdeS
 She learned that water bottles are no longer just to hold liquid, but they're also status symbols.__	-plow Transformation, Key 5, Score 16.6667
 ------------------------------
 
-
 # line 184: Sn orntd,essshewteg   yo .edat etlb' s_  tlnroiursy_lteeo  qtetm_ehrs jhu  ab_aa  luoitato_rtbaosldhlul_
 She learned that water bottles are no longer just to hold liquid, but they're also status symbols.______	-transpose Transformation, Key 13, Score 16.6667
 ------------------------------
-
 
 # line 185: 7f434e0b5d42595e580b434a4f0b5b445c4e59580b4544454e0b444d0b5e580b40454e5c0b4e5342585f4e4f05
 The virus had powers none of us knew existed.	-XOR, Base 16, Key 43, CharLength 2, Score 9
 ------------------------------
 
-
 # line 186: Tevrshdpwr oeo ske xse.h iu a oesnn fu nweitd
 The virus had powers none of us knew existed._	-transpose Transformation, Key 23, Score 9
 ------------------------------
-
 
 # line 187: .ieuesp v s rn nxdeekfoeduehrawno  tsws  ohiT
 The virus had powers none of us knew existed.	-plow Transformation, Key 5, Score 9
 ------------------------------
 
-
 # line 188: Tsweksh e ntehroee asfwdvd   .i nue_rposx_uon i_
 The virus had powers none of us knew existed.___	-transpose Transformation, Key 6, Score 9
 ------------------------------
-
 
 # line 189: 7f434e0b4d4258430b4742585f4e454e4f0b42455f4e455f47520b5f440b5c434a5f0b5f434e0b4d59444c580b434a4f0b5f440b584a5205
 The fish listened intently to what the frogs had to say.	-XOR, Base 16, Key 43, CharLength 2, Score 11
 ------------------------------
 
-
 # line 190: Tefs itnditnl owa h rg a osyh ihlsee netyt httefoshdt a.
 The fish listened intently to what the frogs had to say.	-transpose Transformation, Key 28, Score 11
 ------------------------------
-
 
 # line 191: _yt f  lnnlf  eitot s a__sdgeatn thehssde hhoa _.ohrtwyteiiT
 The fish listened intently to what the frogs had to say.____	-plow Transformation, Key 5, Score 11
 ------------------------------
 
-
 # line 192: T dlar hl ytoteii  go sntts fttoh siee ehasnnw ayhethfd.
 The fish listened intently to what the frogs had to say.	-transpose Transformation, Key 7, Score 11
 ------------------------------
-
 
 # line 193: 65445f4342454c0b584e4e464e4f0b445e5f0b444d0b5b474a484e0b4e53484e5b5f0b5f434e0b5c4a584342454c0b464a484342454e0b42450b5f434e0b494a5905
 Nothing seemed out of place except the washing machine in the bar.	-XOR, Base 16, Key 43, CharLength 2, Score 12
 ------------------------------
 
-
 # line 194: Ntigsee u fpaeecp h ahn ahn ntebrohn emdoto lc xettewsigmciei h a.
 Nothing seemed out of place except the washing machine in the bar.	-transpose Transformation, Key 33, Score 12
 ------------------------------
-
 
 # line 195: _rh cnw xao eihsd let iaeta__b nmhep pte togmu eehs in _.eihgatccfoenN
 Nothing seemed out of place except the washing machine in the bar.____	-plow Transformation, Key 5, Score 12
 ------------------------------
 
-
 # line 196: Nsuapaanroetctsc .te e hht_hmo tiih_iefehnne_nd xege _g pc   b_ olewmia_
 Nothing seemed out of place except the washing machine in the bar.______	-transpose Transformation, Key 9, Score 12
 ------------------------------
-
 
 # line 197: 78434e0b4a4f5d42584e4f0b4342460b5f440b4844464e0b494a48400b4a5f0b4445484e05
 She advised him to come back at once.	-XOR, Base 16, Key 43, CharLength 2, Score 8
 ------------------------------
 
-
 # line 198: Seavsdhmt oebc toc.h die i ocm aka ne
 She advised him to come back at once._	-transpose Transformation, Key 19, Score 8
 ------------------------------
-
 
 # line 199: _cabcmea si   n__okeohiehv tmc .etao ddS
 She advised him to come back at once.___	-plow Transformation, Key 5, Score 8
 ------------------------------
 
-
 # line 200: Sstboheoaned cc  ckeaho .dima_vmet_i   _
 She advised him to come back at once.___	-transpose Transformation, Key 5, Score 8
 ------------------------------
-
 
