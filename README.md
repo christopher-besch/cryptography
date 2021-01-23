@@ -8,7 +8,7 @@ Both programs are designed to be executed from the command line.
 `encryption` encrypts the input using one of the supported algorithms
 To select the desired algorithm, the parameter `-a <algorithm name>` or `--algorithm <algorithm name>` shall be used.
 Each algorithms uses certain settings/keys.
-If one of setting is supplied as a console line parameter, only this value for this setting will be used.
+If a value for one of these settings is supplied as a console line parameter, only this value for this setting will be used.
 If the setting is not supplied, all possible values for this setting will be used in succession, returning multiple different ciphers.
 
 The input text can be supplied as the first parameter (otherwise the user has to input it later on).
@@ -36,23 +36,34 @@ These examples are from linux, windows users have to replace `./encryption` with
 
 This command returns the cipher `62 4f 46 46 45 0a 7d 45 58 46 4e 0b` using the xor encryption algorithm with the key 42. The encrypted characters are represented in base-16 (hex), separated with spaces and padded with 0s.
 
+```
+./encryption "Hello World!" -a xor -b 16 -0 -d
+```
+
+This command does the same as the one prior with the differense that all possible keys (0-255) are used in succession.
+
 ## Decryption
 
 `decryption` is able to decrypt certain ciphers automatically.
 The user gives the program as much information as she has and it tries its best to decrypt the entered cipher.
-The program usually a brute force method by default, creating all decryptions using all possible settings for the decryption algorithms.
+The program uses brute force by default, creating all decryptions using all possible settings and decryption algorithms.
 Each decrypted string gets a score based on its human comprehensibility.
 To determine the score of a given string, a dictionary of English and German words is being used.
 The user is able to add custom words into `user_dict.dic` in the `resource` folder.
+Thus anything that can't be found in the dictionaries, like links or telephone numbers, will receive bad scores.
+That's why this program won't be able to automatically decrypt these, manual decryption is neccessary in this case.
+The user can use the `-m 0` parameter and redirect the ouput into a file to achieve that.
+
+The input cipher can be supplied as the first parameter (otherwise the user has to input it later on).
 
 These parameters are supported with all algorithms:
 
+- `-a <algorithms...>` or `--algorithm <algorithms...>`: This can be set to `xor` or `transform` each for one of the following decryption algorithms.
+- `-m <amount>` or `--amount <amount>`: By default the program returns the best decryptions it can find.
+  With this parameter only a certain amount of decryptions will be generated.
+  (0 will print all found decryptions.)
 - `-f <input_file_path> <output_file_path>` or `--file <input_file_path> <output_file_path>`: When this flag is used, each line from `<input_file_path>` will be treated as an individual cipher and decrypted into `<output_file_path>`.
   Every line can use a different algorithm / settings.
-- `-a <amount>` or `--amount <amount>`: The program returns the best decryptions it can find.
-  This amount can be altered with this parameter.
-  (0 will print all found decryptions.)
-- `--algo <algorithms...>`: This can be set to `xor` or `transform` each for one of the following decryption algorithms.
 
 ### xor
 
@@ -83,12 +94,14 @@ The widths of the array that shall be tested can be specified with `-k <keys...>
 Each algorithm is characterized by a certain transformation used on the 2D array.
 Once that is done, the transformed 2D array gets read row by row.
 
-The used transformation can be specified with `-t` or `--transform`.
+The used transformation can be specified with `-t <transformations...>` or `--transform <transformations...>`.
 `plow` and `transpose` are supported.
 
-Fence decryption can be achieved by using transpose with half the length of the cipher as key plus, rounded up.
+Fence decryption can be achieved by using a transpose transformation with half the length of the cipher as key plus, rounded up.
 
 ### Example
+
+These examples are from linux, windows users have to replace `./decryption` with `decryption.exe`.
 
 ```
 ./decryption "HloWrdel ol"
@@ -101,11 +114,11 @@ In this case the user doesn't know anything about the used encryption process, t
 ```
 
 This cipher has been created using the fence encryption and has the length 11.
-Therefore the transform algorithms with the transpose transformation can be used with the key 6.
+Therefore the transform algorithm with the transpose transformation can be used with the key 6.
 
 # Download
 
-The latest build for both linux and windows can be downloaded [here](https://github.com/christopher-besch/cryptography/releases/latest)
+The latest build for both linux and windows can be downloaded [here](https://github.com/christopher-besch/cryptography/releases/latest).
 
 ## How to Build?
 
