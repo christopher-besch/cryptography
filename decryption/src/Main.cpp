@@ -17,8 +17,8 @@
 // should this algorithm be used?
 bool is_to_test_algo(const std::string &algo, const ConsoleArguments &console_arguments)
 {
-    const std::vector<const char *> algos = console_arguments["--algo"].get_arguments();
-    return !console_arguments["--algo"] || std::find(algos.begin(), algos.end(), algo) != algos.end();
+    const std::vector<const char *> algos = console_arguments["-a"].get_arguments();
+    return !console_arguments["-a"] || std::find(algos.begin(), algos.end(), algo) != algos.end();
 }
 
 // decrypt a single string with all supported algorithms and return reports for each decryption
@@ -130,20 +130,20 @@ int main(int argc, char *argv[])
     console_arguments.add_optional({"-b", "--base"}, 1, -1);
     console_arguments.add_optional({"-k", "--key"}, 1, -1);
     console_arguments.add_optional({"-t", "--transform"}, 1, -1);
-    console_arguments.add_optional({"--algo"}, 1, -1);
-    console_arguments.add_optional({"-a", "--amount"}, 1, 1);
+    console_arguments.add_optional({"-a", "--algorithm"}, 1, -1);
+    console_arguments.add_optional({"-m", "--amount"}, 1, 1);
     console_arguments.add_optional({"-f", "--file"}, 2, 2);
     console_arguments.load_arguments(argc, argv);
 
-    // algos valid?
-    for (const std::string &algo : console_arguments["--algo"].get_arguments())
+    // algorithms valid?
+    for (const std::string &algo : console_arguments["-a"].get_arguments())
         if (algo != "xor" && algo != "transform")
             raise_error("Invalid algorithm '" << algo << "'!");
 
     // amount of requested decryptions
     int decryptions_amount = -1;
-    if (console_arguments["-a"])
-        decryptions_amount = checked_stoi(console_arguments["-a"].get_arguments()[0]);
+    if (console_arguments["-m"])
+        decryptions_amount = checked_stoi(console_arguments["-m"].get_arguments()[0]);
 
     // load dictionary
     std::cerr << "loading database" << std::endl;
