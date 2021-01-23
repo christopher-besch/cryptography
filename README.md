@@ -105,7 +105,7 @@ Therefore the transform algorithms with the transpose transformation can be used
 
 # Download
 
-[Download](releases/latest)
+The latest build for both linux and windows can be downloaded [here](https://github.com/christopher-besch/cryptography/releases/latest)
 
 ## How to Build?
 
@@ -115,13 +115,21 @@ Once the files for the compiler of your liking have been created, you can use th
 
 # Implementation Details
 
-## [Utils](utils)
+This repository consists of four projects], [encryption](encryption), [decryption](decryption), [utils](utils) and [test](test).
+
+## utils
 
 This is a statically linked library containing:
 
 - an abstraction layer for console arguments,
-- an implementation of the [Trie](https://en.wikipedia.org/wiki/Trie) data structure and
+- an implementation of the [Trie](https://en.wikipedia.org/wiki/Trie) data structure
+- string transformation functionality used for both encrypting and decrypting transformation ciphers and
 - generally useful preprocessor macros and functions.
+
+## test
+
+This repository is under constant development.
+New algorithms get tested in this project.
 
 # Resources
 
