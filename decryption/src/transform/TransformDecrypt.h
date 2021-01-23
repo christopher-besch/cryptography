@@ -61,13 +61,13 @@ public:
     void add_requested_key(int key)
     {
         if (key < 1 || key > m_cipher.size())
-            raise_error("The provided key " << key << " is invalid!");
+            raise_error("The provided key '" << key << "' is invalid!");
         m_requested_keys.push_back(key);
     }
     void add_requested_transformation_types(std::string transformation_type)
     {
-        if (transformation_type != "plow" || transformation_type != "transpose")
-            raise_error("The provided transformation type " << transformation_type << " is invalid!");
+        if (transformation_type != "plow" && transformation_type != "transpose")
+            raise_error("The provided transformation type '" << transformation_type << "' is invalid!");
         m_requested_transformation_type.push_back(transformation_type);
     }
 

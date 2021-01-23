@@ -100,19 +100,19 @@ public:
     void add_requested_char_length(int char_length)
     {
         if (m_cipher_chars_only.size() % char_length)
-            raise_error("The provided char length " << char_length << " is invalid with the cipher " << m_cipher_chars_only << "!");
+            raise_error("The provided char length '" << char_length << "' is invalid with the cipher " << m_cipher_chars_only << "!");
         m_requested_char_lengths.push_back(char_length);
     }
     void add_requested_key(int key)
     {
         if (key < 0 || key > 255)
-            raise_error("The provided key " << key << " is invalid!");
+            raise_error("The provided key '" << key << "' is invalid!");
         m_requested_keys.push_back(key);
     }
     void add_requested_base(int base)
     {
         if (base < 2 || base > 36)
-            raise_error("The provided base " << base << " is invalid!");
+            raise_error("The provided base '" << base << "' is invalid!");
         m_requested_bases.push_back(base);
     }
 

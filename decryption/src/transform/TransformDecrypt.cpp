@@ -70,8 +70,14 @@ void TransformDecryptor::create_decryptions(int amount)
 
     // more and more settings get stored in copies of this object
     TransformDecrypted template_decrypt;
-    template_decrypt.transformation_type = "plow";
-    test_decryptions(plow_transform, template_decrypt, true);
-    template_decrypt.transformation_type = "transpose";
-    test_decryptions(transpose_transform, template_decrypt, false);
+    if (is_to_test_transformation_type("plow"))
+    {
+        template_decrypt.transformation_type = "plow";
+        test_decryptions(plow_transform, template_decrypt, true);
+    }
+    if (is_to_test_transformation_type("transpose"))
+    {
+        template_decrypt.transformation_type = "transpose";
+        test_decryptions(transpose_transform, template_decrypt, false);
+    }
 }
