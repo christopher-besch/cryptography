@@ -38,19 +38,21 @@ This command returns the cipher `62 4f 46 46 45 0a 7d 45 58 46 4e 0b` using the 
 
 ## Decryption
 
-This is a console application able to decrypt certain ciphers automatically.
+`decryption` is able to decrypt certain ciphers automatically.
 The user gives the program as much information as she has and it tries its best to decrypt the entered cipher.
 The program usually a brute force method by default, creating all decryptions using all possible settings for the decryption algorithms.
 Each decrypted string gets a score based on its human comprehensibility.
 To determine the score of a given string, a dictionary of English and German words is being used.
 The user is able to add custom words into `user_dict.dic` in the `resource` folder.
 
-Each supported algorithm works in a slightly different way.
+These parameters are supported with all algorithms:
 
-- `-f <input_file_path> <output_file_path>` or `--file <input_file_path> <output_file_path>`: When this flag is used, the output will also be stored in a file at `<file_path>` or "output.txt" if omitted.
-- `-a <amount>` or `--amount <amount>`: The program returns the five best decryptions it can find.
+- `-f <input_file_path> <output_file_path>` or `--file <input_file_path> <output_file_path>`: When this flag is used, each line from `<input_file_path>` will be treated as an individual cipher and decrypted into `<output_file_path>`.
+  Every line can use a different algorithm / settings.
+- `-a <amount>` or `--amount <amount>`: The program returns the best decryptions it can find.
   This amount can be altered with this parameter.
   (0 will print all found decryptions.)
+- `--algo <algorithms...>`: This can be set to `xor` or `transform` each for one of the following decryption algorithms.
 
 ### xor
 
@@ -72,24 +74,44 @@ These are the supported parameters:
 - `-b <bases...>` or `--base <bases...>`: If this parameter is used, only these bases will be tested.
 - `-k <keys...>` or `--key <keys...>`: Only these keys will be tested if supplied.
 
-- `-d <delimiters...>`
-  console_arguments.add_optional({"-l", "--len"}, 1, -1);
-  console_arguments.add_optional({"-b", "--base"}, 1, -1);
-  console_arguments.add_optional({"-k", "--key"}, 1, -1);
-  console_arguments.add_optional({"-t", "--transform"}, 1, -1);
-  console_arguments.add_optional({"--algo"}, 1, -1);
-  console_arguments.add_optional({"-a", "--amount"}, 1, 1);
-  console_arguments.add_optional({"-f", "--file"}, 2, 2);
+### transformation
 
-- plow
-- transpose
-- fence (using transpose with half the length of the cipher as key plus, rounded up)
+This implements multiple decryption algorithms (plow, transpose and fence).
+
+The cipher gets read into a 2D array row by row.
+The widths of the array that shall be tested can be specified with `-k <keys...>` or `--key <keys...>`.
+Each algorithm is characterized by a certain transformation used on the 2D array.
+Once that is done, the transformed 2D array gets read row by row.
+
+The used transformation can be specified with `-t` or `--transform`.
+`plow` and `transpose` are supported.
+
+Fence decryption can be achieved by using transpose with half the length of the cipher as key plus, rounded up.
 
 ### Example
 
 ```
+./decryption "HloWrdel ol"
+```
+
+In this case the user doesn't know anything about the used encryption process, thus no parameters are supplied.
+
+```
 ./decryption "HloWrdel ol" --algo transform -t transpose -k 6
 ```
+
+This cipher has been created using the fence encryption and has the length 11.
+Therefore the transform algorithms with the transpose transformation can be used with the key 6.
+
+# Download
+
+## How to Build?
+
+This repository uses [premake5](https://github.com/premake/premake-core/wiki) as its build system.
+Therefore premake5 can be used to create e.g. Makefiles, Visual Studio .sln and .vcxproj files, etc...
+Once the files for the compiler of your liking have been created, you can use that compiler to build the projects.
+
+# Implementation Details
 
 ## [Utils](utils)
 
@@ -98,28 +120,6 @@ This is a statically linked library containing:
 - an abstraction layer for console arguments,
 - an implementation of the [Trie](https://en.wikipedia.org/wiki/Trie) data structure and
 - generally useful preprocessor macros and functions.
-
-### Command Line Parameters
-
-The first parameter should be the cipher to be decrypted.
-If the user has more information about the encryption used, she can use the following parameters:
-
-- `-d <delimiters...>` or `--delim <delimiters...>`: Only these supplied delimiters will be used to split the encrypted numbers.
-  The program won't attempt to separate the cipher with the length of the encrypted numbers, unless explicitly requested.
-- `-l <lengths...>` or `--len <lengths...>`: Only these encrypted numbers lengths will be used.
-  Analogue to the delimiters, all delimiters are getting ignored if not explicitly requested.
-- `-b <bases...>` or `--base <bases...>`: If this parameter is used, only these bases will be tested.
-- `-k <keys...>` or `--key <keys...>`: Only the these keys will be tested if supplied.
-- `-f <file_path>` or `--file <file_path>`: When this flag is used, the output will also be stored in a file at `<file_path>` or "output.txt" if omitted.
-- `-a <amount>` or `--amount <amount>`: The program returns the five best decryptions it can find.
-  This amount can be altered with this parameter.
-  (0 will print all found decryptions.)
-
-# How to Build?
-
-This repository uses [premake5](https://github.com/premake/premake-core/wiki) as its build system.
-Therefore premake5 can be used to create e.g. Makefiles, Visual Studio .sln and .vcxproj files, etc...
-Once the files for the compiler of your liking have been created, you can use that compiler to build the projects.
 
 # Resources
 
