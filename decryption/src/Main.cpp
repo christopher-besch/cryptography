@@ -148,10 +148,10 @@ int main(int argc, char *argv[])
     // load dictionary
     std::cerr << "loading database" << std::endl;
     LibrarySearch dictionary;
-    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "english.dic");
-    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "german1.dic");
-    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "german2.dic");
-    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "user_dict.dic");
+    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "decryption" + file_slash + "resources" + file_slash + "english.dic");
+    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "decryption" + file_slash + "resources" + file_slash + "german1.dic");
+    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "decryption" + file_slash + "resources" + file_slash + "german2.dic");
+    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "decryption" + file_slash + "resources" + file_slash + "user_dict.dic");
 
     std::cerr << "starting decryption" << std::endl;
     // read each line from file as one cipher
@@ -172,9 +172,7 @@ int main(int argc, char *argv[])
             // create and store decryptions
             out_file << "# line " << line << ": " << cipher << std::endl;
             std::string decryption_result = do_decryptions(cipher, dictionary, console_arguments, decryptions_amount);
-            out_file << decryption_result << std::endl;
-
-            out_file << std::endl;
+            out_file << decryption_result;
             std::cerr << "line " << line << " decrypted" << std::endl;
         }
     }
@@ -196,10 +194,10 @@ int main(int argc, char *argv[])
 
         // decrypt cipher and print results
         std::string decryption_result = do_decryptions(input, dictionary, console_arguments, decryptions_amount);
+        std::cout << "------------------------------" << std::endl;
         std::cout << decryption_result << std::endl;
     }
 
     return 0;
 }
 // todo: add help page
-// todo: database could be extended to include more technical words like https

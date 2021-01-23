@@ -40,7 +40,7 @@ This command returns the cipher `62 4f 46 46 45 0a 7d 45 58 46 4e 0b` using the 
 ./encryption "Hello World!" -a xor -b 16 -0 -d
 ```
 
-This command does the same as the one prior with the differense that all possible keys (0-255) are used in succession.
+This command does the same as the one prior with the difference that all possible keys (0-255) are used in succession.
 
 ## Decryption
 
@@ -51,8 +51,8 @@ Each decrypted string gets a score based on its human comprehensibility.
 To determine the score of a given string, a dictionary of English and German words is being used.
 The user is able to add custom words into `user_dict.dic` in the `resource` folder.
 Thus anything that can't be found in the dictionaries, like links or telephone numbers, will receive bad scores.
-That's why this program won't be able to automatically decrypt these, manual decryption is neccessary in this case.
-The user can use the `-m 0` parameter and redirect the ouput into a file to achieve that.
+That's why this program won't be able to automatically decrypt these, manual decryption is necessary in this case.
+The user can use the `-m 0` parameter and redirect the output into a file to achieve that.
 
 The input cipher can be supplied as the first parameter (otherwise the user has to input it later on).
 
@@ -110,7 +110,7 @@ These examples are from linux, windows users have to replace `./decryption` with
 In this case the user doesn't know anything about the used encryption process, thus no parameters are supplied.
 
 ```
-./decryption "HloWrdel ol" --algo transform -t transpose -k 6
+./decryption "HloWrdel ol" -a transform -t transpose -k 6
 ```
 
 This cipher has been created using the fence encryption and has the length 11.

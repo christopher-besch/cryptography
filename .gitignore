@@ -36,3 +36,4 @@ bin/*
 bin-int/*
 
 MakeFile
+.vscode/*
