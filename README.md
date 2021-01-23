@@ -146,6 +146,6 @@ New algorithms get tested in this project.
 
 # Resources
 
-- (english.txt)[https://github.com/LordHypersonic/C-Spell-Checker]
-- (german1.txt)[https://sourceforge.net/projects/germandict/]
-- (german2.txt)[https://sourceforge.net/p/germandict/code/HEAD/tree/variants.dic]
+- [english.txt](https://github.com/LordHypersonic/C-Spell-Checker)
+- [german1.txt](https://sourceforge.net/projects/germandict/)
+- [german2.txt](https://sourceforge.net/p/germandict/code/HEAD/tree/variants.dic)
