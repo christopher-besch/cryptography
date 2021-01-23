@@ -21,7 +21,7 @@ The input text can be supplied as the first parameter (otherwise the user has to
   - `-d <delimiter>` or `--delim <delimiter>`: if not supplied, the encrypted numbers won't be separated, if the `<delimiter>` is omitted, a space will be used
   - `-o`: when set, each encrypted numbers will have the length (0s will be used as a padding)
 - `plow`:
-  `-k <key>`: sets the width of the array, the input gets read into
+  - `-k <key>`: sets the width of the array, the input gets read into
 - `transpose`:
   - `-k <key>`: sets the width of the array, the input gets read into
 - `fence`
