@@ -105,6 +105,8 @@ Therefore the transform algorithms with the transpose transformation can be used
 
 # Download
 
+[Download](releases/latest)
+
 ## How to Build?
 
 This repository uses [premake5](https://github.com/premake/premake-core/wiki) as its build system.
