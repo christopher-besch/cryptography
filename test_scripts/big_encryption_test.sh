@@ -5,33 +5,30 @@ IFS=$'\n\t'
 full_path=$(realpath $0)
 dir_path=$(dirname $full_path)
 
-exec_path="$dir_path/../../bin/Dist-linux-x86_64/encryption/encryption"
-
 # loop through file, encrypt each line
 idx=0
 while IFS= read -r line; do
     # skip empty lines
     if [[ "$line" != "" && "$line" != "#"* ]]; then
         # encrypt
-        command="$exec_path \"$line\" -a xor -k 0 -b 2 -0"
         IFS=$' \n\t'
         # encrypt, put into string, echo and pipe over, use tail to get last line only, reverse output, cut at tabs, take first element, reverse again
-        output=$(/mnt/d/Files/cpp/cryptography/encryption/tests/../../bin/Dist-linux-x86_64/encryption/encryption "$line" -a xor -k 43 -b 16 -0)
+        output=$("${dir_path}/../bin/Dist-linux-x86_64/encryption/encryption" "$line" -a xor -k 43 -b 16 -0)
         encryptions[idx]=$(echo "$output" | tail -1 | rev | cut -d$'\t' -f1 | rev)
         idx=$(($idx+1))
         printf "encrypted $idx\n"
 
-        output=$(/mnt/d/Files/cpp/cryptography/encryption/tests/../../bin/Dist-linux-x86_64/encryption/encryption "$line" -a fence)
+        output=$("${dir_path}/../bin/Dist-linux-x86_64/encryption/encryption" "$line" -a fence)
         encryptions[idx]=$(echo "$output" | tail -1 | rev | cut -d$'\t' -f1 | rev)
         idx=$(($idx+1))
         printf "encrypted $idx\n"
 
-        output=$(/mnt/d/Files/cpp/cryptography/encryption/tests/../../bin/Dist-linux-x86_64/encryption/encryption "$line" -a plow -k 5)
+        output=$("${dir_path}/../bin/Dist-linux-x86_64/encryption/encryption" "$line" -a plow -k 5)
         encryptions[idx]=$(echo "$output" | tail -1 | rev | cut -d$'\t' -f1 | rev)
         idx=$(($idx+1))
         printf "encrypted $idx\n"
 
-        output=$(/mnt/d/Files/cpp/cryptography/encryption/tests/../../bin/Dist-linux-x86_64/encryption/encryption "$line" -a transpose -k 8)
+        output=$("${dir_path}/../bin/Dist-linux-x86_64/encryption/encryption" "$line" -a transpose -k 8)
         encryptions[idx]=$(echo "$output" | tail -1 | rev | cut -d$'\t' -f1 | rev)
         idx=$(($idx+1))
         printf "encrypted $idx\n"

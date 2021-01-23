@@ -148,19 +148,34 @@ int main(int argc, char *argv[])
     // load dictionary
     std::cerr << "loading database" << std::endl;
     LibrarySearch dictionary;
-    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "decryption" + file_slash + "resources" + file_slash + "english.dic");
-    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "decryption" + file_slash + "resources" + file_slash + "german1.dic");
-    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "decryption" + file_slash + "resources" + file_slash + "german2.dic");
-    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "decryption" + file_slash + "resources" + file_slash + "user_dict.dic");
+    // from cwd decryption/resources/*
+#ifdef IDE
+    dictionary.load_file(std::string("decryption") + file_slash + "resources" + file_slash + "english.dic");
+    dictionary.load_file(std::string("decryption") + file_slash + "resources" + file_slash + "german1.dic");
+    dictionary.load_file(std::string("decryption") + file_slash + "resources" + file_slash + "german2.dic");
+    dictionary.load_file(std::string("decryption") + file_slash + "resources" + file_slash + "user_dict.dic");
+    // from executable directory/resources/*
+#else
+    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "english.dic");
+    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "german1.dic");
+    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "german2.dic");
+    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "user_dict.dic");
+#endif
 
     std::cerr << "starting decryption" << std::endl;
     // read each line from file as one cipher
     if (console_arguments["-f"])
     {
-        std::ifstream in_file(console_arguments["-f"].get_arguments()[0]);
-        std::ofstream out_file(console_arguments["-f"].get_arguments()[1]);
+        std::fstream in_file(console_arguments["-f"].get_arguments()[0], std::ios::in);
+        std::fstream out_file(console_arguments["-f"].get_arguments()[1], std::ios::out);
+
+        if (!in_file)
+            raise_error("Can't open file '" << console_arguments["-f"].get_arguments()[0] << "'!");
+        if (!out_file)
+            raise_error("Can't open file '" << console_arguments["-f"].get_arguments()[1] << "'!");
 
         int line = 1;
+        bool empty = true;
         for (std::string cipher; std::getline(in_file, cipher); ++line)
         {
             // perform checks
@@ -174,7 +189,12 @@ int main(int argc, char *argv[])
             std::string decryption_result = do_decryptions(cipher, dictionary, console_arguments, decryptions_amount);
             out_file << decryption_result;
             std::cerr << "line " << line << " decrypted" << std::endl;
+            empty = false;
         }
+        in_file.close();
+        out_file.close();
+        if (empty)
+            raise_error("'" << console_arguments["-f"].get_arguments()[0] << "' is empty!");
     }
     // only one input cipher from the console
     else

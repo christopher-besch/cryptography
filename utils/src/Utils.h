@@ -14,13 +14,8 @@
 #define file_slash '\\'
 #endif
 
-// load files from cwd or from execution location
-#ifdef IDE
-inline std::string get_virtual_cwd(std::string execution_path)
-{
-    return "";
-}
-#else
+// load files from execution location
+
 inline std::string get_virtual_cwd(std::string execution_path)
 {
     // cut at last slash
@@ -33,7 +28,6 @@ inline std::string get_virtual_cwd(std::string execution_path)
         }
     return virtual_cwd;
 }
-#endif
 
 #ifdef DEBUG
 #define raise_error(msg)                                                                                                  \
