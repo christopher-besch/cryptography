@@ -5,7 +5,7 @@ Both programs are designed to be executed from the command line.
 
 ## Encryption
 
-`encryption` encrypts the input using one of the supported algorithms
+`encryption` encrypts the input using one of the supported algorithms.
 To select the desired algorithm, the parameter `-a <algorithm name>` or `--algorithm <algorithm name>` shall be used.
 Each algorithms uses certain settings/keys.
 If a value for one of these settings is supplied as a console line parameter, only this value for this setting will be used.
