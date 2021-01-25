@@ -7,12 +7,10 @@
 #include "transform/TransformDecrypt.h"
 #include "goodness/LibrarySearch.h"
 
-// only holding up to <MAX_BEST_DECRYPTIONS> decryptions before removing the worst decryption
+// only holding up to <MAX_BEST_DECRYPTIONS> decryptions before overwriting the worst decryption
 #define MAX_BEST_DECRYPTIONS 20
-// when the score of a certain decryption is at least (1-<MAX_ALLOWED_DEVIATION>) times score of best decryption, it gets printed as well with decryptions_amount < 0
+// when the score of a certain decryption is at least ((1 - <MAX_ALLOWED_DEVIATION>) * <score of best decryption>), it gets printed as well with decryptions_amount < 0
 #define MAX_ALLOWED_DEVIATION 0.05f
-
-#define DECRYPTION_RESERVER_AMOUNT 50
 
 // should this algorithm be used?
 bool is_to_test_algo(const std::string &algo, const ConsoleArguments &console_arguments)
@@ -22,15 +20,22 @@ bool is_to_test_algo(const std::string &algo, const ConsoleArguments &console_ar
 }
 
 // decrypt a single string with all supported algorithms and return reports for each decryption
-std::string do_decryptions(const std::string &str, const LibrarySearch &dictionary, const ConsoleArguments &console_arguments, int decryptions_amount)
+std::string do_decryptions(const std::string &str, const LibrarySearch &dictionary, const ConsoleArguments &console_arguments)
 {
-    // when decryptions_amount is negative, return best results only
-    int hold_amount = decryptions_amount;
-    if (decryptions_amount < 0)
+    // amount of requested decryptions
+    int hold_amount = -1;
+    if (console_arguments["-m"])
+        hold_amount = checked_stoi(console_arguments["-m"].get_arguments()[0]);
+    bool print_best_only = false;
+    if (hold_amount < 0)
+    {
         hold_amount = MAX_BEST_DECRYPTIONS;
+        print_best_only = true;
+    }
 
     std::string result;
-    result.reserve(DECRYPTION_RESERVER_AMOUNT);
+    // reserve memory (only approximation)
+    result.reserve(str.size());
     std::vector<const Decrypted *> decryptions;
 
     XORDecryptor xor_decryptor(str, dictionary);
@@ -58,6 +63,7 @@ std::string do_decryptions(const std::string &str, const LibrarySearch &dictiona
     }
     if (is_to_test_algo("transform", console_arguments))
     {
+        // load requests
         for (const char *key : console_arguments["-k"].get_arguments())
             transform_decryptor.add_requested_key(checked_stoi(key));
         for (const char *key : console_arguments["-t"].get_arguments())
@@ -75,7 +81,7 @@ std::string do_decryptions(const std::string &str, const LibrarySearch &dictiona
     if (decryptions.empty())
         raise_error("Failed to create any decryptions for '" << str << "'!");
 
-    if (decryptions_amount < 0)
+    if (print_best_only)
     {
         // best results come first
         std::sort(decryptions.begin(), decryptions.end(), [](const Decrypted *a, const Decrypted *b) { return *a > *b; });
@@ -97,17 +103,18 @@ std::string do_decryptions(const std::string &str, const LibrarySearch &dictiona
             result.push_back('\n');
         }
     }
+    // print certain amount of decrypts
     else
     {
         // best results come last
         std::sort(decryptions.begin(), decryptions.end(), [](const Decrypted *a, const Decrypted *b) { return *a < *b; });
 
-        int start_idx = decryptions.size() - decryptions_amount;
+        int start_idx = decryptions.size() - hold_amount;
         // when start idx is negative <- decryptions_amount is too big
-        if (!decryptions_amount || start_idx < 0)
+        if (!hold_amount || start_idx < 0)
             start_idx = 0;
 
-        // only print as many as requested
+        // only print as many as requested -> print until last one
         for (int idx = start_idx; idx < decryptions.size(); ++idx)
         {
             result.append(decryptions[idx]->report);
@@ -123,7 +130,6 @@ std::string do_decryptions(const std::string &str, const LibrarySearch &dictiona
 
 int main(int argc, char *argv[])
 {
-    // todo: read config from json
     ConsoleArguments console_arguments;
     console_arguments.add_optional({"-d", "--delim"}, 1, -1);
     console_arguments.add_optional({"-l", "--len"}, 1, -1);
@@ -140,21 +146,16 @@ int main(int argc, char *argv[])
         if (algo != "xor" && algo != "transform")
             raise_error("Invalid algorithm '" << algo << "'!");
 
-    // amount of requested decryptions
-    int decryptions_amount = -1;
-    if (console_arguments["-m"])
-        decryptions_amount = checked_stoi(console_arguments["-m"].get_arguments()[0]);
-
     // load dictionary
-    std::cerr << "loading database" << std::endl;
+    std::cerr << "loading dictionaries" << std::endl;
     LibrarySearch dictionary;
-    // from cwd decryption/resources/*
+    // from <cwd decryption>/resources/*
 #ifdef IDE
     dictionary.load_file(std::string("decryption") + file_slash + "resources" + file_slash + "english.dic");
     dictionary.load_file(std::string("decryption") + file_slash + "resources" + file_slash + "german1.dic");
     dictionary.load_file(std::string("decryption") + file_slash + "resources" + file_slash + "german2.dic");
     dictionary.load_file(std::string("decryption") + file_slash + "resources" + file_slash + "user_dict.dic");
-    // from executable directory/resources/*
+    // from <executable directory>/resources/*
 #else
     dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "english.dic");
     dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "german1.dic");
@@ -186,7 +187,7 @@ int main(int argc, char *argv[])
                     raise_error("Unsupported character '" << character << "' found in line " << line << "!");
             // create and store decryptions
             out_file << "# line " << line << ": " << cipher << std::endl;
-            std::string decryption_result = do_decryptions(cipher, dictionary, console_arguments, decryptions_amount);
+            std::string decryption_result = do_decryptions(cipher, dictionary, console_arguments);
             out_file << decryption_result << std::endl;
             std::cerr << "line " << line << " decrypted" << std::endl;
             empty = false;
@@ -213,7 +214,7 @@ int main(int argc, char *argv[])
                 raise_error("Unsupported character '" << character << "' found!");
 
         // decrypt cipher and print results
-        std::string decryption_result = do_decryptions(input, dictionary, console_arguments, decryptions_amount);
+        std::string decryption_result = do_decryptions(input, dictionary, console_arguments);
         std::cout << "------------------------------" << std::endl;
         std::cout << decryption_result << std::endl;
     }
