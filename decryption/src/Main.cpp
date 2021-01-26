@@ -156,6 +156,7 @@ int main(int argc, char *argv[])
     dictionary.load_file(std::string("decryption") + file_slash + "resources" + file_slash + "german2.dic");
     dictionary.load_file(std::string("decryption") + file_slash + "resources" + file_slash + "user_dict.dic");
     // from <executable directory>/resources/*
+    // todo: doesn't work when accessed thorugh PATH
 #else
     dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "english.dic");
     dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "german1.dic");

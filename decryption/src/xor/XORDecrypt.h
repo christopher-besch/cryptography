@@ -32,7 +32,7 @@ struct XORDecrypted : public Decrypted
     }
 };
 
-// for one cipher and all valid decryption options
+// for one xor cipher and all valid decryption options
 class XORDecryptor : public Decryptor
 {
 private:
@@ -53,11 +53,17 @@ private:
     int m_smallest_base;
 
 private:
+    // convert encrypted char-digit in base <check_base> to int
     int character_to_int(char character, int check_base = 36, bool error = true);
+    // find possible delimiters and smallest possible base
     void preprocess();
+    // cut cipher into individual encrypted numbers by their length
     std::vector<std::string> cut_cipher_with_char_length(int char_length);
+    // cut cipher into individual encrypted numbers by delimiter
     std::vector<std::string> cut_cipher_with_delimiter(char delimiter);
+    // convert encrypted number in base <base> to int
     long long decrypt_number(std::string digit_str, int base, int key);
+    // decrypt encrypted numbers with settings found in the template decrypt, add decryption to new copy of that decrypt and store it
     void decrypt(std::vector<std::string> &encrypted_numbers, XORDecrypted &template_decrypt);
     void test_decryptions(std::vector<std::string> &encrypted_numbers, XORDecrypted &template_decrypt);
 

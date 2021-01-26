@@ -8,7 +8,6 @@
 
 #include <Utils.h>
 
-// convert encrypted char-digit in base <check_base> to int
 int XORDecryptor::character_to_int(char character, int check_base, bool error)
 {
     int digit = check_base;
@@ -25,12 +24,11 @@ int XORDecryptor::character_to_int(char character, int check_base, bool error)
         if (!error)
             return -1;
         else
-            raise_error("'" << character << "' not supported with base " << std::to_string(static_cast<int>(check_base)));
+            raise_error("'" << character << "' not supported with base '" << check_base << "'!");
     }
     return digit;
 }
 
-// find possible delimiters and smallest possible base
 void XORDecryptor::preprocess()
 {
     m_smallest_base = 0;
@@ -45,20 +43,19 @@ void XORDecryptor::preprocess()
         else if (decrypted_character + 1 > m_smallest_base)
             m_smallest_base = decrypted_character + 1;
     }
-    // remove everything but the char-digits itself
+    // remove everything but the encrypted characters itself
     remove_chars(m_cipher_chars_only, m_possible_delimiters);
 }
 
-// cut cipher into individual encrypted numbers by their length
 std::vector<std::string> XORDecryptor::cut_cipher_with_char_length(int char_length)
 {
     std::vector<std::string> encrypted_numbers;
+    encrypted_numbers.reserve(m_cipher_chars_only.size() / char_length);
     for (int idx = 0; idx < m_cipher_chars_only.size(); idx += char_length)
         encrypted_numbers.push_back(m_cipher_chars_only.substr(idx, char_length));
     return encrypted_numbers;
 }
 
-// cut cipher into individual encrypted numbers by delimiter
 std::vector<std::string> XORDecryptor::cut_cipher_with_delimiter(char delimiter)
 {
     std::vector<std::string> encrypted_numbers;
@@ -68,7 +65,7 @@ std::vector<std::string> XORDecryptor::cut_cipher_with_delimiter(char delimiter)
     {
         // remove everything but the characters itself
         remove_chars(buffer, m_possible_delimiters);
-        // doupled delimiters aren't a problem
+        // doubled delimiters aren't a problem
         if (!buffer.empty())
         {
             encrypted_numbers.push_back(buffer);
@@ -80,7 +77,6 @@ std::vector<std::string> XORDecryptor::cut_cipher_with_delimiter(char delimiter)
     return encrypted_numbers;
 }
 
-// convert encrypted number in base <base> to int
 long long XORDecryptor::decrypt_number(std::string encrypted_number, int base, int key)
 {
     long long result_char_code = 0;
@@ -91,7 +87,6 @@ long long XORDecryptor::decrypt_number(std::string encrypted_number, int base, i
     return result_char_code ^ key;
 }
 
-// decrypt encrypted numbers with settings found int the template decrypt, add it to copy of that decrypt and store in this
 void XORDecryptor::decrypt(std::vector<std::string> &encrypted_numbers, XORDecrypted &template_decrypt)
 {
     bool possible = true;
@@ -106,7 +101,7 @@ void XORDecryptor::decrypt(std::vector<std::string> &encrypted_numbers, XORDecry
             possible = false;
             break;
         }
-        decrypted_str.push_back(static_cast<char>(decrypted_number));
+        decrypted_str.push_back(decrypted_number);
     }
     if (possible)
     {

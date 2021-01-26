@@ -8,8 +8,9 @@
 struct Decrypted
 {
     std::string decrypted_str;
-    // used to compare different decryption options
+    // used to compare different decryptions
     float score;
+    // representing this decryption in console or file output
     std::string report;
 
     Decrypted() {}
