@@ -35,7 +35,6 @@ ElementParams transpose_transform(ElementParams orig_array_params)
     return {transposed_x, transposed_y, transposed_row_count, transposed_column_count};
 }
 
-// go thorugh all keys for a specific transformation callback
 void TransformDecryptor::test_decryptions(transformation_func transformation, TransformDecrypted &template_decrypt, bool row_count_known)
 {
     for (int test_key = 1; test_key < m_cipher.size() + 1; test_key++)

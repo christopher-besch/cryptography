@@ -1,6 +1,5 @@
 #include "XOREncrypt.h"
 
-// use xor on single number and encode to base <base>
 std::string xor_encrypt_number(int number, int base, int key, int min_length)
 {
 #ifdef DEBUG
@@ -13,8 +12,9 @@ std::string xor_encrypt_number(int number, int base, int key, int min_length)
     int char_code = number ^ key;
 
     std::string result_digits;
+    result_digits.reserve(min_length);
     // going through every digit
-    // add more 0 if initial char_code is too small for min_length
+    // add more zeros if initial char_code is too small for min_length
     for (int idx = min_length - 1; idx >= 0 || char_code; idx--)
     {
         char this_digit = digit_chars[char_code % base];
@@ -26,7 +26,6 @@ std::string xor_encrypt_number(int number, int base, int key, int min_length)
     return result_digits;
 }
 
-// encrypt text with xor to string of numbers in base <base> with delimiter if requested
 XOREncrypted xor_encrypt(std::string str, int base, int key, char delimiter, bool add_0)
 {
     // add 0 if requested

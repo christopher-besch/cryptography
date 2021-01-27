@@ -122,7 +122,6 @@ void XORDecryptor::decrypt(std::vector<std::string> &encrypted_numbers, XORDecry
     }
 }
 
-// decrypt encrypted numbers, trying every base and key possible
 void XORDecryptor::test_decryptions(std::vector<std::string> &encrypted_numbers, XORDecrypted &template_decrypt)
 {
     // test possible bases
@@ -133,7 +132,6 @@ void XORDecryptor::test_decryptions(std::vector<std::string> &encrypted_numbers,
         if (is_to_test_base(test_base))
         {
             template_decrypt.base = test_base;
-            // todo: test more keys
             // test possible keys
             for (int test_key = 0; test_key < 256; test_key++)
                 if (is_to_test_key(test_key))

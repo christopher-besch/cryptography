@@ -16,7 +16,6 @@ void Trie::insert(std::string key)
     current_node->end_of_word = true;
 }
 
-// return true if found
 bool Trie::search(std::string key) const
 {
     // start at root node
@@ -29,8 +28,8 @@ bool Trie::search(std::string key) const
             return false;
         current_node = current_node->children[char_idx];
     }
-    // only when existent and leaf
-    return current_node && current_node->end_of_word;
+    // only when leaf
+    return current_node->end_of_word;
 }
 
 // return amount of characters that can be matched to a word (starting at the first element)
@@ -46,8 +45,8 @@ int Trie::count_matching_chars(std::string key) const
         if (!current_node->children[char_idx])
             return count;
         current_node = current_node->children[char_idx];
-        // when existent and leaf
-        if (current_node && current_node->end_of_word)
+        // when leaf
+        if (current_node->end_of_word)
             count = idx + 1;
     }
     return count;

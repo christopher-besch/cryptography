@@ -14,19 +14,15 @@
 #define file_slash '\\'
 #endif
 
-// load files from execution location
-
-inline std::string get_virtual_cwd(std::string execution_path)
+// load files from executable location
+// todo: doesn't work when loaded from PATH
+inline std::string get_exec_dir(std::string execution_path)
 {
     // cut at last slash
-    std::string virtual_cwd = "";
     for (int idx = execution_path.size() - 1; idx >= 0; idx--)
         if (execution_path[idx] == file_slash)
-        {
-            virtual_cwd = execution_path.substr(0, idx + 1);
-            break;
-        }
-    return virtual_cwd;
+            return execution_path.substr(0, idx + 1);
+    return "";
 }
 
 #ifdef DEBUG

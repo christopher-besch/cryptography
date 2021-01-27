@@ -28,27 +28,29 @@ struct TransformDecrypted : public Decrypted
     }
 };
 
-// for one cipher and all valid decryption options
+// for one transformation cipher and all valid decryption options
 class TransformDecryptor : public Decryptor
 {
 private:
     std::vector<TransformDecrypted> m_decryptions;
 
     std::vector<int> m_requested_keys;
-    std::vector<std::string> m_requested_transformation_type;
+    std::vector<std::string> m_requested_transformation_types;
 
 private:
     // when a certain setting is requested, everything else won't be tested
     bool is_to_test_key(int key)
     {
-        return m_requested_keys.empty() || std::find(m_requested_keys.begin(), m_requested_keys.end(), key) != m_requested_keys.end();
+        return m_requested_keys.empty() ||
+               std::find(m_requested_keys.begin(), m_requested_keys.end(), key) != m_requested_keys.end();
     }
     bool is_to_test_transformation_type(std::string transformation_type)
     {
-        return m_requested_transformation_type.empty() ||
-               std::find(m_requested_transformation_type.begin(), m_requested_transformation_type.end(), transformation_type) != m_requested_transformation_type.end();
+        return m_requested_transformation_types.empty() ||
+               std::find(m_requested_transformation_types.begin(), m_requested_transformation_types.end(), transformation_type) != m_requested_transformation_types.end();
     }
 
+    // go thorugh all keys for a specific transformation callback
     void test_decryptions(transformation_func transformation, TransformDecrypted &template_decrypt, bool row_count_known);
 
 public:
@@ -64,11 +66,11 @@ public:
             raise_error("The provided key '" << key << "' is invalid!");
         m_requested_keys.push_back(key);
     }
-    void add_requested_transformation_types(std::string transformation_type)
+    void add_requested_transformation_type(std::string transformation_type)
     {
         if (transformation_type != "plow" && transformation_type != "transpose")
             raise_error("The provided transformation type '" << transformation_type << "' is invalid!");
-        m_requested_transformation_type.push_back(transformation_type);
+        m_requested_transformation_types.push_back(transformation_type);
     }
 
     std::vector<TransformDecrypted> &get_decryptions() { return m_decryptions; }

@@ -12,7 +12,7 @@ void do_xor_encryption(const std::string &str, int input_base, int input_key, ch
     {
         if (input_base != -1)
             encryptions.push_back(xor_encrypt(str, input_base, input_key, delimiter, add_0));
-        // go thorugh every base
+        // go through every base
         else
             for (int base = 36; base >= 2; base--)
                 encryptions.push_back(xor_encrypt(str, base, input_key, delimiter, add_0));
@@ -37,7 +37,7 @@ void do_xor_encryption(const std::string &str, int input_base, int input_key, ch
         std::cout << encrypt.get_base() << "\t" << encrypt.get_key() << "\t" << encrypt.get_encrypted_str() << std::endl;
 }
 
-// print fence encryption
+// create and print fence encryption
 void do_fence_encrypt(const std::string &str)
 {
     SimpleEncrypted encryption = fence_encrypt(str);
@@ -45,14 +45,14 @@ void do_fence_encrypt(const std::string &str)
     std::cout << encryption.get_encrypted_str() << std::endl;
 }
 
-// create and print all transformation encryption with specified transformation callback
+// create and print transformation encryption with specified transformation callback
 void do_transformation_encryption(const std::string &str, transformation_func transformation, int input_key)
 {
     std::vector<TransposeEncrypted> encryptions;
     if (input_key != -1)
     {
         if (input_key < 1)
-            raise_error("Unsupported key: " << input_key);
+            raise_error("Unsupported key '" << input_key << "'!");
         encryptions.push_back(transform_encrypt(str, transformation, input_key));
     }
     // go through every key
@@ -92,7 +92,6 @@ int main(int argc, char *argv[])
         if (!(character >= ' ' && character <= '~'))
             raise_error("Unsupported character '" << character << "' (char code " << static_cast<int>(character) << ") found!");
 
-    // todo: read from json
     // select delimiter
     char delimiter = '\0';
     if (console_arguments["-d"])
@@ -148,5 +147,4 @@ int main(int argc, char *argv[])
     else
         raise_error("'" << algorithm << "' is an unsupported encryption algorithm");
 }
-
 // todo: add help page

@@ -67,7 +67,7 @@ std::string do_decryptions(const std::string &str, const LibrarySearch &dictiona
         for (const char *key : console_arguments["-k"].get_arguments())
             transform_decryptor.add_requested_key(checked_stoi(key));
         for (const char *key : console_arguments["-t"].get_arguments())
-            transform_decryptor.add_requested_transformation_types(key);
+            transform_decryptor.add_requested_transformation_type(key);
         // perform decryption
         transform_decryptor.create_decryptions(hold_amount);
         // save decryptions
@@ -158,10 +158,10 @@ int main(int argc, char *argv[])
     // from <executable directory>/resources/*
     // todo: doesn't work when accessed thorugh PATH
 #else
-    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "english.dic");
-    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "german1.dic");
-    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "german2.dic");
-    dictionary.load_file(get_virtual_cwd(console_arguments[0]) + "resources" + file_slash + "user_dict.dic");
+    dictionary.load_file(get_exec_dir(console_arguments[0]) + "resources" + file_slash + "english.dic");
+    dictionary.load_file(get_exec_dir(console_arguments[0]) + "resources" + file_slash + "german1.dic");
+    dictionary.load_file(get_exec_dir(console_arguments[0]) + "resources" + file_slash + "german2.dic");
+    dictionary.load_file(get_exec_dir(console_arguments[0]) + "resources" + file_slash + "user_dict.dic");
 #endif
 
     std::cerr << "starting decryption" << std::endl;

@@ -30,7 +30,7 @@ inline TransposeEncrypted transform_encrypt(const std::string &str, transformati
 }
 
 /*
-    a set of transformation, taking size of 2d array and vector-> moving vector to new location
+    a set of transformation, taking size of 2d array and vector -> moving vector to new location
 */
 
 // equivalent to: fill row by row, read column by column like a snake

@@ -12,6 +12,7 @@ std::string transform_str(transformation_func transformation, const std::string 
     if (orig_column_count < 1 && orig_row_count >= 1)
     {
         orig_column_count = str.size() / orig_row_count;
+        // round up
         if (str.size() % orig_row_count)
             ++orig_column_count;
     }
@@ -19,6 +20,7 @@ std::string transform_str(transformation_func transformation, const std::string 
     else if (orig_column_count >= 1 && orig_row_count < 1)
     {
         orig_row_count = str.size() / orig_column_count;
+        // round up
         if (str.size() % orig_column_count)
             ++orig_row_count;
     }

@@ -15,6 +15,7 @@ public:
         : Encrypted(encrypted_string) {}
 };
 
+// todo: could also be implemented using transformations
 inline SimpleEncrypted fence_encrypt(std::string str)
 {
     std::string first;

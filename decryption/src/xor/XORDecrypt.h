@@ -65,26 +65,31 @@ private:
     long long decrypt_number(std::string digit_str, int base, int key);
     // decrypt encrypted numbers with settings found in the template decrypt, add decryption to new copy of that decrypt and store it
     void decrypt(std::vector<std::string> &encrypted_numbers, XORDecrypted &template_decrypt);
+    // decrypt encrypted numbers, trying every base and key possible
     void test_decryptions(std::vector<std::string> &encrypted_numbers, XORDecrypted &template_decrypt);
 
     // when a certain setting is requested, everything else won't be tested
     bool is_to_test_delimiter(char delim)
     {
-        // when a char_length is defined but no delimiter, the delimiter has to be defined as well to be tested
-        return (m_requested_delimiters.empty() && m_requested_char_lengths.empty()) || std::find(m_requested_delimiters.begin(), m_requested_delimiters.end(), delim) != m_requested_delimiters.end();
+        // when a char_length is defined but no delimiter, any delimiter has to be defined as well to be tested
+        return (m_requested_delimiters.empty() && m_requested_char_lengths.empty()) ||
+               std::find(m_requested_delimiters.begin(), m_requested_delimiters.end(), delim) != m_requested_delimiters.end();
     }
     bool is_to_test_char_length(int char_length)
     {
-        // when a delimiter is defined but no char_length, the char_length has to be defined as well to be tested
-        return (m_requested_char_lengths.empty() && m_requested_delimiters.empty()) || std::find(m_requested_char_lengths.begin(), m_requested_char_lengths.end(), char_length) != m_requested_char_lengths.end();
+        // when a delimiter is defined but no char_length, any char_length has to be defined as well to be tested
+        return (m_requested_char_lengths.empty() && m_requested_delimiters.empty()) ||
+               std::find(m_requested_char_lengths.begin(), m_requested_char_lengths.end(), char_length) != m_requested_char_lengths.end();
     }
     bool is_to_test_key(int key)
     {
-        return m_requested_keys.empty() || std::find(m_requested_keys.begin(), m_requested_keys.end(), key) != m_requested_keys.end();
+        return m_requested_keys.empty() ||
+               std::find(m_requested_keys.begin(), m_requested_keys.end(), key) != m_requested_keys.end();
     }
     bool is_to_test_base(int base)
     {
-        return m_requested_bases.empty() || std::find(m_requested_bases.begin(), m_requested_bases.end(), base) != m_requested_bases.end();
+        return m_requested_bases.empty() ||
+               std::find(m_requested_bases.begin(), m_requested_bases.end(), base) != m_requested_bases.end();
     }
 
 public:

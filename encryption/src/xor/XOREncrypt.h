@@ -23,6 +23,7 @@ public:
     int get_key() const { return m_key; }
 };
 
+// use xor on single number and encode to base <base>
 std::string xor_encrypt_number(int number, int base, int key = 0, int min_length = 1);
 
 // get length of biggest ASCII char (255) in base <base>
@@ -31,4 +32,5 @@ inline int get_xor_encrypted_char_length(int base)
     return xor_encrypt_number(255, base).size();
 }
 
+// encrypt text with xor to string of numbers in base <base> with delimiter if requested
 XOREncrypted xor_encrypt(std::string str, int base, int key = 0, char delimiter = '\0', bool add_0 = false);

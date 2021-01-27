@@ -6,7 +6,6 @@
 
 #include "Utils.h"
 
-// evaluates single word
 float LibrarySearch::get_word_score(std::string word) const
 {
     float score = 0.0f;
@@ -17,7 +16,7 @@ float LibrarySearch::get_word_score(std::string word) const
         if (word[idx] >= 'A' && word[idx] <= 'Z')
             word[idx] += 'a' - 'A';
         // remove and punish unsupported characters
-        else if (!(word[idx] >= 'a' && word[idx] <= 'z'))
+        else if (word[idx] < 'a' || word[idx] > 'z')
         {
             // unsupported characters at the end are allowed (i.e. commas or full stops)
             if (idx != word.size() - 1)
@@ -29,11 +28,10 @@ float LibrarySearch::get_word_score(std::string word) const
         return 0.0f;
 
     // scan through whole string searching for words
-    // when word found skip ahead of found word
-    // empty word is no use -> last element is not useful
-    // todo: for (int start_idx = 0; start_idx < uncut_word.size() - 1; ++start_idx)
+    // when word found skip to after last character of found word
     for (int start_idx = 0; start_idx < word.size();)
     {
+        // add 1 for each matched character
         int matching_chars = m_dictionary.count_matching_chars(word.substr(start_idx, word.size() - start_idx));
         score += matching_chars;
         // all matching chars get skipped
@@ -46,10 +44,9 @@ float LibrarySearch::get_word_score(std::string word) const
     return score / word.size();
 }
 
-// load dictionary into Trie
 void LibrarySearch::load_file(const std::string &file_path)
 {
-    std::ifstream file(file_path);
+    std::fstream file(file_path, std::ios::in);
     if (!file)
         raise_error("Can't open dictionary " << file_path);
 
@@ -71,14 +68,12 @@ void LibrarySearch::load_file(const std::string &file_path)
     file.close();
 }
 
-// evaluate whole decrypted text
 float LibrarySearch::get_score(const std::string &text) const
 {
     float score = 0;
     // the first unprintable character gets punished the most
     bool found_unprintable = false;
     for (auto ptr = text.begin(); ptr < text.end(); ptr++)
-        // todo: punishment of unprintable characters might have to be better
         if (*ptr < ' ' && *ptr != '\n' && *ptr != '\r')
         {
             found_unprintable = true;

@@ -5,9 +5,10 @@
 
 #include "Utils.h"
 
-////////////////////
-// VectorArgument //
-////////////////////
+/*
+    VectorArgument
+*/
+
 VectorArgument::VectorArgument(std::vector<const char *> init_arguments, int min_arguments, int max_arguments, bool optional)
     : m_init_arguments(init_arguments), m_min_arguments(min_arguments), m_max_arguments(max_arguments), m_optional(optional), m_found(false)
 {
@@ -32,7 +33,6 @@ void VectorArgument::add_argument(const char *argument)
 
 bool VectorArgument::contains_init_argument(const char *init_argument) const
 {
-    // look mum I managed to cram three good lines of code into one bad one
     return std::find_if(m_init_arguments.begin(), m_init_arguments.end(), [&](const char *this_init_argument) { return std::strcmp(this_init_argument, init_argument) == 0; }) != m_init_arguments.end();
 }
 
@@ -44,9 +44,10 @@ void VectorArgument::test_requirements() const
         raise_error("Console Parameter " << m_init_arguments[0] << " needs more arguments!");
 }
 
-//////////////////////
-// ConsoleArguments //
-//////////////////////
+/*
+    ConsoleArguments
+*/
+
 // test if all VectorArguments fullfill their requirements
 void ConsoleArguments::test_requirements() const
 {
@@ -96,9 +97,9 @@ void ConsoleArguments::load_arguments(int argc, char *argv[])
                 }
             }
             if (!found)
-                raise_error("Unknown Parameter: " << argv[idx]);
+                raise_error("Unknown parameter '" << argv[idx] << "'!");
         }
-        // is other argument
+        // store not init argument
         else
         {
             // when no init argument found before this

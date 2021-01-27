@@ -2,7 +2,7 @@
 
 #include <string>
 
-// representing single vector representing single element in string + dimensions of virtual array
+// representing single vector representing single element in string and dimensions of virtual array
 struct ElementParams
 {
     int x;
@@ -12,7 +12,7 @@ struct ElementParams
     int column_count;
 };
 
-// callback used to transform a single vector representing an element in a string
+// callback used to transform a single vector representing a character in a string
 typedef ElementParams (*transformation_func)(ElementParams);
 
 // transform a single string using provided callback and either width or height of virtual array

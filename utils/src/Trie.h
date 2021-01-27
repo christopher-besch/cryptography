@@ -30,7 +30,7 @@ struct TrieNode
                 children[idx] = nullptr;
         }
     }
-    TrieNode(const TrieNode &&other)
+    TrieNode(TrieNode &&other)
     {
         for (int idx = 0; idx < alphabet_size; idx++)
         {
@@ -51,7 +51,7 @@ struct TrieNode
         }
         return *this;
     }
-    TrieNode &operator=(const TrieNode &&other)
+    TrieNode &operator=(TrieNode &&other)
     {
         for (int idx = 0; idx < alphabet_size; idx++)
         {
@@ -87,7 +87,7 @@ public:
         : m_root(new TrieNode) {}
     Trie(const Trie &other)
         : m_root(new TrieNode(*other.m_root)) {}
-    Trie(const Trie &&other)
+    Trie(Trie &&other)
         : m_root(std::move(other.m_root)) {}
     Trie &operator=(const Trie &other)
     {
@@ -95,7 +95,7 @@ public:
         m_root = new TrieNode(*other.m_root);
         return *this;
     }
-    Trie &operator=(const Trie &&other)
+    Trie &operator=(Trie &&other)
     {
         delete m_root;
         m_root = std::move(other.m_root);
@@ -108,6 +108,7 @@ public:
     }
 
     void insert(std::string new_key);
+    // return true if key found
     bool search(std::string key) const;
     int count_matching_chars(std::string key) const;
 };
