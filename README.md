@@ -130,7 +130,7 @@ Once the files for the compiler of your liking have been created, you can use th
 
 This repository consists of four projects], [encryption](encryption), [decryption](decryption), [utils](utils) and [test](test).
 
-## utils
+## [utils](utils)
 
 This is a statically linked library containing:
 
@@ -139,7 +139,7 @@ This is a statically linked library containing:
 - string transformation functionality used for both encrypting and decrypting transformation ciphers and
 - generally useful preprocessor macros and functions.
 
-## test
+## [test](test)
 
 This repository is under constant development.
 New algorithms get tested in this project.
