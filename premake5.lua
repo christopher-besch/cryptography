@@ -5,7 +5,7 @@ workspace "cryptography"
 
     configurations { "Debug", "Release", "Dist" }
 
-    -- when "IDE" defined, program reads form cwd instead of execution location
+    -- when "IDE" defined, program reads form cwd instead of executable location
     filter "configurations:Debug"
         defines { "DEBUG", "IDE" }
         symbols "On"
