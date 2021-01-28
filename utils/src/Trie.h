@@ -4,24 +4,24 @@
 
 #include "Utils.h"
 
-const int alphabet_size = 26;
+#define ALPHABET_SIZE 26
 
 struct TrieNode
 {
     // when this is leaf node
     bool end_of_word;
     // either nullptr or pointing to next node
-    TrieNode *children[alphabet_size];
+    TrieNode *children[ALPHABET_SIZE];
 
     TrieNode()
         : end_of_word(false)
     {
-        for (int idx = 0; idx < alphabet_size; idx++)
+        for (int idx = 0; idx < ALPHABET_SIZE; idx++)
             children[idx] = nullptr;
     }
     TrieNode(const TrieNode &other)
     {
-        for (int idx = 0; idx < alphabet_size; idx++)
+        for (int idx = 0; idx < ALPHABET_SIZE; idx++)
         {
             end_of_word = other.end_of_word;
             if (other.children[idx])
@@ -32,7 +32,7 @@ struct TrieNode
     }
     TrieNode(TrieNode &&other)
     {
-        for (int idx = 0; idx < alphabet_size; idx++)
+        for (int idx = 0; idx < ALPHABET_SIZE; idx++)
         {
             end_of_word = other.end_of_word;
             children[idx] = std::move(other.children[idx]);
@@ -40,7 +40,7 @@ struct TrieNode
     }
     TrieNode &operator=(const TrieNode &other)
     {
-        for (int idx = 0; idx < alphabet_size; idx++)
+        for (int idx = 0; idx < ALPHABET_SIZE; idx++)
         {
             delete children[idx];
             end_of_word = other.end_of_word;
@@ -53,7 +53,7 @@ struct TrieNode
     }
     TrieNode &operator=(TrieNode &&other)
     {
-        for (int idx = 0; idx < alphabet_size; idx++)
+        for (int idx = 0; idx < ALPHABET_SIZE; idx++)
         {
             delete children[idx];
             end_of_word = other.end_of_word;
@@ -64,7 +64,7 @@ struct TrieNode
 
     ~TrieNode()
     {
-        for (int idx = 0; idx < alphabet_size; idx++)
+        for (int idx = 0; idx < ALPHABET_SIZE; idx++)
             delete children[idx];
     }
 };
