@@ -128,7 +128,7 @@ Once the files for the compiler of your liking have been created, you can use th
 
 # Implementation Details
 
-This repository consists of four projects], [encryption](encryption), [decryption](decryption), [utils](utils) and [test](test).
+This repository consists of four projects, [encryption](encryption), [decryption](decryption), [utils](utils) and [test](test).
 
 ## [utils](utils)
 
