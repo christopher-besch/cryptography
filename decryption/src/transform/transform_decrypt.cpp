@@ -1,6 +1,6 @@
-#include "TransformDecrypt.h"
+#include "transform_decrypt.h"
 
-#include "Transformation.h"
+#include "transformation.h"
 
 /*
     a set of transformation, taking size of 2d array and vector-> moving vector to new location
@@ -8,10 +8,10 @@
 ElementParams plow_transform(ElementParams orig_array_params)
 {
     // transpose
-    int transposed_x = orig_array_params.y;
-    int transposed_y = orig_array_params.x;
+    int transposed_x            = orig_array_params.y;
+    int transposed_y            = orig_array_params.x;
     int transposed_column_count = orig_array_params.row_count;
-    int transposed_row_count = orig_array_params.column_count;
+    int transposed_row_count    = orig_array_params.column_count;
 
     // flip all rows
     int flipped_x = transposed_column_count - 1 - transposed_x;
@@ -21,21 +21,21 @@ ElementParams plow_transform(ElementParams orig_array_params)
     if ((transposed_column_count - flipped_x) % 2)
         flipped_y = transposed_row_count - 1 - transposed_y;
 
-    return {flipped_x, flipped_y, transposed_row_count, transposed_column_count};
+    return { flipped_x, flipped_y, transposed_row_count, transposed_column_count };
 }
 
 ElementParams transpose_transform(ElementParams orig_array_params)
 {
     // transpose
-    int transposed_x = orig_array_params.y;
-    int transposed_y = orig_array_params.x;
+    int transposed_x            = orig_array_params.y;
+    int transposed_y            = orig_array_params.x;
     int transposed_column_count = orig_array_params.row_count;
-    int transposed_row_count = orig_array_params.column_count;
+    int transposed_row_count    = orig_array_params.column_count;
 
-    return {transposed_x, transposed_y, transposed_row_count, transposed_column_count};
+    return { transposed_x, transposed_y, transposed_row_count, transposed_column_count };
 }
 
-void TransformDecryptor::test_decryptions(transformation_func transformation, TransformDecrypted &template_decrypt, bool row_count_known)
+void TransformDecryptor::test_decryptions(transformation_func transformation, TransformDecrypted& template_decrypt, bool row_count_known)
 {
     for (int test_key = 1; test_key < m_cipher.size() + 1; test_key++)
         if (is_to_test_key(test_key))

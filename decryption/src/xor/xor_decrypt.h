@@ -1,20 +1,22 @@
-#include <vector>
-#include <string>
+#pragma once
+
 #include <iostream>
 #include <sstream>
+#include <string>
+#include <vector>
 
-#include "Utils.h"
+#include "utils.h"
 
-#include "goodness/LibrarySearch.h"
-#include "Decrypted.h"
+#include "decrypted.h"
+#include "goodness/library_search.h"
 
 // for one valid decryption option
 struct XORDecrypted : public Decrypted
 {
     char delimiter;
-    int char_length;
-    int key;
-    int base;
+    int  char_length;
+    int  key;
+    int  base;
 
     XORDecrypted() {}
     XORDecrypted(std::string decrypted_str, int score, char delimiter, int char_length, int key, int base)
@@ -43,9 +45,9 @@ private:
 
     // when there are elements in these, only search for decryptions with these settings
     std::vector<char> m_requested_delimiters;
-    std::vector<int> m_requested_char_lengths;
-    std::vector<int> m_requested_keys;
-    std::vector<int> m_requested_bases;
+    std::vector<int>  m_requested_char_lengths;
+    std::vector<int>  m_requested_keys;
+    std::vector<int>  m_requested_bases;
 
     // all characters in the cipher that can't be decrypted
     std::vector<char> m_possible_delimiters;
@@ -64,9 +66,9 @@ private:
     // convert encrypted number in base <base> to int
     long long decrypt_number(std::string digit_str, int base, int key);
     // decrypt encrypted numbers with settings found in the template decrypt, add decryption to new copy of that decrypt and store it
-    void decrypt(std::vector<std::string> &encrypted_numbers, XORDecrypted &template_decrypt);
+    void decrypt(std::vector<std::string>& encrypted_numbers, XORDecrypted& template_decrypt);
     // decrypt encrypted numbers, trying every base and key possible
-    void test_decryptions(std::vector<std::string> &encrypted_numbers, XORDecrypted &template_decrypt);
+    void test_decryptions(std::vector<std::string>& encrypted_numbers, XORDecrypted& template_decrypt);
 
     // when a certain setting is requested, everything else won't be tested
     bool is_to_test_delimiter(char delim)
@@ -93,14 +95,14 @@ private:
     }
 
 public:
-    XORDecryptor(const std::string &cipher, const LibrarySearch &dictionary)
+    XORDecryptor(const std::string& cipher, const LibrarySearch& dictionary)
         : Decryptor(cipher, dictionary), m_cipher_chars_only(cipher)
     {
         preprocess();
     }
     // copies are not allowed
-    XORDecryptor(const XORDecryptor &) = delete;
-    XORDecryptor &operator=(const XORDecryptor &) = delete;
+    XORDecryptor(const XORDecryptor&) = delete;
+    XORDecryptor& operator=(const XORDecryptor&) = delete;
 
     void add_requested_delimiter(char delimiter)
     {
@@ -127,7 +129,10 @@ public:
         m_requested_bases.push_back(base);
     }
 
-    std::vector<XORDecrypted> &get_decryptions() { return m_decryptions; }
+    std::vector<XORDecrypted>& get_decryptions()
+    {
+        return m_decryptions;
+    }
 
     virtual void create_decryptions(int amount = 0) override;
 };

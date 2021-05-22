@@ -1,13 +1,13 @@
 #pragma once
 
-#include <iostream>
-#include <string>
-#include <sstream>
 #include <algorithm>
+#include <iostream>
+#include <sstream>
+#include <string>
 
-#include <Utils.h>
+#include "utils.h"
 
-#include "Encrypted.h"
+#include "encrypted.h"
 
 class XOREncrypted : public Encrypted
 {
@@ -19,8 +19,14 @@ public:
     XOREncrypted(std::string encrypted_string, int base, int key)
         : Encrypted(encrypted_string), m_base(base), m_key(key) {}
 
-    int get_base() const { return m_base; }
-    int get_key() const { return m_key; }
+    int get_base() const
+    {
+        return m_base;
+    }
+    int get_key() const
+    {
+        return m_key;
+    }
 };
 
 // use xor on single number and encode to base <base>

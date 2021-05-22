@@ -1,4 +1,4 @@
-#include "XOREncrypt.h"
+#include "xor_encrypt.h"
 
 std::string xor_encrypt_number(int number, int base, int key, int min_length)
 {
@@ -6,8 +6,8 @@ std::string xor_encrypt_number(int number, int base, int key, int min_length)
     if (min_length != 1 && min_length < get_xor_encrypted_char_length(base))
         raise_error("min_length " << min_length << " is too small for base " << base << "!");
 #endif
-    char digit_chars[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-                          'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    char digit_chars[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                           'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
 
     int char_code = number ^ key;
 
@@ -40,5 +40,5 @@ XOREncrypted xor_encrypt(std::string str, int base, int key, char delimiter, boo
         if (delimiter != '\0')
             encrypted_str.push_back(delimiter);
     }
-    return {encrypted_str, base, key};
+    return { encrypted_str, base, key };
 }

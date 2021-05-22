@@ -32,7 +32,7 @@ workspace "cryptography"
 project "decryption"
     language "C++"
     architecture "x86_64"
-    cppdialect "C++14"
+    cppdialect "C++17"
     kind "ConsoleApp"
 
     location "%{prj.name}"
@@ -55,7 +55,7 @@ project "decryption"
 project "encryption"
     language "C++"
     architecture "x86_64"
-    cppdialect "C++14"
+    cppdialect "C++17"
     kind "ConsoleApp"
 
     location "%{prj.name}"
@@ -75,39 +75,5 @@ project "encryption"
         "utils"
     }
 
-project "test"
-    language "C++"
-    architecture "x86_64"
-    cppdialect "C++14"
-    kind "ConsoleApp"
-
-    location "%{prj.name}"
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-
-    files {
-        "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp"
-    }
-
-    includedirs {
-        "%{prj.name}/src",
-        "utils/src"
-    }
-
-    links {
-        "utils"
-    }
-
-project "utils"
-    language "C++"
-    architecture "x86_64"
-    cppdialect "C++14"
-    kind "StaticLib"
-
-    location "%{prj.name}"
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-
-    files {
-        "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp"
-    }
+-- dependencies
+include "utils"

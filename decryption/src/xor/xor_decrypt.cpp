@@ -1,12 +1,12 @@
-#include "XORDecrypt.h"
+#include "xor_decrypt.h"
 
-#include <vector>
-#include <string>
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 #include <sstream>
+#include <string>
+#include <vector>
 
-#include <Utils.h>
+#include "utils.h"
 
 int XORDecryptor::character_to_int(char character, int check_base, bool error)
 {
@@ -59,7 +59,7 @@ std::vector<std::string> XORDecryptor::cut_cipher_with_char_length(int char_leng
 std::vector<std::string> XORDecryptor::cut_cipher_with_delimiter(char delimiter)
 {
     std::vector<std::string> encrypted_numbers;
-    std::stringstream ss_cipher(m_cipher);
+    std::stringstream        ss_cipher(m_cipher);
 
     for (std::string buffer; std::getline(ss_cipher, buffer, delimiter);)
     {
@@ -87,9 +87,9 @@ long long XORDecryptor::decrypt_number(std::string encrypted_number, int base, i
     return result_char_code ^ key;
 }
 
-void XORDecryptor::decrypt(std::vector<std::string> &encrypted_numbers, XORDecrypted &template_decrypt)
+void XORDecryptor::decrypt(std::vector<std::string>& encrypted_numbers, XORDecrypted& template_decrypt)
 {
-    bool possible = true;
+    bool        possible      = true;
     std::string decrypted_str = "";
     // decrypt each number
     for (std::string encrypted_number : encrypted_numbers)
@@ -107,7 +107,7 @@ void XORDecryptor::decrypt(std::vector<std::string> &encrypted_numbers, XORDecry
     {
         // save decryption
         template_decrypt.decrypted_str = decrypted_str;
-        template_decrypt.score = m_dictionary.get_score(decrypted_str);
+        template_decrypt.score         = m_dictionary.get_score(decrypted_str);
         // when not filled yet
         if (!m_amount || m_decryptions.size() < m_amount)
             m_decryptions.push_back(template_decrypt);
@@ -122,7 +122,7 @@ void XORDecryptor::decrypt(std::vector<std::string> &encrypted_numbers, XORDecry
     }
 }
 
-void XORDecryptor::test_decryptions(std::vector<std::string> &encrypted_numbers, XORDecrypted &template_decrypt)
+void XORDecryptor::test_decryptions(std::vector<std::string>& encrypted_numbers, XORDecrypted& template_decrypt)
 {
     // test possible bases
     for (int test_base = m_smallest_base; test_base < 37; test_base++)
@@ -159,7 +159,7 @@ void XORDecryptor::create_decryptions(int amount)
             // when unable to find anything or numbers are too long
             if (encrypted_numbers.empty())
                 continue;
-            template_decrypt.delimiter = test_delimiter;
+            template_decrypt.delimiter   = test_delimiter;
             template_decrypt.char_length = 0;
             test_decryptions(encrypted_numbers, template_decrypt);
         }
@@ -172,8 +172,8 @@ void XORDecryptor::create_decryptions(int amount)
             if (m_cipher_chars_only.size() % test_char_length)
                 continue;
             std::vector<std::string> encrypted_numbers = cut_cipher_with_char_length(test_char_length);
-            template_decrypt.delimiter = '\0';
-            template_decrypt.char_length = test_char_length;
+            template_decrypt.delimiter                 = '\0';
+            template_decrypt.char_length               = test_char_length;
             test_decryptions(encrypted_numbers, template_decrypt);
         }
 }

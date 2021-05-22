@@ -8,7 +8,7 @@ dir_path=$(dirname $full_path)
 # loop through file, encrypt each line
 idx=0
 while IFS= read -r line; do
-    # skip empty lines
+    # skip empty lines and comments
     if [[ "$line" != "" && "$line" != "#"* ]]; then
         # encrypt
         IFS=$' \n\t'

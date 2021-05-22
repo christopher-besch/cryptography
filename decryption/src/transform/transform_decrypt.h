@@ -1,18 +1,20 @@
-#include <vector>
-#include <string>
+#pragma once
+
 #include <iostream>
 #include <sstream>
+#include <string>
+#include <vector>
 
-#include "Utils.h"
-#include "Transformation.h"
+#include "transformation.h"
+#include "utils.h"
 
-#include "goodness/LibrarySearch.h"
-#include "Decrypted.h"
+#include "decrypted.h"
+#include "goodness/library_search.h"
 
 // for one valid decryption option
 struct TransformDecrypted : public Decrypted
 {
-    int key;
+    int         key;
     std::string transformation_type;
 
     TransformDecrypted() {}
@@ -34,7 +36,7 @@ class TransformDecryptor : public Decryptor
 private:
     std::vector<TransformDecrypted> m_decryptions;
 
-    std::vector<int> m_requested_keys;
+    std::vector<int>         m_requested_keys;
     std::vector<std::string> m_requested_transformation_types;
 
 private:
@@ -51,14 +53,14 @@ private:
     }
 
     // go thorugh all keys for a specific transformation callback
-    void test_decryptions(transformation_func transformation, TransformDecrypted &template_decrypt, bool row_count_known);
+    void test_decryptions(transformation_func transformation, TransformDecrypted& template_decrypt, bool row_count_known);
 
 public:
-    TransformDecryptor(const std::string &cipher, const LibrarySearch &dictionary)
+    TransformDecryptor(const std::string& cipher, const LibrarySearch& dictionary)
         : Decryptor(cipher, dictionary) {}
     // copies are not allowed
-    TransformDecryptor(const TransformDecryptor &) = delete;
-    TransformDecryptor &operator=(const TransformDecryptor &) = delete;
+    TransformDecryptor(const TransformDecryptor&) = delete;
+    TransformDecryptor& operator=(const TransformDecryptor&) = delete;
 
     void add_requested_key(int key)
     {
@@ -73,7 +75,10 @@ public:
         m_requested_transformation_types.push_back(transformation_type);
     }
 
-    std::vector<TransformDecrypted> &get_decryptions() { return m_decryptions; }
+    std::vector<TransformDecrypted>& get_decryptions()
+    {
+        return m_decryptions;
+    }
 
     virtual void create_decryptions(int amount = 0) override;
 };

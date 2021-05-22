@@ -1,10 +1,10 @@
-#include "LibrarySearch.h"
+#include "library_search.h"
 
+#include <algorithm>
 #include <fstream>
 #include <sstream>
-#include <algorithm>
 
-#include "Utils.h"
+#include "utils.h"
 
 float LibrarySearch::get_word_score(std::string word) const
 {
@@ -44,7 +44,7 @@ float LibrarySearch::get_word_score(std::string word) const
     return score / word.size();
 }
 
-void LibrarySearch::load_file(const std::string &file_path)
+void LibrarySearch::load_file(const std::string& file_path)
 {
     std::fstream file(file_path, std::ios::in);
     if (!file)
@@ -68,7 +68,7 @@ void LibrarySearch::load_file(const std::string &file_path)
     file.close();
 }
 
-float LibrarySearch::get_score(const std::string &text) const
+float LibrarySearch::get_score(const std::string& text) const
 {
     float score = 0;
     // the first unprintable character gets punished the most

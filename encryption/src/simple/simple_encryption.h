@@ -1,12 +1,12 @@
 #pragma once
 
+#include <algorithm>
 #include <iostream>
 #include <string>
-#include <algorithm>
 
-#include <Utils.h>
+#include "utils.h"
 
-#include "Encrypted.h"
+#include "encrypted.h"
 
 class SimpleEncrypted : public Encrypted
 {
@@ -30,5 +30,5 @@ inline SimpleEncrypted fence_encrypt(std::string str)
             first.push_back(str[idx]);
     }
     // return second glued to first
-    return {first.append(second)};
+    return { first.append(second) };
 }
