@@ -18,8 +18,9 @@ public:
 // todo: could also be implemented using transformations
 inline SimpleEncrypted fence_encrypt(std::string str)
 {
-    std::string first;
-    std::string second;
+    std::string first, second;
+    first.reserve(str.size() / 2);
+    second.reserve(str.size() / 2);
 
     // add first character to first, second to second, third to first and so on
     for (int idx = 0; idx < str.size(); ++idx)

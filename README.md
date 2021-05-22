@@ -7,8 +7,8 @@ Both programs are designed to be executed from the command line.
 
 `encryption` encrypts the input using one of the supported algorithms.
 To select the desired algorithm, the parameter `-a <algorithm name>` or `--algorithm <algorithm name>` shall be used.
-Each algorithms uses certain settings/keys.
-If a value for one of these settings is supplied as a console line parameter, only this value for this setting will be used.
+Each algorithm uses certain settings/keys.
+If a value for one of these settings is supplied as a command line parameter, only this value for this setting will be used.
 If the setting is not supplied, all possible values for this setting will be used in succession, returning multiple different ciphers.
 
 The input text can be supplied as the first parameter (otherwise the user has to input it later on).
@@ -19,7 +19,7 @@ The input text can be supplied as the first parameter (otherwise the user has to
   - `-k <key>` or `--key <key>`: each number (representing a single character using ASCII) get xored with this number
   - `-b <base>` or `--base <base>`: sets base, every encrypted number shall be represented in
   - `-d <delimiter>` or `--delim <delimiter>`: if not supplied, the encrypted numbers won't be separated, if the `<delimiter>` is omitted, a space will be used
-  - `-o`: when set, each encrypted numbers will have the length (0s will be used as a padding)
+  - `-o`: when set, each encrypted number will have the same length (0s will be used as a padding)
 - `plow`:
   - `-k <key>`: sets the width of the array, the input gets read into
 - `transpose`:
@@ -58,10 +58,10 @@ The input cipher can be supplied as the first parameter (otherwise the user has 
 
 These parameters are supported with all algorithms:
 
-- `-a <algorithms...>` or `--algorithm <algorithms...>`: This can be set to `xor` or `transform` each for one of the following decryption algorithms.
+- `-a <algorithms...>` or `--algorithm <algorithms...>`: This can be set to `xor` and/or `transform`
 - `-m <amount>` or `--amount <amount>`: By default the program returns the best decryptions it can find.
   With this parameter only a certain amount of decryptions will be generated.
-  (0 will print all found decryptions.)
+  (`0` will print all found decryptions.)
 - `-f <input_file_path> <output_file_path>` or `--file <input_file_path> <output_file_path>`: When this flag is used, each line from `<input_file_path>` will be treated as an individual cipher and decrypted into `<output_file_path>`.
   Every line can use a different algorithm / settings.
 
@@ -73,7 +73,7 @@ There are two ways of doing this:
 1. Search for characters that can't be decrypted (like spaces) and cut at those delimiters. <- requires delimiter
 2. Ignore all of these possible delimiters and cut into numbers of equal length. <- requires encrypted numbers to be of equal length
 
-The program will perform both of these methods (unless ordered not to), which might lead to the decrypted text being returned twice.
+The program will perform both of these methods (unless ordered not to), which may lead to the decrypted text being returned twice.
 
 It will use all possible values for each setting unless otherwise specified.
 These are the supported parameters:
@@ -97,7 +97,7 @@ Once that is done, the transformed 2D array gets read row by row.
 The used transformation can be specified with `-t <transformations...>` or `--transform <transformations...>`.
 `plow` and `transpose` are supported.
 
-Fence decryption can be achieved by using a transpose transformation with half the length of the cipher as key plus, rounded up.
+Fence decryption can be achieved by using a transpose transformation with half the length of the cipher as key, rounded up.
 
 ### Example
 
@@ -128,7 +128,7 @@ Once the files for the compiler of your liking have been created, you can use th
 
 # Implementation Details
 
-This repository consists of four projects, [encryption](encryption), [decryption](decryption), [utils](utils) and [test](test).
+This repository consists of three projects, [encryption](encryption), [decryption](decryption) and [utils](utils).
 
 ## [utils](utils)
 
@@ -138,11 +138,6 @@ This is a statically linked library containing:
 - an implementation of the [Trie](https://en.wikipedia.org/wiki/Trie) data structure
 - string transformation functionality used for both encrypting and decrypting transformation ciphers and
 - generally useful preprocessor macros and functions.
-
-## [test](test)
-
-This repository is under constant development.
-New algorithms get tested in this project.
 
 # Resources
 

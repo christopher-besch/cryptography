@@ -1,0 +1,152 @@
+#include "console.h"
+
+#include "simple/simple_encryption.h"
+#include "transform/transform_encrypt.h"
+#include "xor/xor_encrypt.h"
+
+// create and print xor encryptions
+void do_xor_encryption(const std::string& str, int input_base, int input_key, char delimiter, bool add_0)
+{
+    std::vector<XOREncrypted> encryptions;
+    if (input_key != -1)
+    {
+        if (input_base != -1)
+            encryptions.push_back(xor_encrypt(str, input_base, input_key, delimiter, add_0));
+        // go through every base
+        else
+            for (int base = 36; base >= 2; base--)
+                encryptions.push_back(xor_encrypt(str, base, input_key, delimiter, add_0));
+    }
+    // go through every key
+    else
+        for (int key = 255; key >= 0; key--)
+        {
+            if (input_base != -1)
+                encryptions.push_back(xor_encrypt(str, input_base, key, delimiter, add_0));
+            // go thorugh every base
+            else
+                for (int base = 36; base >= 2; base--)
+                    encryptions.push_back(xor_encrypt(str, base, key, delimiter, add_0));
+        }
+    if (encryptions.empty())
+        raise_error("Error while creating encryptions!");
+
+    // print encryptions
+    std::cout << "base\tkey\tresult" << std::endl;
+    for (XOREncrypted& encrypt : encryptions)
+        std::cout << encrypt.get_base() << "\t" << encrypt.get_key() << "\t" << encrypt.get_encrypted_str() << std::endl;
+}
+
+// create and print fence encryption
+void do_fence_encrypt(const std::string& str)
+{
+    SimpleEncrypted encryption = fence_encrypt(str);
+    std::cout << "result" << std::endl;
+    std::cout << encryption.get_encrypted_str() << std::endl;
+}
+
+// create and print transformation encryption with specified transformation callback
+void do_transformation_encryption(const std::string& str, transformation_func transformation, int input_key)
+{
+    std::vector<TransposeEncrypted> encryptions;
+    if (input_key != -1)
+    {
+        if (input_key < 1)
+            raise_error("Unsupported key '" << input_key << "'!");
+        encryptions.push_back(transform_encrypt(str, transformation, input_key));
+    }
+    // go through every key
+    else
+        for (int key = str.size(); key >= 1; --key)
+            encryptions.push_back(transform_encrypt(str, transformation, key));
+
+    if (encryptions.empty())
+        raise_error("Error while creating encryptions!");
+
+    // print encryptions
+    std::cout << "key\tresult" << std::endl;
+    for (TransposeEncrypted& encrypt : encryptions)
+        std::cout << encrypt.get_key() << "\t" << encrypt.get_encrypted_str() << std::endl;
+}
+
+int main(int argc, char* argv[])
+{
+    ConsoleArguments console_arguments;
+    console_arguments.add_optional({ "-b", "--base" }, 1, 1);
+    console_arguments.add_optional({ "-k", "--key" }, 1, 1);
+    console_arguments.add_optional({ "-d", "--delim" }, 0, 1);
+    console_arguments.add_optional({ "-a", "--algorithm" }, 1, 1);
+    console_arguments.add_bool({ "-0" });
+    console_arguments.load_arguments(argc, argv);
+
+    // todo: read from file
+    std::string str;
+    if (console_arguments.other_size() >= 2)
+        str = console_arguments[1];
+    else
+    {
+        std::cout << "Input Text: ";
+        std::getline(std::cin, str);
+    }
+    for (char character : str)
+        if (!(character >= ' ' && character <= '~'))
+            raise_error("Unsupported character '" << character << "' (char code " << static_cast<int>(character) << ") found!");
+
+    // select delimiter
+    // '\0' -> no delimiter used
+    char delimiter = '\0';
+    if (console_arguments["-d"])
+    {
+        if (console_arguments["-d"].get_arguments().empty())
+            // default
+            delimiter = ' ';
+        else
+            // only use first character
+            delimiter = console_arguments["-d"].get_arguments()[0][0];
+    }
+
+    // should leading 0s be added -> all char-digits are of same length
+    bool add_0 = console_arguments["-0"];
+
+    // key provided?
+    int key = -1;
+    if (console_arguments["-k"])
+    {
+        key = checked_stoi(console_arguments["-k"].get_arguments()[0]);
+        if (key < 0 || key > 255)
+            raise_error("The provided key " << key << " is invalid!");
+    }
+
+    // base provided?
+    int base = -1;
+    if (console_arguments["-b"])
+    {
+        base = checked_stoi(console_arguments["-b"].get_arguments()[0]);
+        if (base < 2 || base > 36)
+            raise_error("The provided base " << base << " is invalid!");
+    }
+
+    // algorithm provided?
+    std::string algorithm;
+    if (console_arguments["-a"])
+        algorithm = console_arguments["-a"].get_arguments()[0];
+    else
+    {
+        std::cout << "Input Encryption Algorithm (xor, plow and transpose are supported): ";
+        std::getline(std::cin, algorithm);
+    }
+    make_lower_case(algorithm);
+
+    // perform correct encryption
+    if (algorithm == "xor")
+        do_xor_encryption(str, base, key, delimiter, add_0);
+    else if (algorithm == "fence")
+        do_fence_encrypt(str);
+    else if (algorithm == "plow")
+        do_transformation_encryption(str, plow_transform, key);
+    else if (algorithm == "transpose")
+        do_transformation_encryption(str, transpose_transform, key);
+    else
+        raise_error("'" << algorithm << "' is an unsupported encryption algorithm");
+}
+// todo: add help page

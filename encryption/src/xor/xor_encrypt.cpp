@@ -22,7 +22,7 @@ std::string xor_encrypt_number(int number, int base, int key, int min_length)
 
         char_code = char_code / base;
     }
-    reverse(result_digits.begin(), result_digits.end());
+    std::reverse(result_digits.begin(), result_digits.end());
     return result_digits;
 }
 

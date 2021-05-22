@@ -39,7 +39,7 @@ inline TransposeEncrypted transform_encrypt(const std::string& str, transformati
 // equivalent to: fill row by row, read column by column like a snake
 inline ElementParams plow_transform(ElementParams orig_array_params)
 {
-    // flip every second column, last column gets flipped
+    // flip every second column; last column gets flipped
     int flipped_y = orig_array_params.y;
     if ((orig_array_params.column_count - orig_array_params.x) % 2)
         flipped_y = orig_array_params.row_count - 1 - orig_array_params.y;
