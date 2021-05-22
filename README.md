@@ -1,6 +1,6 @@
 # 🔒Cryptography
 
-This repository contains two console applications, `encryption` and `decryption`.
+This repository contains two command line applications, `encryption` and `decryption`.
 Both programs are designed to be executed from the command line.
 
 ## Encryption
